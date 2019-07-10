@@ -12,7 +12,7 @@
 		5295215522D5D3E900174BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5295215422D5D3E900174BC1 /* Assets.xcassets */; };
 		5295215822D5D3EA00174BC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5295215622D5D3E900174BC1 /* LaunchScreen.storyboard */; };
 		5295216522D5D57F00174BC1 /* DataOfTass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216422D5D57F00174BC1 /* DataOfTass.swift */; };
-		5295216722D5D59100174BC1 /* DataOfDeby.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216622D5D59100174BC1 /* DataOfDeby.swift */; };
+		5295216722D5D59100174BC1 /* DataOfDevy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216622D5D59100174BC1 /* DataOfDevy.swift */; };
 		5295216922D5D59A00174BC1 /* DataOfAllen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216822D5D59A00174BC1 /* DataOfAllen.swift */; };
 		5295216B22D5D5E600174BC1 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216A22D5D5E600174BC1 /* HomeVC.swift */; };
 		5295216D22D5D62F00174BC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216C22D5D62F00174BC1 /* HomeView.swift */; };
@@ -28,7 +28,7 @@
 		5295215722D5D3E900174BC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5295215922D5D3EA00174BC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5295216422D5D57F00174BC1 /* DataOfTass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOfTass.swift; sourceTree = "<group>"; };
-		5295216622D5D59100174BC1 /* DataOfDeby.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOfDeby.swift; sourceTree = "<group>"; };
+		5295216622D5D59100174BC1 /* DataOfDevy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOfDevy.swift; sourceTree = "<group>"; };
 		5295216822D5D59A00174BC1 /* DataOfAllen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataOfAllen.swift; sourceTree = "<group>"; };
 		5295216A22D5D5E600174BC1 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		5295216C22D5D62F00174BC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -109,7 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				5295216422D5D57F00174BC1 /* DataOfTass.swift */,
-				5295216622D5D59100174BC1 /* DataOfDeby.swift */,
+				5295216622D5D59100174BC1 /* DataOfDevy.swift */,
 				5295216822D5D59A00174BC1 /* DataOfAllen.swift */,
 			);
 			path = Data;
@@ -258,7 +258,7 @@
 				5295216B22D5D5E600174BC1 /* HomeVC.swift in Sources */,
 				5295216522D5D57F00174BC1 /* DataOfTass.swift in Sources */,
 				5295216D22D5D62F00174BC1 /* HomeView.swift in Sources */,
-				5295216722D5D59100174BC1 /* DataOfDeby.swift in Sources */,
+				5295216722D5D59100174BC1 /* DataOfDevy.swift in Sources */,
 				5295216F22D5D65400174BC1 /* Network.swift in Sources */,
 				5295216922D5D59A00174BC1 /* DataOfAllen.swift in Sources */,
 			);
