@@ -17,4 +17,8 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 
 19.07.10  feat: tass - make basic Project
 
-19.07.10  docs: devy - reupload basic Project 
+19.07.10  docs: devy - reupload basic Project
+
+19.07.10  feat: allen - change HomeVC type from UIVC to UITBLVC
+
+ 
