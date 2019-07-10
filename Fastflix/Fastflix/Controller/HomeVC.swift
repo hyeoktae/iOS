@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeVC: UIViewController {
+class HomeVC: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,7 +16,4 @@ class HomeVC: UIViewController {
 
       
     }
-    
 
-
-}
