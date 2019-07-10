@@ -15,12 +15,13 @@ final class ImageCell: UICollectionViewCell {
   private let imageView: UIImageView = {
     let img = UIImageView()
     img.contentMode = .scaleAspectFill
+    img.backgroundColor = .darkGray
     img.clipsToBounds = true
     return img
   }()
   
   func configure(url: URL) {
-    imageView.kf.setImage(with: url)
+    imageView.kf.setImage(with: url, options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 100, height: 200))), .cacheOriginalImage])
   }
   
   override func didMoveToSuperview() {

@@ -9,12 +9,14 @@
 import UIKit
 import SnapKit
 
-class HeaderView: UICollectionReusableView {
+class HeaderView: UITableViewCell {
   static let identifier = "HeaderView"
   
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = .white
+    label.backgroundColor = .darkGray
+    label.font = UIFont.boldSystemFont(ofSize: 20)
     return label
   }()
   
