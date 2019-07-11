@@ -21,4 +21,4 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 
 19.07.10  feat: allen - change HomeVC type from UIVC to UITBLVC
 
- 
+19.07.11  docs: tass - connect to github
