@@ -17,6 +17,9 @@
 		5295216B22D5D5E600174BC1 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216A22D5D5E600174BC1 /* HomeVC.swift */; };
 		5295216D22D5D62F00174BC1 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216C22D5D62F00174BC1 /* HomeView.swift */; };
 		5295216F22D5D65400174BC1 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216E22D5D65400174BC1 /* Network.swift */; };
+		C14355F422DB0B11005189E9 /* PreviewCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14355F322DB0B11005189E9 /* PreviewCollectionCell.swift */; };
+		C14355F622DB0B18005189E9 /* PreviewTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14355F522DB0B18005189E9 /* PreviewTableCell.swift */; };
+		C14355F822DB0E22005189E9 /* MainImageTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C14355F722DB0E22005189E9 /* MainImageTableCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		5295216A22D5D5E600174BC1 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
 		5295216C22D5D62F00174BC1 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		5295216E22D5D65400174BC1 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		C14355F322DB0B11005189E9 /* PreviewCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewCollectionCell.swift; sourceTree = "<group>"; };
+		C14355F522DB0B18005189E9 /* PreviewTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreviewTableCell.swift; sourceTree = "<group>"; };
+		C14355F722DB0E22005189E9 /* MainImageTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainImageTableCell.swift; sourceTree = "<group>"; };
 		E29600FEE1EEB7B6DD9E0171 /* Pods_Fastflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fastflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -93,6 +99,9 @@
 		5295216022D5D53100174BC1 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				C14355F722DB0E22005189E9 /* MainImageTableCell.swift */,
+				C14355F522DB0B18005189E9 /* PreviewTableCell.swift */,
+				C14355F322DB0B11005189E9 /* PreviewCollectionCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -255,8 +264,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				5295214E22D5D3E800174BC1 /* AppDelegate.swift in Sources */,
+				C14355F822DB0E22005189E9 /* MainImageTableCell.swift in Sources */,
 				5295216B22D5D5E600174BC1 /* HomeVC.swift in Sources */,
+				C14355F422DB0B11005189E9 /* PreviewCollectionCell.swift in Sources */,
 				5295216522D5D57F00174BC1 /* DataOfTass.swift in Sources */,
+				C14355F622DB0B18005189E9 /* PreviewTableCell.swift in Sources */,
 				5295216D22D5D62F00174BC1 /* HomeView.swift in Sources */,
 				5295216722D5D59100174BC1 /* DataOfDevy.swift in Sources */,
 				5295216F22D5D65400174BC1 /* Network.swift in Sources */,
@@ -400,12 +412,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KNHX5B578D;
 				INFOPLIST_FILE = Fastflix/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hyeoktae.com.Fastflix;
+				PRODUCT_BUNDLE_IDENTIFIER = com.your.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -418,12 +431,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = KNHX5B578D;
 				INFOPLIST_FILE = Fastflix/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = hyeoktae.com.Fastflix;
+				PRODUCT_BUNDLE_IDENTIFIER = com.your.;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
