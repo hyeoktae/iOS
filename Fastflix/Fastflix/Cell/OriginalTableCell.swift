@@ -17,11 +17,13 @@ protocol OriginalTableCellDelegate: class {
 
 class OriginalTableCell: UITableViewCell {
   
+  static let identifier = "OriginalTableCell"
+  
   let sectionHeaderlabel: UILabel = {
     let label = UILabel()
     label.textColor = .white
     label.text = "Netflix 오리지널 >"
-    label.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
+    label.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
     return label
   }()
   
@@ -36,7 +38,7 @@ class OriginalTableCell: UITableViewCell {
     addSubViews()
     snpLayout()
     collectionviewSetUp()
-    collectionView.register(OriginalCollectionCell.self, forCellWithReuseIdentifier: "OriginalCollectionCell")
+    collectionView.register(OriginalCollectionCell.self, forCellWithReuseIdentifier: OriginalCollectionCell.identifier)
   }
   
   // MARK: - addSubViews
@@ -47,16 +49,18 @@ class OriginalTableCell: UITableViewCell {
   // MARK: - snapKitLayout
   private func snpLayout() {
     
+    contentView.snp.makeConstraints {
+      $0.height.equalTo(350)
+    }
+    
     sectionHeaderlabel.snp.makeConstraints {
-      $0.top.trailing.equalToSuperview().offset(5)
+      $0.top.equalToSuperview().offset(15)
       $0.leading.equalTo(10)
-      $0.height.equalTo(5)
     }
     
     collectionView.snp.makeConstraints {
       $0.leading.trailing.bottom.equalToSuperview()
-      $0.height.equalTo(400)
-      $0.top.equalToSuperview()
+      $0.top.equalTo(sectionHeaderlabel.snp.bottom).offset(15)
     }
     
   }
@@ -92,7 +96,7 @@ extension OriginalTableCell: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OriginalCollectionCell", for: indexPath) as! OriginalCollectionCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OriginalCollectionCell.identifier, for: indexPath) as! OriginalCollectionCell
     cell.originalImageView.kf.setImage(with: URL(string: ImagesData.shared.originalImages[indexPath.row]), options: [.processor(CroppingImageProcessor(size: CGSize(width: 170, height: 300))), .scaleFactor(UIScreen.main.scale)])
     return cell
   }

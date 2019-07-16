@@ -16,6 +16,8 @@ protocol PreviewTableCellDelegate: class {
 
 class PreviewTableCell: UITableViewCell {
   
+  static let identifier = "PreviewTableCell"
+  
   let layout = UICollectionViewFlowLayout()
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
   
@@ -35,7 +37,7 @@ class PreviewTableCell: UITableViewCell {
     self.backgroundColor = .clear
  
     //collectionView register
-    collectionView.register(PreviewCollectionCell.self, forCellWithReuseIdentifier: "PreviewCollectionCell")
+    collectionView.register(PreviewCollectionCell.self, forCellWithReuseIdentifier: PreviewCollectionCell.identifier)
     addSubViews()
     snpLayout()
     collectionviewSetUp()
@@ -90,7 +92,7 @@ extension PreviewTableCell: UICollectionViewDataSource {
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PreviewCollectionCell", for: indexPath) as! PreviewCollectionCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PreviewCollectionCell.identifier, for: indexPath) as! PreviewCollectionCell
     cell.preImageView.image = UIImage(named: "preViewFace2")
     return cell
   }
