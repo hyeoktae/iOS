@@ -111,7 +111,9 @@ extension HomeVC: PreviewTableCellDelegate {
 
 extension HomeVC: OriginalTableCellDelegate {
   func originalDidSelectItemAt(indexPath: IndexPath) {
-    let detailVC = DetailTableVC()
+//    let detailVC = DetailTableVC()
+    let detailVC = DetailVC()
+    print("present DetailVC")
     present(detailVC, animated: true)
   }
   
