@@ -38,7 +38,7 @@ class MainCell: UITableViewCell {
     layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
     layout.minimumLineSpacing = 15
     layout.minimumInteritemSpacing = 15
-    layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3.5, height: UIScreen.main.bounds.height / 5)
+    layout.itemSize = CGSize(width: UIScreen.main.bounds.width / 3.5, height: UIScreen.main.bounds.height / 4.8)
     layout.scrollDirection = .horizontal
     
     collectionView.register(
@@ -59,12 +59,13 @@ class MainCell: UITableViewCell {
     
     titleLabel.snp.makeConstraints {
       $0.leading.equalToSuperview().offset(10)
-      $0.top.equalToSuperview().offset(20)
+      $0.top.equalToSuperview().offset(10)
     }
     
     collectionView.snp.makeConstraints {
-      $0.leading.trailing.bottom.equalToSuperview()
+      $0.leading.trailing.equalToSuperview()
       $0.top.equalTo(titleLabel.snp.bottom).offset(5)
+      $0.bottom.equalToSuperview().offset(-10)
     }
     
   }

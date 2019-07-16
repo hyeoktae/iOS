@@ -14,6 +14,14 @@ class StreamingCell: UITableViewCell {
   
   static let identifier = "StreamingCell"
   
+  lazy var stackView: UIStackView = {
+    let view = UIStackView(arrangedSubviews: [playBtn, pokeBtn])
+    view.axis = .horizontal
+    view.distribution = .fillEqually
+    view.spacing = 10
+    return view
+  }()
+  
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -103,11 +111,11 @@ class StreamingCell: UITableViewCell {
   
   private func setupAutoLayout() {
     
-    [playerVC.view, titleLabel, pokeBtn, playBtn].forEach { addSubview($0) }
+    [playerVC.view, titleLabel, stackView].forEach { addSubview($0) }
     [muteBtn, degreeLabel].forEach { playerVC.view.addSubview($0) }
     
     self.contentView.snp.makeConstraints {
-      $0.height.equalTo(320)
+      $0.height.equalTo(306)
       $0.width.equalToSuperview()
     }
     
@@ -132,17 +140,22 @@ class StreamingCell: UITableViewCell {
       $0.top.equalTo(titleLabel.snp.bottom).offset(5)
     }
     
-    playBtn.snp.makeConstraints {
-      $0.leading.bottom.equalToSuperview().offset(10)
+    stackView.snp.makeConstraints {
+      $0.leading.trailing.bottom.equalToSuperview()
       $0.top.equalTo(playerVC.view.snp.bottom).offset(10)
-      $0.trailing.equalTo(contentView.snp.centerX).offset(-5)
     }
     
-    pokeBtn.snp.makeConstraints {
-      $0.leading.equalTo(contentView.snp.centerX).offset(5)
-      $0.centerY.equalTo(playBtn)
-      $0.trailing.equalToSuperview().offset(-10)
-    }
+//    playBtn.snp.makeConstraints {
+//      $0.leading.bottom.equalToSuperview().offset(10)
+//      $0.top.equalTo(playerVC.view.snp.bottom).offset(10)
+//      $0.trailing.equalTo(contentView.snp.centerX).offset(-5)
+//    }
+//
+//    pokeBtn.snp.makeConstraints {
+//      $0.leading.equalTo(contentView.snp.centerX).offset(5)
+//      $0.centerY.equalTo(playBtn)
+//      $0.trailing.equalToSuperview().offset(-10)
+//    }
   }
   
   override func awakeFromNib() {
