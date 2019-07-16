@@ -19,7 +19,7 @@ import Kingfisher
 
 class MainImageTableCell: UITableViewCell {
   
-  static let identifier = "MainImageTableCell"
+  static let identifier = "MainImageTableCell" 
   
   var stackView = UIStackView()
   var textStackView = UIStackView()
