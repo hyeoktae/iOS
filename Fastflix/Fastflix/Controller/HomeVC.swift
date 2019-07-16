@@ -12,27 +12,30 @@ import AVKit
 
 class HomeVC: UITableViewController {
   
-  let staticCell = StreamingCell()
+  let streamingCell = StreamingCell()
+  let mainImageCell = MainImageTableCell()
+  let preViewCell = PreviewTableCell()
+  let originalCell = OriginalTableCell()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     tableView.backgroundColor = #colorLiteral(red: 0.07762928299, green: 0.07762928299, blue: 0.07762928299, alpha: 1)
     tableView.separatorStyle = .none
     tableView.allowsSelection = false
+    tableView.showsVerticalScrollIndicator = false
     registerTableViewCell()
     
   }
   
   private func registerTableViewCell() {
     
-    tableView.register(MainImageTableCell.self, forCellReuseIdentifier: MainImageTableCell.identifier)
-    tableView.register(PreviewTableCell.self, forCellReuseIdentifier: PreviewTableCell.identifier)
-    tableView.register(OriginalTableCell.self, forCellReuseIdentifier: OriginalTableCell.identifier)
+//    tableView.register(MainImageTableCell.self, forCellReuseIdentifier: MainImageTableCell.identifier)
+//    tableView.register(PreviewTableCell.self, forCellReuseIdentifier: PreviewTableCell.identifier)
+//    tableView.register(OriginalTableCell.self, forCellReuseIdentifier: OriginalTableCell.identifier)
+//
+//    tableView.register(MainCell.self, forCellReuseIdentifier: MainCell.identifier)
     
-    tableView.register(MainCell.self, forCellReuseIdentifier: MainCell.identifier)
-    tableView.register(MainImageTableCell.self, forCellReuseIdentifier: MainImageTableCell.identifier)
-    
-    staticCell.configure(url: "http://movietrailers.apple.com/movies/lucasfilm/star-wars-the-last-jedi/the-last-jedi-worlds-of-the-last-jedi_i320.m4v")
+    streamingCell.configure(url: "http://movietrailers.apple.com/movies/lucasfilm/star-wars-the-last-jedi/the-last-jedi-worlds-of-the-last-jedi_i320.m4v")
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,7 +46,7 @@ class HomeVC: UITableViewController {
     
     switch indexPath.row {
     case 0:
-      let cell = tableView.dequeueReusableCell(withIdentifier: MainImageTableCell.identifier, for: indexPath) as! MainImageTableCell
+      let cell = mainImageCell
       cell.selectionStyle = .none
       cell.mainImage.kf.setImage(with: URL(string: ImagesData.shared.imagesUrl[0]), options: [.processor(CroppingImageProcessor(size: CGSize(width: 414, height: 600))), .scaleFactor(UIScreen.main.scale)])
       
@@ -52,24 +55,24 @@ class HomeVC: UITableViewController {
       return cell
       
     case 1:
-      let cell = tableView.dequeueReusableCell(withIdentifier: PreviewTableCell.identifier, for: indexPath) as! PreviewTableCell
+      let cell = preViewCell
       cell.delegate = self
       cell.selectionStyle = .none
       
       return cell
       
     case 5:
-      let cell = staticCell
+      let cell = streamingCell
       return cell
       
     case 7:
-      let cell = tableView.dequeueReusableCell(withIdentifier: OriginalTableCell.identifier, for: indexPath) as! OriginalTableCell
+      let cell = originalCell
       cell.selectionStyle = .none
       cell.delegate = self
       return cell
       
     default:
-      let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.identifier, for: indexPath) as! MainCell
+      let cell = MainCell()
       cell.configure(url: imageUrls, title: "\(indexPath)")
       
       return cell

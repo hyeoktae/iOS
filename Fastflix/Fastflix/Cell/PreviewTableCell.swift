@@ -60,6 +60,7 @@ class PreviewTableCell: UITableViewCell {
     layout.itemSize = CGSize(width: 110, height: 110)
     
     layout.sectionHeadersPinToVisibleBounds = true
+    collectionView.showsHorizontalScrollIndicator = false
   }
   // MARK: - snpkitLayout
   private func snpLayout() {

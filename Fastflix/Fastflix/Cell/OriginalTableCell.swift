@@ -50,17 +50,17 @@ class OriginalTableCell: UITableViewCell {
   private func snpLayout() {
     
     contentView.snp.makeConstraints {
-      $0.height.equalTo(350)
+      $0.height.equalTo(370)
     }
     
     sectionHeaderlabel.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(15)
+      $0.top.equalToSuperview().offset(10)
       $0.leading.equalTo(10)
     }
     
     collectionView.snp.makeConstraints {
       $0.leading.trailing.bottom.equalToSuperview()
-      $0.top.equalTo(sectionHeaderlabel.snp.bottom).offset(15)
+      $0.top.equalTo(sectionHeaderlabel.snp.bottom).offset(10)
     }
     
   }
@@ -71,12 +71,13 @@ class OriginalTableCell: UITableViewCell {
     collectionView.delegate = self
     collectionView.backgroundColor = .clear
     self.collectionView.collectionViewLayout = layout
-    layout.sectionInset = UIEdgeInsets(top: 0, left: 7, bottom: 7, right: 7)
+    layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 10, right: 10)
     layout.minimumLineSpacing = 7
     layout.minimumInteritemSpacing = 7
-    layout.itemSize = CGSize(width: 170, height: 300)
+    layout.itemSize = CGSize(width: 170, height: 370)
     
     layout.sectionHeadersPinToVisibleBounds = true
+    collectionView.showsHorizontalScrollIndicator = false
   }
   
   

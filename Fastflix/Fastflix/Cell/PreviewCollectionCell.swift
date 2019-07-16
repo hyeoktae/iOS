@@ -44,6 +44,7 @@ class PreviewCollectionCell: UICollectionViewCell {
 //    addGesture()
     addSubViews()
     snpLayout()
+    
   }
 //
 //  func addGesture() {
