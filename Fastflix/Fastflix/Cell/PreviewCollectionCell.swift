@@ -9,39 +9,71 @@
 import UIKit
 import SnapKit
 
-protocol PreviewCollectionCellDelegate: class {
-  func tossInfo(cell:PreviewCollectionCell )
-}
 class PreviewCollectionCell: UICollectionViewCell {
+  
+//  var myIndexpath: IndexPath? = nil
   
   let preImageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.layer.cornerRadius = imageView.frame.height / 2
+    imageView.layer.cornerRadius = 55
     imageView.layer.borderWidth = 1.5
-    imageView.layer.borderColor = UIColor.blue.cgColor
+    imageView.layer.borderColor = UIColor.white.cgColor
     imageView.clipsToBounds = true
+    imageView.layer.masksToBounds = true
     return imageView
   }()
   
-  weak var delegate: PreviewCollectionCellDelegate?
+  let preImageLogo: UIImageView = {
+    let logoImage = UIImageView()
+    logoImage.image = UIImage(named: "preViewLogo")
+    return logoImage
+  }()
+  
+  let blurImage: UIImageView = {
+    let blurImage = UIImageView()
+    blurImage.image = UIImage(named: "navshadow")
+    return blurImage
+  }()
+  
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    backgroundColor = .red
-    self.addSubview(preImageView)
-    snp()
-    delegate?.tossInfo(cell: self)
+    
+//    addGesture()
+    addSubViews()
+    snpLayout()
+  }
+//
+//  func addGesture() {
+//    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handTapGesture(_:)))
+//    preImageView.addGestureRecognizer(tapGesture)
+//    preImageView.isUserInteractionEnabled = true
+//  }
+  
+  // addSubViews
+  private func addSubViews() {
+    [preImageView,blurImage, preImageLogo].forEach { self.addSubview($0)}
     
   }
   
-  private func snp() {
+  private func snpLayout() {
     preImageView.snp.makeConstraints {
-      $0.top.bottom.leading.trailing.equalToSuperview()
-      $0.height.equalToSuperview()
-      
+      $0.top.equalToSuperview()
+      $0.bottom.equalToSuperview()
+      $0.width.height.equalTo(110)
+    }
+    preImageLogo.snp.makeConstraints {
+      $0.top.equalTo(preImageView.snp.bottom).inset(25)
+      $0.centerX.equalToSuperview()
+      $0.width.equalTo(UIScreen.main.bounds.width / 4.5)
+    }
+    blurImage.snp.makeConstraints {
+      $0.top.equalTo(preImageView.snp.bottom).inset(90)
+      $0.centerX.equalToSuperview()
+      $0.width.equalTo(UIScreen.main.bounds.width)
     }
   }
-  
+
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

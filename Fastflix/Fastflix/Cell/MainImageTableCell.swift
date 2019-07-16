@@ -5,12 +5,21 @@
 //  Created by Jeon-heaji on 11/07/2019.
 //  Copyright © 2019 hyeoktae kwon. All rights reserved.
 //
+//
+//  MainImageCell.swift
+//  Fastflix
+//
+//  Created by Jeon-heaji on 11/07/2019.
+//  Copyright © 2019 hyeoktae kwon. All rights reserved.
+//
 
 import UIKit
 import SnapKit
 import Kingfisher
 
 class MainImageTableCell: UITableViewCell {
+  
+  static let identifier = "MainImageTableCell"
   
   var stackView = UIStackView()
   var textStackView = UIStackView()
@@ -29,7 +38,7 @@ class MainImageTableCell: UITableViewCell {
   
   let movieDetailLabel: UILabel = {
     let label = UILabel()
-    label.text = " 환생 ･ 한국 작품 ･ 판타지 영화 ･ 타임리미트 ･ 블록버스터 "
+    label.text = " 슈퍼히어로 ･ 왕실 ･ SF ･ 액션 ･ 할리우드 영화 ･ 어드벤처 "
     label.textColor = .white
     label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
     return label
@@ -45,7 +54,7 @@ class MainImageTableCell: UITableViewCell {
   
   let playButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.setImage(UIImage(named: "play"), for: .normal)
+    button.setImage(UIImage(named: "play2"), for: .normal)
     return button
   }()
   
@@ -72,18 +81,31 @@ class MainImageTableCell: UITableViewCell {
     text.textAlignment = .center
     return text
   }()
+  
   let blurImage: UIImageView = {
     let blurImage = UIImageView()
     blurImage.image = UIImage(named: "navshadow")
     return blurImage
   }()
-  
+
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
+    self.backgroundColor = .clear
+    setupStackView()
     addSubViews()
     snpLayout()
+  }
+  
+  func configure(imageURL: String, logoImageURL: String) {
+    let imageURL = URL(string: imageURL)!
+    let logoImageURL = URL(string: logoImageURL)!
     
+    self.mainImage.kf.setImage(with: imageURL)
+    self.logoImage.kf.setImage(with: logoImageURL)
+  }
+  
+  private func setupStackView() {
     // stackView
     stackView = UIStackView(arrangedSubviews: [pokeButton, playButton, infoButton])
     stackView.axis = .horizontal
@@ -94,56 +116,51 @@ class MainImageTableCell: UITableViewCell {
     textStackView.axis = .horizontal
     textStackView.distribution = .fillEqually
     textStackView.spacing = 205
-    
-    self.addSubview(stackView)
-    self.addSubview(textStackView)
-    
-    stackView.snp.makeConstraints {
-      $0.top.equalTo(movieDetailLabel.snp.bottom).offset(20)
-      $0.centerX.equalToSuperview()
-    }
-    
-    textStackView.snp.makeConstraints {
-      $0.top.equalTo(stackView.snp.bottom)
-      $0.centerX.equalTo(self)
-    }
-
   }
+  
+  
   // addSubViews
   private func addSubViews() {
-    let views = [mainImage, movieDetailLabel, logoImage , blurImage]
-    views.forEach { self.addSubview($0)}
-    
+    [mainImage, movieDetailLabel, logoImage, textStackView, stackView].forEach { self.addSubview($0)}
+    insertSubview(blurImage, at: 2)
   }
   // snp
   private func snpLayout() {
     mainImage.snp.makeConstraints {
       $0.left.right.bottom.equalToSuperview()
       $0.top.equalToSuperview().offset(-44)
-      $0.height.equalTo(600)
-
+      $0.height.equalTo(630)
     }
-    logoImage.snp.makeConstraints {
-      $0.top.equalTo(self).offset(320)
-      $0.centerX.equalTo(self)
-      $0.height.equalTo(100)
-      $0.width.equalTo(230)
     
+    logoImage.snp.makeConstraints {
+      $0.centerX.equalToSuperview()
+      $0.height.equalTo(UIScreen.main.bounds.width / 4)
+      $0.width.equalTo(UIScreen.main.bounds.width / 1.8)
+      $0.bottom.equalTo(movieDetailLabel.snp.top).offset(-20)
     }
+    
     movieDetailLabel.snp.makeConstraints {
-      $0.top.equalTo(logoImage.snp.bottom).offset(15)
       $0.centerX.equalToSuperview()
       $0.height.equalTo(30)
-    }
-
-    blurImage.snp.makeConstraints {
-      $0.leading.equalToSuperview().offset(-80)
-      $0.bottom.equalToSuperview()
-      $0.width.equalTo(650)
-      $0.top.equalTo(logoImage.snp.top).offset(-50)
-      
+      $0.bottom.equalTo(stackView.snp.top).offset(-20)
     }
     
+    blurImage.snp.makeConstraints {
+      $0.bottom.equalToSuperview()
+      $0.width.equalTo(800)
+      $0.centerX.equalToSuperview()
+      $0.top.equalTo(UIScreen.main.bounds.height / 3)
+    }
+    
+    stackView.snp.makeConstraints {
+      $0.bottom.equalTo(textStackView.snp.top)
+      $0.centerX.equalToSuperview()
+    }
+    
+    textStackView.snp.makeConstraints {
+      $0.bottom.equalToSuperview().offset(-20)
+      $0.centerX.equalToSuperview()
+    }
   }
   
   @objc func pokeBtnDidTap(_ sender: UIButton) {

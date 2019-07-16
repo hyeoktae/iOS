@@ -1,23 +1,14 @@
 //
-//  PreviewCell.swift
+//  OriginalTableViewCell.swift
 //  Fastflix
 //
-//  Created by Jeon-heaji on 12/07/2019.
+//  Created by Jeon-heaji on 15/07/2019.
 //  Copyright © 2019 hyeoktae kwon. All rights reserved.
 //
 
 import UIKit
-import SnapKit
-import Kingfisher
 
-protocol PreviewTableCellDelegate: class {
-  func didSelectItemAt(indexPath: IndexPath)
-}
-
-class PreviewTableCell: UITableViewCell {
-  
-  let layout = UICollectionViewFlowLayout()
-  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+class OriginalTableCell: UITableViewCell {
   
   let sectionHeaderlabel: UILabel = {
     let label = UILabel()
@@ -27,15 +18,18 @@ class PreviewTableCell: UITableViewCell {
     return label
   }()
   
-  weak var delegate: PreviewTableCellDelegate?
+  let originalImageView: UIImageView = {
+    let imageView = UIImageView()
+    
+    return imageView
+  }()
+  
+  let layout = UICollectionViewFlowLayout()
+  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+  
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
-    self.backgroundColor = .clear
- 
-    //collectionView register
-    collectionView.register(PreviewCollectionCell.self, forCellWithReuseIdentifier: "PreviewCollectionCell")
     addSubViews()
     snpLayout()
     collectionviewSetUp()
@@ -45,7 +39,24 @@ class PreviewTableCell: UITableViewCell {
   private func addSubViews() {
     [collectionView, sectionHeaderlabel].forEach { self.addSubview($0)}
   }
-  // MARK: - collectionViewSetUp
+  
+  // MARK: - snapKitLayout
+  private func snpLayout() {
+    
+    sectionHeaderlabel.snp.makeConstraints {
+      $0.top.trailing.equalToSuperview().offset(10)
+      $0.leading.equalTo(10)
+      $0.height.equalTo(5)
+    }
+    
+    collectionView.snp.makeConstraints {
+      $0.leading.trailing.bottom.equalToSuperview()
+      $0.height.equalTo(180)
+      $0.top.equalToSuperview()
+    }
+    
+  }
+  
   private func collectionviewSetUp() {
     layout.scrollDirection = .horizontal
     collectionView.dataSource = self
@@ -59,48 +70,31 @@ class PreviewTableCell: UITableViewCell {
     
     layout.sectionHeadersPinToVisibleBounds = true
   }
-  // MARK: - snpkitLayout
-  private func snpLayout() {
-    collectionView.snp.makeConstraints {
-      $0.leading.trailing.bottom.equalToSuperview()
-      $0.height.equalTo(180)
-      $0.top.equalToSuperview()
-    }
-    sectionHeaderlabel.snp.makeConstraints {
-      $0.top.trailing.equalToSuperview().offset(10)
-      $0.leading.equalTo(10)
-      $0.height.equalTo(5)
-    }
-  }
+  
+
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
+  
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-  
-}
 
-extension PreviewTableCell: UICollectionViewDataSource {
-  
+}
+extension OriginalTableCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return ImagesData.shared.originalImages.count
+    return 1
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PreviewCollectionCell", for: indexPath) as! PreviewCollectionCell
-    cell.preImageView.image = UIImage(named: "preViewFace2")
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: <#T##String#>, for: <#T##IndexPath#>)
     return cell
   }
   
+  
 }
 
-extension PreviewTableCell: UICollectionViewDelegate {
-  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    print("indexPath.row: ", indexPath.row)
-    delegate?.didSelectItemAt(indexPath: indexPath)
-    
-  }
+extension OriginalTableCell: UICollectionViewDelegate {
+  
 }
