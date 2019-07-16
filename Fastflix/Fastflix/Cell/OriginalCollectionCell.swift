@@ -11,6 +11,8 @@ import SnapKit
 
 class OriginalCollectionCell: UICollectionViewCell {
   
+  static let identifier = "OriginalCollectionCell"
+  
   let originalImageView: UIImageView = {
     let imageView = UIImageView()
     return imageView

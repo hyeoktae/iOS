@@ -13,6 +13,8 @@ class PreviewCollectionCell: UICollectionViewCell {
   
 //  var myIndexpath: IndexPath? = nil
   
+  static let identifier = "PreviewCollectionCell"
+  
   let preImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 55
