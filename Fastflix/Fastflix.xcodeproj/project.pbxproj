@@ -131,6 +131,7 @@
 				5295216A22D5D5E600174BC1 /* HomeVC.swift */,
 				C143560322DC8E3E005189E9 /* PreViewPlayerVC.swift */,
 				C143560B22DCD16E005189E9 /* DetailTableVC.swift */,
+				C1E21BE222DF0C9E00930115 /* LaunchScreenVC.swift */,
 				52BA342922DDE513005F8489 /* MainTabBarController.swift */,
 				47FF9DC022DE3C15005C7BAD /* DetailVC.swift */,
 			);
@@ -180,6 +181,14 @@
 				5295216E22D5D65400174BC1 /* Network.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		C1E21BE122DF0C6F00930115 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				C143561B22DE1D9B005189E9 /* LaunchScreenVC.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		D3DAF0B40D3A1BD1093E39D6 /* Pods */ = {
@@ -320,9 +329,9 @@
 				C143560822DCAA98005189E9 /* OriginalCollectionCell.swift in Sources */,
 				5295216B22D5D5E600174BC1 /* HomeVC.swift in Sources */,
 				47FF9DC122DE3C15005C7BAD /* DetailVC.swift in Sources */,
+				C1E21BE322DF0C9E00930115 /* LaunchScreenVC.swift in Sources */,
 				C143560422DC8E3E005189E9 /* PreViewPlayerVC.swift in Sources */,
 				C143560A22DCAAD5005189E9 /* OriginalTableCell.swift in Sources */,
-				C143561C22DE1D9B005189E9 /* LaunchScreenVC.swift in Sources */,
 				C14355F422DB0B11005189E9 /* PreviewCollectionCell.swift in Sources */,
 				52BA343022DDE7EF005F8489 /* MainCell.swift in Sources */,
 				47FF9DC722DE3CC4005C7BAD /* DetailCollectionViewCell.swift in Sources */,
