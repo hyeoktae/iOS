@@ -9,7 +9,7 @@
 import UIKit
 
 protocol PlayButtonDelegate: class {
-  func playButtonDidTap(sender: UIButton) 
+  func playButtonDidTap(sender: UIButton)
   func didTapDismissBtn()
 }
 
