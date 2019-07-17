@@ -37,19 +37,12 @@ class DetailViewUpperCell: UITableViewCell {
     return view
   }()
   
-  lazy var backgroundLayerView: UIImageView = {
-    let view = UIImageView()
-    view.backgroundColor = #colorLiteral(red: 0.09803921569, green: 0.09803921569, blue: 0.09803921569, alpha: 1)
-    view.alpha = 0.3
-    let gradient = CAGradientLayer()
-    gradient.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-    gradient.startPoint = CGPoint(x: 0, y: 0)
-    gradient.endPoint = CGPoint(x: 1, y: 1)
-    gradient.type = .axial
-    gradient.frame = view.frame
-    view.layer.addSublayer(gradient)
-    return view
-  }()
+    let backgroundLayerView: UIImageView = {
+        let view = UIImageView()
+        view.alpha = 1
+        view.image = UIImage(named: "blurview")
+        return view
+    }()
   
   // 디테일뷰 메인이미지
   let mainImageView: UIImageView = {
