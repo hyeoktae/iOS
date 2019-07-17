@@ -10,11 +10,11 @@ import UIKit
 import AVKit
 import SnapKit
 
-class StreamingCell: UITableViewCell {
+final class StreamingCell: UITableViewCell {
   
   static let identifier = "StreamingCell"
   
-  lazy var stackView: UIStackView = {
+  private lazy var stackView: UIStackView = {
     let view = UIStackView(arrangedSubviews: [playBtn, pokeBtn])
     view.axis = .horizontal
     view.distribution = .fillEqually
@@ -72,8 +72,8 @@ class StreamingCell: UITableViewCell {
     return label
   }()
   
-  let playerVC = AVPlayerViewController()
-  var player: AVPlayer?
+  private let playerVC = AVPlayerViewController()
+  private var player: AVPlayer?
   
   
   
@@ -156,16 +156,6 @@ class StreamingCell: UITableViewCell {
 //      $0.centerY.equalTo(playBtn)
 //      $0.trailing.equalToSuperview().offset(-10)
 //    }
-  }
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-  }
-  
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-    
-    // Configure the view for the selected state
   }
   
 }

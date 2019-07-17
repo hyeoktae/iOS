@@ -51,7 +51,7 @@ class MainCell: UITableViewCell {
     setupAutoLayout()
   }
   
-  func setupAutoLayout() {
+  private func setupAutoLayout() {
     
     contentView.snp.makeConstraints {
       $0.height.equalTo(220)

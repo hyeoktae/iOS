@@ -12,21 +12,21 @@ protocol DetailViewCellDelegate: class {
     func detailViewDidSelectItemAt(indexPath: IndexPath)
 }
 
-class DetailViewBelowCell: UITableViewCell {
+final class DetailViewBelowCell: UITableViewCell {
     
-    let firstBlackLine: UIView = {
+    private let firstBlackLine: UIView = {
         let uiView = UIView()
         uiView.backgroundColor = .black
         return uiView
     }()
     
-    let redLine: UIView = {
+    private let redLine: UIView = {
         let uiView = UIView()
         uiView.backgroundColor = .red
         return uiView
     }()
     
-    let similarLabel: UILabel = {
+    private let similarLabel: UILabel = {
         let label = UILabel()
         label.text = "비슷한 콘텐츠"
         label.textColor = .white
@@ -34,10 +34,11 @@ class DetailViewBelowCell: UITableViewCell {
         return label
     }()
     
-    let cellWidth = (UIScreen.main.bounds.width - 40)/3
-    lazy var cellHeight = cellWidth * 1.447064
+    private let cellWidth = (UIScreen.main.bounds.width - 40)/3
+  
+    private lazy var cellHeight = cellWidth * 1.447064
     
-    let collectionView: UICollectionView = {
+    private let collectionView: UICollectionView = {
         let cellWidth = (UIScreen.main.bounds.width - 40)/3
         let cellHeight = cellWidth * 1.447064
         let layout = UICollectionViewFlowLayout()
@@ -117,8 +118,9 @@ extension DetailViewBelowCell: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailCollectionViewCell", for: indexPath) as! DetailCollectionViewCell
-        cell.detailImageView.image = UIImage(named: "toystory")
-        cell.detailImageView.contentMode = .scaleToFill
+//        cell.detailImageView.image = UIImage(named: "toystory")
+//        cell.detailImageView.contentMode = .scaleToFill
+      cell.configure(imageName: "toystory")
         return cell
     }
 }

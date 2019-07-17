@@ -14,14 +14,15 @@ protocol PreviewTableCellDelegate: class {
   func didSelectItemAt(indexPath: IndexPath)
 }
 
-class PreviewTableCell: UITableViewCell {
+final class PreviewTableCell: UITableViewCell {
   
   static let identifier = "PreviewTableCell"
   
-  let layout = UICollectionViewFlowLayout()
-  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+  private let layout = UICollectionViewFlowLayout()
   
-  let sectionHeaderlabel: UILabel = {
+  private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+  
+  private let sectionHeaderlabel: UILabel = {
     let label = UILabel()
     label.textColor = .white
     label.text = "미리보기"
@@ -79,10 +80,6 @@ class PreviewTableCell: UITableViewCell {
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-    }
   
 }
 
@@ -94,7 +91,7 @@ extension PreviewTableCell: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PreviewCollectionCell.identifier, for: indexPath) as! PreviewCollectionCell
-    cell.preImageView.image = UIImage(named: "preViewFace2")
+    cell.configure(imageName: "preViewFace2")
     return cell
   }
   

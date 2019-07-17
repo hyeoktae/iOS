@@ -9,9 +9,9 @@
 import UIKit
 import SnapKit
 
-class DetailTableVC: UITableViewController {
+final class DoNotUse: UITableViewController {
   
-  let label: UILabel = {
+  private let label: UILabel = {
     let label = UILabel()
     label.text = "디테일 페이지"
     label.textColor = .white
@@ -19,7 +19,7 @@ class DetailTableVC: UITableViewController {
     return label
   }()
   
-  let button: UIButton = {
+  private let button: UIButton = {
     let button = UIButton(type: .custom)
     button.setTitleColor(.gray, for: .normal)
     button.addTarget(self, action: #selector(dismissBtnDidTap(_:)), for: .touchUpInside)
@@ -27,7 +27,10 @@ class DetailTableVC: UITableViewController {
     
     return button
   }()
+  
+  
 
+  
     override func viewDidLoad() {
         super.viewDidLoad()
       tableView.separatorStyle = .none
