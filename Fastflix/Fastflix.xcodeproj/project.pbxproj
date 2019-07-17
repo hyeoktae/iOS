@@ -82,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		523DF83722DF194A00C979F0 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				C143561B22DE1D9B005189E9 /* LaunchScreenVC.swift */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		5295214122D5D3E800174BC1 = {
 			isa = PBXGroup;
 			children = (
@@ -89,6 +97,7 @@
 				5295214B22D5D3E800174BC1 /* Products */,
 				D3DAF0B40D3A1BD1093E39D6 /* Pods */,
 				F01A658871B7E30443DCCAE3 /* Frameworks */,
+				523DF83722DF194A00C979F0 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -123,7 +132,7 @@
 				C143560322DC8E3E005189E9 /* PreViewPlayerVC.swift */,
 				C143560B22DCD16E005189E9 /* DetailTableVC.swift */,
 				52BA342922DDE513005F8489 /* MainTabBarController.swift */,
-				47FF9DC022DE3C15005C7BAD /* DetailVC.swift */
+				47FF9DC022DE3C15005C7BAD /* DetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
