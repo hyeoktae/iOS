@@ -15,11 +15,11 @@ protocol OriginalTableCellDelegate: class {
   func originalDidSelectItemAt(indexPath: IndexPath)
 }
 
-class OriginalTableCell: UITableViewCell {
+final class OriginalTableCell: UITableViewCell {
   
   static let identifier = "OriginalTableCell"
   
-  let sectionHeaderlabel: UILabel = {
+  private let sectionHeaderlabel: UILabel = {
     let label = UILabel()
     label.textColor = .white
     label.text = "Netflix 오리지널 >"
@@ -27,8 +27,9 @@ class OriginalTableCell: UITableViewCell {
     return label
   }()
   
-  let layout = UICollectionViewFlowLayout()
-  let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+  private let layout = UICollectionViewFlowLayout()
+  
+  private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
   
   weak var delegate: OriginalTableCellDelegate?
   
@@ -86,10 +87,6 @@ class OriginalTableCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-  }
-  
 }
 extension OriginalTableCell: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -98,7 +95,7 @@ extension OriginalTableCell: UICollectionViewDataSource {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OriginalCollectionCell.identifier, for: indexPath) as! OriginalCollectionCell
-    cell.originalImageView.kf.setImage(with: URL(string: ImagesData.shared.originalImages[indexPath.row]), options: [.processor(CroppingImageProcessor(size: CGSize(width: 170, height: 300))), .scaleFactor(UIScreen.main.scale)])
+    cell.configure(imageUrlString: ImagesData.shared.originalImages[indexPath.row])
     return cell
   }
   

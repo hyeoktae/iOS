@@ -13,12 +13,12 @@ protocol PlayButtonDelegate: class {
   func didTapDismissBtn()
 }
 
-class DetailViewUpperCell: UITableViewCell {
+final class DetailViewUpperCell: UITableViewCell {
   
   //이미지뷰 가로 크기(고정)
   private let imageWidth: CGFloat = 133
   
-  lazy var dissmissButton: UIButton = {
+  private lazy var dissmissButton: UIButton = {
     let button = UIButton(type: .system)
     button.backgroundColor = .black
     button.tintColor = .white
@@ -31,13 +31,13 @@ class DetailViewUpperCell: UITableViewCell {
     return button
   }()
   
-  let backgroundBlurView: UIImageView = {
+  private let backgroundBlurView: UIImageView = {
     let view = UIImageView()
     view.image = UIImage(named: "toystory")
     return view
   }()
   
-    let backgroundLayerView: UIImageView = {
+    private let backgroundLayerView: UIImageView = {
         let view = UIImageView()
         view.alpha = 1
         view.image = UIImage(named: "blurview")
@@ -45,7 +45,7 @@ class DetailViewUpperCell: UITableViewCell {
     }()
   
   // 디테일뷰 메인이미지
-  let mainImageView: UIImageView = {
+  private let mainImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "toystory")
     imageView.layer.shadowColor = UIColor.black.cgColor
@@ -57,21 +57,21 @@ class DetailViewUpperCell: UITableViewCell {
   }()
   
   // 일치율, 출시년도 관람등급, 상영시간
-  let suggestionLabel: UILabel = {
+  private let suggestionLabel: UILabel = {
     let label = UILabel()
     label.text = "74%일치"
     label.textColor = #colorLiteral(red: 0, green: 0.9810667634, blue: 0.5736914277, alpha: 1)
     label.font = UIFont.boldSystemFont(ofSize: 14)
     return label
   }()
-  lazy var movieExplainLabel: UILabel = {
+  private lazy var movieExplainLabel: UILabel = {
     let label = UILabel()
     label.text = "2009   청불   1시간 39분"
     label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
     return label
   }()
-  lazy var imageBelowStackView: UIStackView = {
+  private lazy var imageBelowStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [suggestionLabel, movieExplainLabel])
     stackView.alignment = .fill
     stackView.spacing = 25
@@ -80,7 +80,7 @@ class DetailViewUpperCell: UITableViewCell {
   }()
   
   // 플레이버튼: 델리게이트로 뷰컨트롤러에 전달
-  lazy var playButton: UIButton = {
+  private lazy var playButton: UIButton = {
     let button = UIButton(type: .system)
     button.backgroundColor = .red
     button.setTitle("▶︎  재생", for: .normal)
@@ -92,20 +92,20 @@ class DetailViewUpperCell: UITableViewCell {
   }()
   
   // 보던 영화일 경우, 남은시간 표시
-  let slider: UISlider = {
+  private let slider: UISlider = {
     let slider = UISlider()
     slider.thumbTintColor = .clear
     slider.tintColor = .red
     return slider
   }()
-  let leftTimeLabel: UILabel = {
+  private let leftTimeLabel: UILabel = {
     let label = UILabel()
     label.text = "남은시간: 1시간 4분"
     label.font = UIFont.systemFont(ofSize: 10, weight: .light)
     label.textColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
     return label
   }()
-  lazy var movieTimeStackView: UIStackView = {
+  private lazy var movieTimeStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [slider, leftTimeLabel])
     stackView.alignment = .fill
     stackView.spacing = 10
@@ -114,7 +114,7 @@ class DetailViewUpperCell: UITableViewCell {
   }()
   
   // 영화 정보 설명
-  let descriptionLabel: UILabel = {
+  private let descriptionLabel: UILabel = {
     let label = UILabel()
     label.numberOfLines = 0
     label.text = "전직경찰이자 자칭 보안관 백단 오지랖으로 수호하는 마을. 평화롭던 이곳에 수상한 외지인이 등장했다. 잘나가는 이 사업가에게 토박이들이 마음을 여는 사이, 보안관은 오히려 구린 냄새에 뒤를 캐기 시작한다. 우리 마을은 내가 지켜!"
@@ -122,7 +122,7 @@ class DetailViewUpperCell: UITableViewCell {
     label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
     return label
   }()
-  let directorAndCastLabel: UILabel = {
+  private let directorAndCastLabel: UILabel = {
     let label = UILabel()
     label.numberOfLines = 0
     label.font = UIFont.systemFont(ofSize: 12, weight: .light)
@@ -133,7 +133,7 @@ class DetailViewUpperCell: UITableViewCell {
     """
     return label
   }()
-  lazy var movieDescriptionStackView: UIStackView = {
+  private lazy var movieDescriptionStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [descriptionLabel, directorAndCastLabel])
     stackView.alignment = .fill
     stackView.spacing = 10
@@ -142,7 +142,7 @@ class DetailViewUpperCell: UITableViewCell {
   }()
   
   // 내가 찜한 콘텐츠 버튼
-  lazy var myPokedContentsButton: UIButton = {
+  private lazy var myPokedContentsButton: UIButton = {
     let button = UIButton(type: .system)
     let image = UIImage(named: "add")
     button.setImage(image, for: .normal)
@@ -150,7 +150,7 @@ class DetailViewUpperCell: UITableViewCell {
     //button.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
     return button
   }()
-  lazy var myPokedContentsButtonLabel: UIButton = {
+  private lazy var myPokedContentsButtonLabel: UIButton = {
     let button = UIButton()
     button.setTitle("내가 찜한 콘텐츠", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .light)
@@ -158,7 +158,7 @@ class DetailViewUpperCell: UITableViewCell {
     // button.addTarget(self, action: #selector(play), for: .touchUpInside)
     return button
   }()
-  lazy var myPokedStackView: UIStackView = {
+  private lazy var myPokedStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [myPokedContentsButton, myPokedContentsButtonLabel])
     stackView.alignment = .center
     stackView.spacing = 7
@@ -167,7 +167,7 @@ class DetailViewUpperCell: UITableViewCell {
   }()
   
   // 평가 버튼
-  lazy var evaluationButton: UIButton = {
+  private lazy var evaluationButton: UIButton = {
     let button = UIButton(type: .system)
     let image = UIImage(named: "like")
     button.setImage(image, for: .normal)
@@ -175,7 +175,7 @@ class DetailViewUpperCell: UITableViewCell {
     //button.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
     return button
   }()
-  lazy var evaluationButtonLabel: UIButton = {
+  private lazy var evaluationButtonLabel: UIButton = {
     let button = UIButton()
     button.setTitle("평가", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .light)
@@ -183,7 +183,7 @@ class DetailViewUpperCell: UITableViewCell {
     // button.addTarget(self, action: #selector(play), for: .touchUpInside)
     return button
   }()
-  lazy var evaluationStackView: UIStackView = {
+  private lazy var evaluationStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [evaluationButton, evaluationButtonLabel])
     stackView.alignment = .center
     stackView.spacing = 7
@@ -192,7 +192,7 @@ class DetailViewUpperCell: UITableViewCell {
   }()
   
   // 공유버튼
-  lazy var shareButton: UIButton = {
+  private lazy var shareButton: UIButton = {
     let button = UIButton(type: .system)
     let image = UIImage(named: "share")
     button.setImage(image, for: .normal)
@@ -200,7 +200,7 @@ class DetailViewUpperCell: UITableViewCell {
     //button.addTarget(self, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
     return button
   }()
-  lazy var shareButtonLabel: UIButton = {
+  private lazy var shareButtonLabel: UIButton = {
     let button = UIButton()
     button.setTitle("공유", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .light)
@@ -208,7 +208,7 @@ class DetailViewUpperCell: UITableViewCell {
     // button.addTarget(self, action: #selector(play), for: .touchUpInside)
     return button
   }()
-  lazy var shareStackView: UIStackView = {
+  private lazy var shareStackView: UIStackView = {
     let stackView = UIStackView(arrangedSubviews: [shareButton, shareButtonLabel])
     stackView.alignment = .center
     stackView.spacing = 7
@@ -240,10 +240,6 @@ class DetailViewUpperCell: UITableViewCell {
     self.selectionStyle = .none
     
     backgroundBlurView.addBlurEffect()
-    
-    
-    
-    
   }
   
   // 스냅킷 오토레이아웃

@@ -9,13 +9,13 @@
 import UIKit
 import SnapKit
 
-class PreviewCollectionCell: UICollectionViewCell {
+final class PreviewCollectionCell: UICollectionViewCell {
   
 //  var myIndexpath: IndexPath? = nil
   
   static let identifier = "PreviewCollectionCell"
   
-  let preImageView: UIImageView = {
+  private let preImageView: UIImageView = {
     let imageView = UIImageView()
     imageView.layer.cornerRadius = 55
     imageView.layer.borderWidth = 1.5
@@ -25,13 +25,13 @@ class PreviewCollectionCell: UICollectionViewCell {
     return imageView
   }()
   
-  let preImageLogo: UIImageView = {
+  private let preImageLogo: UIImageView = {
     let logoImage = UIImageView()
     logoImage.image = UIImage(named: "preViewLogo")
     return logoImage
   }()
   
-  let blurImage: UIImageView = {
+  private let blurImage: UIImageView = {
     let blurImage = UIImageView()
     blurImage.image = UIImage(named: "navshadow")
     return blurImage
@@ -52,6 +52,10 @@ class PreviewCollectionCell: UICollectionViewCell {
 //    preImageView.addGestureRecognizer(tapGesture)
 //    preImageView.isUserInteractionEnabled = true
 //  }
+  
+  func configure(imageName: String) {
+    preImageView.image = UIImage(named: imageName)
+  }
   
   // addSubViews
   private func addSubViews() {

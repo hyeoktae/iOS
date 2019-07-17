@@ -9,7 +9,7 @@
 import UIKit
 // LaunchScreen - rootViewController
 
-class LaunchScreenVC: UIViewController {
+final class LaunchScreenVC: UIViewController {
   let imageView: UIImageView = {
     let imageView = UIImageView()
     imageView.translatesAutoresizingMaskIntoConstraints = false

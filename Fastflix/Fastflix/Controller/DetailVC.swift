@@ -8,9 +8,9 @@
 
 import UIKit
 
-class DetailVC: UITableViewController {
+final class DetailVC: UITableViewController {
   
-  let movieTitleLabel: UILabel = {
+  private let movieTitleLabel: UILabel = {
     let label = UILabel()
     label.text = "토이스토리"
     label.textColor = .white
@@ -24,7 +24,7 @@ class DetailVC: UITableViewController {
     super.viewDidLoad()
     
     setTableView()
-    makeConstraints()
+//    makeConstraints()
     registerTableViewCell()
     
   }
@@ -36,8 +36,8 @@ class DetailVC: UITableViewController {
   }
   
   
-  private func makeConstraints() {
-    
+//  private func makeConstraints() {
+//
 //    [dissmissButton].forEach { tableView.addSubview($0) }
 //
 //    //        tableView.snp.makeConstraints {
@@ -49,7 +49,7 @@ class DetailVC: UITableViewController {
 //      $0.top.equalToSuperview().offset(5)
 //      $0.trailing.equalToSuperview().offset(-5)
 //    }
-  }
+//  }
   
   private func registerTableViewCell() {
     tableView.register(DetailViewUpperCell.self, forCellReuseIdentifier: "DetailViewUpperCell")
