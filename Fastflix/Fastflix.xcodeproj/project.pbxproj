@@ -32,6 +32,7 @@
 		C143560822DCAA98005189E9 /* OriginalCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143560722DCAA98005189E9 /* OriginalCollectionCell.swift */; };
 		C143560A22DCAAD5005189E9 /* OriginalTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143560922DCAAD5005189E9 /* OriginalTableCell.swift */; };
 		C143560C22DCD16E005189E9 /* DoNotUse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143560B22DCD16E005189E9 /* DoNotUse.swift */; };
+		C1CA09C422E0A087009B1296 /* SeeMoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1CA09C322E0A087009B1296 /* SeeMoreVC.swift */; };
 		C1E21BE622DF1BB400930115 /* LaunchScreenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1E21BE522DF1BB300930115 /* LaunchScreenVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -65,6 +66,7 @@
 		C143560922DCAAD5005189E9 /* OriginalTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OriginalTableCell.swift; sourceTree = "<group>"; };
 		C143560B22DCD16E005189E9 /* DoNotUse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoNotUse.swift; sourceTree = "<group>"; };
 		C143561B22DE1D9B005189E9 /* LaunchScreenVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenVC.swift; sourceTree = "<group>"; };
+		C1CA09C322E0A087009B1296 /* SeeMoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreVC.swift; sourceTree = "<group>"; };
 		C1E21BE522DF1BB300930115 /* LaunchScreenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LaunchScreenVC.swift; sourceTree = "<group>"; };
 		E29600FEE1EEB7B6DD9E0171 /* Pods_Fastflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fastflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -132,6 +134,7 @@
 				C1E21BE522DF1BB300930115 /* LaunchScreenVC.swift */,
 				52BA342922DDE513005F8489 /* MainTabBarController.swift */,
 				47FF9DC022DE3C15005C7BAD /* DetailVC.swift */,
+				C1CA09C322E0A087009B1296 /* SeeMoreVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -317,6 +320,7 @@
 				47FF9DC322DE3C51005C7BAD /* DetailViewUpperCell.swift in Sources */,
 				C143560822DCAA98005189E9 /* OriginalCollectionCell.swift in Sources */,
 				5295216B22D5D5E600174BC1 /* HomeVC.swift in Sources */,
+				C1CA09C422E0A087009B1296 /* SeeMoreVC.swift in Sources */,
 				47FF9DC122DE3C15005C7BAD /* DetailVC.swift in Sources */,
 				C143560422DC8E3E005189E9 /* PreViewPlayerVC.swift in Sources */,
 				C143560A22DCAAD5005189E9 /* OriginalTableCell.swift in Sources */,
