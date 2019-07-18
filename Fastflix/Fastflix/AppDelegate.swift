@@ -12,14 +12,26 @@ import UIKit
 final class AppDelegate: UIResponder, UIApplicationDelegate {
 
   var window: UIWindow?
+  
+  static var instance: AppDelegate {
+    return (UIApplication.shared.delegate as! AppDelegate)
+  }
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    checkLoginState()
+    return true
+  }
+  
+  func checkLoginState() {
+    let path = UserDefaults.standard
+    let token = path.string(forKey: "token")
+    let rootVC = token == nil ? DoNotUse() : MainTabBarController()
+    token == nil ? print("Logout") : print("Login")
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.backgroundColor = .clear
-    window?.rootViewController = MainTabBarController()
+    window?.rootViewController = rootVC
     
     window?.makeKeyAndVisible()
-    return true
   }
 
   func applicationWillResignActive(_ application: UIApplication) {
