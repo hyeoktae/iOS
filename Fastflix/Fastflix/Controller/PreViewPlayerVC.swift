@@ -47,7 +47,6 @@ final class PreViewPlayerVC: UIViewController {
     present(playerViewController, animated: true) {
       player.play()
     }
-    
   }
   
   override func viewDidLoad() {
