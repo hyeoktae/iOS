@@ -23,8 +23,11 @@ final class DoNotUse: UITableViewController {
     let button = UIButton(type: .custom)
     button.setTitleColor(.gray, for: .normal)
     button.addTarget(self, action: #selector(dismissBtnDidTap(_:)), for: .touchUpInside)
-    button.setImage(UIImage(named: "x"), for: .normal)
-    
+//    button.setImage(UIImage(named: "x"), for: .normal)
+    button.setTitle("Get Token", for: .normal)
+    button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 50)
+    button.titleLabel?.textColor = .white
+    button.layer.borderWidth = 1
     return button
   }()
   
@@ -47,13 +50,24 @@ final class DoNotUse: UITableViewController {
       button.snp.makeConstraints {
           $0.top.equalTo(50)
           $0.centerX.equalToSuperview()
-          $0.width.equalTo(40)
+          $0.width.equalTo(330)
       }
 
     }
   
   @objc func dismissBtnDidTap(_ sneder: UIButton) {
-    dismiss(animated: true)
+    print("get token")
+    APICenter.shared.login(id: "IOS권혁태", pw: "1234") {
+      switch $0 {
+      case .success(_):
+        print("Login Success!!!")
+      case .failure(let err):
+        print("fail to login, reason: ", err)
+      }
+      DispatchQueue.main.async {
+        AppDelegate.instance.checkLoginState()
+      }
+    }
   }
   
     // MARK: - Table view data source
