@@ -15,14 +15,14 @@ final class MainTabBarController: UITabBarController {
   private let preVC = PreViewPlayerVC()
   private let launchVC = LaunchScreenVC()
   private let detailVC = DetailVC()
+  private let seeMoreVC = SeeMoreVC()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     tabBar.tintColor = .white
     homeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "tabBarhome2"), tag: 0)
     
-
-    detailVC.tabBarItem = UITabBarItem(title: "더 보기", image: UIImage(named: "tabBarSeeMore1"), tag: 3)
+    seeMoreVC.tabBarItem = UITabBarItem(title: "더 보기", image: UIImage(named: "tabBarSeeMore1"), tag: 3)
     
     let item =  UITabBarItem(title: "저장한 콘텐츠 목록", image: UIImage(named: "tabBarDownLoad1"), tag: 2)
     
@@ -56,6 +56,6 @@ final class MainTabBarController: UITabBarController {
     
     playerVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(named: "tabBarSearch1"), tag: 1)
     
-    self.viewControllers = [homeVC, playerVC, launchVC, detailVC]
+    self.viewControllers = [homeVC, playerVC, launchVC, seeMoreVC]
   }
 }
