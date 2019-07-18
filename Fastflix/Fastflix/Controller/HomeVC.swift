@@ -10,12 +10,12 @@ import UIKit
 import Kingfisher
 import AVKit
 
-class HomeVC: UITableViewController {
+final class HomeVC: UITableViewController {
   
-  let streamingCell = StreamingCell()
-  let mainImageCell = MainImageTableCell()
-  let preViewCell = PreviewTableCell()
-  let originalCell = OriginalTableCell()
+  private let streamingCell = StreamingCell()
+  private let mainImageCell = MainImageTableCell()
+  private let preViewCell = PreviewTableCell()
+  private let originalCell = OriginalTableCell()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -48,9 +48,11 @@ class HomeVC: UITableViewController {
     case 0:
       let cell = mainImageCell
       cell.selectionStyle = .none
-      cell.mainImage.kf.setImage(with: URL(string: ImagesData.shared.imagesUrl[1]), options: [.processor(CroppingImageProcessor(size: CGSize(width: 414, height: 600))), .scaleFactor(UIScreen.main.scale)])
+//      cell.mainImage.kf.setImage(with: URL(string: ImagesData.shared.imagesUrl[1]), options: [.processor(CroppingImageProcessor(size: CGSize(width: 414, height: 600))), .scaleFactor(UIScreen.main.scale)])
+//
+//      cell.logoImage.kf.setImage(with: URL(string: ImagesData.shared.imagesUrl[2]), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 200, height: 200))), .cacheOriginalImage])
       
-      cell.logoImage.kf.setImage(with: URL(string: ImagesData.shared.imagesUrl[2]), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 200, height: 200))), .cacheOriginalImage])
+      cell.configure(imageURLString: ImagesData.shared.imagesUrl[1], logoImageURLString: ImagesData.shared.imagesUrl[2])
       
       return cell
       

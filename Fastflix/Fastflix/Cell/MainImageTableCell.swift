@@ -17,26 +17,26 @@ import UIKit
 import SnapKit
 import Kingfisher
 
-class MainImageTableCell: UITableViewCell {
+final class MainImageTableCell: UITableViewCell {
   
   static let identifier = "MainImageTableCell" 
   
-  var stackView = UIStackView()
-  var textStackView = UIStackView()
+  private var stackView = UIStackView()
+  private var textStackView = UIStackView()
   
-  let mainImage: UIImageView = {
+  private let mainImage: UIImageView = {
     let image = UIImageView()
     image.contentMode = .scaleAspectFill
     image.clipsToBounds = true
     return image
   }()
   
-  let logoImage: UIImageView = {
+  private let logoImage: UIImageView = {
     let image = UIImageView()
     return image
   }()
   
-  let movieDetailLabel: UILabel = {
+  private let movieDetailLabel: UILabel = {
     let label = UILabel()
     label.text = " 슈퍼히어로 ･ 왕실 ･ SF ･ 액션 ･ 할리우드 영화 ･ 어드벤처 "
     label.textColor = .white
@@ -44,7 +44,7 @@ class MainImageTableCell: UITableViewCell {
     return label
   }()
   
-  lazy var pokeButton: UIButton = {
+  private lazy var pokeButton: UIButton = {
     let button = UIButton(type: .custom)
     button.setImage(UIImage(named: "add"), for: .normal)
     button.setImage(UIImage(named: "poke"), for: .selected)
@@ -52,19 +52,19 @@ class MainImageTableCell: UITableViewCell {
     return button
   }()
   
-  let playButton: UIButton = {
+  private let playButton: UIButton = {
     let button = UIButton(type: .custom)
     button.setImage(UIImage(named: "play2"), for: .normal)
     return button
   }()
   
-  let infoButton: UIButton = {
+  private let infoButton: UIButton = {
     let button = UIButton(type: .custom)
     button.setImage(UIImage(named: "info"), for: .normal)
     return button
   }()
   
-  let textBelowPokeBtn: UILabel = {
+  private let textBelowPokeBtn: UILabel = {
     let text = UILabel()
     text.font = UIFont.systemFont(ofSize: 9, weight: .regular)
     text.textColor = .gray
@@ -73,7 +73,7 @@ class MainImageTableCell: UITableViewCell {
     return text
   }()
   
-  let textBelowinfoBtn: UILabel = {
+  private let textBelowinfoBtn: UILabel = {
     let text = UILabel()
     text.font = UIFont.systemFont(ofSize: 9, weight: .regular)
     text.textColor = .gray
@@ -82,7 +82,7 @@ class MainImageTableCell: UITableViewCell {
     return text
   }()
   
-  let blurImage: UIImageView = {
+  private let blurImage: UIImageView = {
     let blurImage = UIImageView()
     blurImage.image = UIImage(named: "navshadow")
     return blurImage
@@ -97,12 +97,12 @@ class MainImageTableCell: UITableViewCell {
     snpLayout()
   }
   
-  func configure(imageURL: String, logoImageURL: String) {
-    let imageURL = URL(string: imageURL)!
-    let logoImageURL = URL(string: logoImageURL)!
+  func configure(imageURLString: String, logoImageURLString: String) {
+    let imageURL = URL(string: imageURLString)
+    let logoImageURL = URL(string: logoImageURLString)
     
-    self.mainImage.kf.setImage(with: imageURL)
-    self.logoImage.kf.setImage(with: logoImageURL)
+    self.mainImage.kf.setImage(with: imageURL, options: [.processor(CroppingImageProcessor(size: CGSize(width: 414, height: 600))), .scaleFactor(UIScreen.main.scale)])
+    self.logoImage.kf.setImage(with: logoImageURL, options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 200, height: 200))), .cacheOriginalImage])
   }
   
   private func setupStackView() {
@@ -172,15 +172,6 @@ class MainImageTableCell: UITableViewCell {
     UIView.animate(withDuration: 0.3) {
       self.pokeButton.alpha = 1
     }
-  }
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-  }
-  
-  override func setSelected(_ selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-    
   }
   
   required init?(coder aDecoder: NSCoder) {

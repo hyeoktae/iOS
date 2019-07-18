@@ -9,21 +9,22 @@
 import UIKit
 import SnapKit
 
-class DetailCollectionViewCell: UICollectionViewCell {
+final class DetailCollectionViewCell: UICollectionViewCell {
     
-    let detailImageView: UIImageView = {
+    private let detailImageView: UIImageView = {
         let imageView = UIImageView()
         return imageView
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        configure()
+        self.backgroundColor = .clear
         makeConstaints()
     }
     
-    private func configure() {
-        self.backgroundColor = .clear
+  func configure(imageName: String) {
+      detailImageView.image = UIImage(named: imageName)
+      detailImageView.contentMode = .scaleToFill
     }
     
     private func makeConstaints() {

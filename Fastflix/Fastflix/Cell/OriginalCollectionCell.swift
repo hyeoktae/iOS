@@ -8,12 +8,13 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
-class OriginalCollectionCell: UICollectionViewCell {
+final class OriginalCollectionCell: UICollectionViewCell {
   
   static let identifier = "OriginalCollectionCell"
   
-  let originalImageView: UIImageView = {
+  private let originalImageView: UIImageView = {
     let imageView = UIImageView()
     return imageView
   }()
@@ -25,6 +26,11 @@ class OriginalCollectionCell: UICollectionViewCell {
     snpLayout()
     
   }
+  
+  func configure(imageUrlString: String) {
+    originalImageView.kf.setImage(with: URL(string: imageUrlString), options: [.processor(CroppingImageProcessor(size: CGSize(width: 170, height: 300))), .scaleFactor(UIScreen.main.scale)])
+  }
+  
   private func snpLayout() {
     originalImageView.snp.makeConstraints {
       $0.top.equalToSuperview().offset(-25)
