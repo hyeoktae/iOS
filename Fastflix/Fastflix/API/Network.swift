@@ -23,11 +23,11 @@ final class APICenter {
     
     let parameters = [
       [
-        "name": "username",
+        "name": "id",
         "value": id
       ],
       [
-        "name": "password",
+        "name": "pw",
         "value": pw
       ]
     ]
