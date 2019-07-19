@@ -9,12 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    Network.shared.request()
+    Network.shared.testAccount()
   }
-
-
+  
+  
 }
 
