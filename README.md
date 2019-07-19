@@ -26,3 +26,5 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 19.07.16  docs: allen - edit README.md file for git test
 
 19.07.17  fix: tass - fix all AutoLayout
+
+19.07.19  feat: tass - simple login & logout

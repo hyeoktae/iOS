@@ -153,4 +153,11 @@ extension SeeMoreVC: UITableViewDelegate {
     }
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    guard indexPath.row == datas.count - 1 else { return }
+    let path = UserDefaults.standard
+    path.removeObject(forKey: "token")
+    AppDelegate.instance.checkLoginState()
+  }
+  
 }
