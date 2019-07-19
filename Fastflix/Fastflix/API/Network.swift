@@ -12,7 +12,7 @@ import Foundation
 final class APICenter {
   static let shared = APICenter()
   
-  private let loginUrl = URL(string: "http://54.180.191.152/accounts/login/")!
+  private let loginUrl = URL(string: "http://54.180.191.152/accounts/login/")! 
   
   
   // MARK: - Login Method
