@@ -7,11 +7,46 @@
 //
 
 import Foundation
+import Alamofire
 
 class Network {
   static let shared = Network()
   
   private let movieURL = "http://54.180.191.152/movies/genre_select_before/"
+  private let loginURL = "http://54.180.191.152/accounts/login/"
+  
+  func loginAlamofire() {
+    
+    let headers = [
+      "content-type": "multipart/form-data; boundary=I don't want use it"
+    ]
+    
+    let parameters =
+      [
+        "id": "KHT@naver.com",
+        "pw": "1234"
+      ]
+    
+    
+    Alamofire.upload(multipartFormData: { MultipartFormData in
+        for (key, value) in parameters {
+          MultipartFormData.append(value.data(using: .utf8)!, withName: key)
+        }
+      
+    }, to: loginURL, method: .post, headers: headers) { (result) in
+      switch result {
+      case .success(let upload, _, _):
+        upload.responseJSON { (res) in
+          print("token: ", res.result.value as Any)
+        }
+      case .failure(let err):
+        print(err)
+        break
+      }
+    }
+    
+    
+  }
   
   func postman() {
     
