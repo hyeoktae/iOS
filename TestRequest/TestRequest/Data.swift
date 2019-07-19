@@ -9,6 +9,46 @@
 import Foundation
 
 
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let requestMovie = try? newJSONDecoder().decode(RequestMovie.self, from: jsonData)
+
+
+// MARK: - RequestMovieElement
+struct RequestMovieElement: Codable {
+  let mainMovie: MainMovie
+  let listOfGenre: [String: [MainMovie]]
+  
+  enum CodingKeys: String, CodingKey {
+    case mainMovie = "메인 영화"
+    case listOfGenre = "장르별 영화리스트"
+  }
+}
+
+// MARK: - 메인영화
+struct MainMovie: Codable {
+  let id: Int
+  let name: String
+  let horizontalImagePath: String
+  let verticalImage: JSONNull?
+  
+  enum CodingKeys: String, CodingKey {
+    case id, name
+    case horizontalImagePath = "horizontal_image_path"
+    case verticalImage = "vertical_image"
+  }
+}
+
+typealias RequestMovie = [RequestMovieElement]
+
+// MARK: - Encode/decode helpers
+
+
+
+// --------------------------------------------------
+
+
 // MARK: - MovieElement
 struct MovieElement: Codable {
   let id: Int
