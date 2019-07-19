@@ -9,17 +9,45 @@
 import Foundation
 import Alamofire
 
-class Network {
-  static let shared = Network()
+class APICenter {
+  static let shared = APICenter()
   
   private let movieURL = "http://54.180.191.152/movies/genre_select_before/"
   private let loginURL = "http://54.180.191.152/accounts/login/"
   
-  func loginAlamofire() {
+  
+  private func getToken() -> String {
+    guard let token = UserDefaults.standard.string(forKey: "token") else {
+      print("ERROR!!!, No TOKEN")
+      AppDelegate.instance.checkLogtinState()
+      return ""}
+    return token
+  }
+  
+  func requestMovie() {
+    let token = getToken()
     
-    let headers = [
-      "content-type": "multipart/form-data; boundary=I don't want use it"
+    let header = [
+      "Authorization": "Token \(token)"
     ]
+    
+    let request = Alamofire.request(movieURL, method: .get, headers: header)
+    
+    request.response(queue: .main) { (response) in
+      guard let data = response.data else { return }
+      do {
+        let result = try Alamofire.JSONDecoder().decode(RequestMovie.self, from: data)
+        print("result: ", result[0].listOfGenre.keys)
+      } catch(let err) {
+        print("error: ", err.localizedDescription)
+      }
+      
+    }
+    
+  }
+  
+  
+  func loginAlamofire(compltion: @escaping (Bool)->() ) {
     
     let parameters =
       [
@@ -33,20 +61,26 @@ class Network {
           MultipartFormData.append(value.data(using: .utf8)!, withName: key)
         }
       
-    }, to: loginURL, method: .post, headers: headers) { (result) in
+    }, to: loginURL, method: .post) { (result) in
       switch result {
       case .success(let upload, _, _):
         upload.responseJSON { (res) in
-          print("token: ", res.result.value as Any)
+          guard let origin = res.result.value as? [String: String] else { return }
+          let value = origin["token"]
+          print("token: ", value)
+          UserDefaults.standard.setValue(value, forKey: "token")
+          compltion(true)
         }
       case .failure(let err):
         print(err)
+        compltion(false)
         break
       }
     }
     
     
   }
+  
   
   func postman() {
     
@@ -129,24 +163,25 @@ class Network {
       }.resume()
   }
   
-  func request() {
-    
-    let url = URL(string: "http://52.78.134.79/movies/".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
-    print(url)
-    URLSession.shared.dataTask(with: url) { (data, res, err) in
-      
-      guard err == nil, let data = data else { return }
-      let result = try? JSONDecoder().decode(Movie.self, from: data)
-      print("all: ", result)
-      }.resume()
-    
-    let url2 = URL(string: "http://52.78.134.79/movies/genre/액션/list/".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
-    print(url2)
-    URLSession.shared.dataTask(with: url2) { (data, res, err) in
-      
-      guard err == nil, let data = data else { return }
-      let result = try? JSONDecoder().decode(Movie.self, from: data)
-      print("not all: ", result?.count)
-      }.resume()
-  }
+  
+//  func request() {
+//
+//    let url = URL(string: "http://52.78.134.79/movies/".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+//    print(url)
+//    URLSession.shared.dataTask(with: url) { (data, res, err) in
+//
+//      guard err == nil, let data = data else { return }
+//      let result = try? JSONDecoder().decode(Movie.self, from: data)
+//      print("all: ", result)
+//      }.resume()
+//
+//    let url2 = URL(string: "http://52.78.134.79/movies/genre/액션/list/".addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)!
+//    print(url2)
+//    URLSession.shared.dataTask(with: url2) { (data, res, err) in
+//
+//      guard err == nil, let data = data else { return }
+//      let result = try? JSONDecoder().decode(Movie.self, from: data)
+//      print("not all: ", result?.count)
+//      }.resume()
+//  }
 }
