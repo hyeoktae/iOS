@@ -55,6 +55,7 @@ class LoginVC: UIViewController {
         tf.layer.cornerRadius = 5
         tf.attributedPlaceholder
             = NSAttributedString(string: "  이메일 주소 또는 전화번호",attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)])
+        tf.textColor = .white
         return tf
     }()
     
@@ -64,6 +65,7 @@ class LoginVC: UIViewController {
         tf.attributedPlaceholder
             = NSAttributedString(string: "  비밀번호",attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)])
         tf.layer.cornerRadius = 5
+        tf.textColor = .white
         return tf
     }()
     

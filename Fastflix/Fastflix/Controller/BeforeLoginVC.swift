@@ -55,19 +55,23 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
     let introView1: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "intro1")
-        imageView.contentMode = .scaleToFill
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .black
+        imageView.isUserInteractionEnabled = false
         return imageView
     }()
     let introView2: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "intro2")
         imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .black
         return imageView
     }()
     let introView3: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "intro3")
         imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .black
         return imageView
     }()
     
@@ -116,13 +120,16 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
         pageControl.tintColor = UIColor.gray
         pageControl.pageIndicatorTintColor = #colorLiteral(red: 0.6000000238, green: 0.6000000238, blue: 0.6000000238, alpha: 1)
         pageControl.currentPageIndicatorTintColor = UIColor.red
-        pageControl.currentPage = 0
         return pageControl
     }()
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        pageControl.currentPage = 0
         scrollViewSetting()
         makeConstraints()
         navigationBarSetting()
@@ -132,11 +139,12 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
         
         [scrollView, loginButton, navigationView, pageControl].forEach { view.addSubview($0) }
         
+        
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(view.snp.top)
+            $0.top.equalTo(view.snp.top).offset(0)
             $0.leading.equalTo(view.snp.leading)
             $0.trailing.equalTo(view.snp.trailing)
-            $0.bottom.equalTo(view.snp.bottom)
+            $0.bottom.equalTo(view.snp.bottom).offset(0)
         }
         
         loginButton.snp.makeConstraints {
@@ -180,31 +188,31 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
             $0.leading.equalTo(scrollView.snp.leading)
             $0.width.equalTo(scrollView.snp.width)
             $0.height.equalTo(scrollView.snp.height)
-            $0.bottom.equalTo(scrollView.snp.bottom)
+            $0.centerY.equalTo(scrollView.snp.centerY)
         }
         
         introView1.snp.makeConstraints {
-            $0.top.equalTo(firstView.snp.top)
+            $0.top.equalTo(scrollView.snp.top)
             $0.leading.equalTo(firstView.snp.trailing)
-            $0.width.equalTo(firstView.snp.width)
-            $0.height.equalTo(firstView.snp.height)
-            $0.bottom.equalTo(firstView.snp.bottom)
+            $0.width.equalTo(scrollView.snp.width)
+            $0.height.equalTo(scrollView.snp.height)
+            $0.centerY.equalTo(scrollView.snp.centerY)
         }
         
         introView2.snp.makeConstraints {
-            $0.top.equalTo(introView1.snp.top)
+            $0.top.equalTo(scrollView.snp.top)
             $0.leading.equalTo(introView1.snp.trailing)
-            $0.width.equalTo(introView1.snp.width)
-            $0.height.equalTo(introView1.snp.height)
-            $0.bottom.equalTo(introView1.snp.bottom)
+            $0.width.equalTo(scrollView.snp.width)
+            $0.height.equalTo(scrollView.snp.height)
+            $0.centerY.equalTo(scrollView.snp.centerY)
         }
         
         introView3.snp.makeConstraints {
-            $0.top.equalTo(introView2.snp.top)
+            $0.top.equalTo(scrollView.snp.top)
             $0.leading.equalTo(introView2.snp.trailing)
-            $0.width.equalTo(introView2.snp.width)
-            $0.height.equalTo(introView2.snp.height)
-            $0.bottom.equalTo(introView2.snp.bottom)
+            $0.width.equalTo(scrollView.snp.width)
+            $0.height.equalTo(scrollView.snp.height)
+            $0.centerY.equalTo(scrollView.snp.centerY)
             $0.trailing.equalTo(scrollView.snp.trailing)
         }
         
@@ -219,8 +227,6 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
             $0.top.equalTo(introlabel1.snp.bottom).offset(20)
             $0.centerX.equalToSuperview()
         }
-        
-        
     }
     
     
@@ -230,18 +236,16 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
     }
     
     private func scrollViewSetting() {
-        scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * 3, height: self.scrollView.frame.size.height)
+        scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * 4, height: self.scrollView.frame.size.height)
         scrollView.delegate = self
-        scrollView.isScrollEnabled = true
         scrollView.isPagingEnabled = true
+        scrollView.bounces = false
     }
     
     @objc private func loginButtonDidTap(_ sender: UIButton) {
         let loginVC = LoginVC()
         navigationController?.pushViewController(loginVC, animated: true)
-        
     }
-    
     
     @objc private func customerCenterTapped(_ sender: UIButton) {
         
@@ -249,7 +253,7 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         // contentOffset은 현재 스크롤된 좌표
-        let pageNumber = round(scrollView.contentOffset.x / scrollView.frame.size.width)
-        //        pageControl.currentPage = Int(pageNumber)
+        pageControl.currentPage = Int(floor(scrollView.contentOffset.x / UIScreen.main.bounds.width))
     }
 }
+
