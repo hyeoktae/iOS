@@ -25,7 +25,9 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   func checkLoginState() {
     let path = UserDefaults.standard
     let token = path.string(forKey: "token")
-    let rootVC = token == nil ? DoNotUse() : MainTabBarController()
+    let navi = UINavigationController()
+    navi.viewControllers = [BeforeLoginVC()]
+    let rootVC = token == nil ? navi : MainTabBarController()
     token == nil ? print("Logout") : print("Login")
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.backgroundColor = .clear
