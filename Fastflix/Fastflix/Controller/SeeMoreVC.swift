@@ -51,9 +51,12 @@ class SeeMoreVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     addSubViews()
-    snpLayout()
     tableViewSetUp()
-    
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    setupSNP()
   }
   
   @objc func profileBtnDidTap(_ sender: UIButton) {
@@ -76,7 +79,7 @@ class SeeMoreVC: UIViewController {
     [profileBtn, profileName, profileAdminBtn].forEach {topView.addSubview($0)}
   }
   
-  private func snpLayout() {
+  private func setupSNP() {
     topView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
       $0.height.equalTo(UIScreen.main.bounds.height * 0.28)

@@ -1,5 +1,5 @@
 //
-//  HomeVC.swift
+//  DoNotUse2.swift
 //  Fastflix
 //
 //  Created by hyeoktae kwon on 2019/07/10.
@@ -11,34 +11,36 @@ import Kingfisher
 import AVKit
 import SnapKit
 
-final class HomeVC: UITableViewController {
+final class DoNotUse2: UITableViewController {
   
-  private let streamingCell = StreamingCell()
-  private let mainImageCell = MainImageTableCell()
-  private let preViewCell = PreviewTableCell()
-  private let originalCell = OriginalTableCell()
+  private let streamingCell: StreamingCell = {
+    let cell = StreamingCell()
+    cell.configure(url: streamingUrl)
+    return cell
+  }()
   
-
+  private let floatingHomeView = FloatingView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupTableView()
+    registerTableViewCell()
+  }
+  
+  private func setupTableView() {
     tableView.backgroundColor = #colorLiteral(red: 0.07762928299, green: 0.07762928299, blue: 0.07762928299, alpha: 1)
     tableView.separatorStyle = .none
     tableView.allowsSelection = false
     tableView.showsVerticalScrollIndicator = false
-    registerTableViewCell()
-    
   }
   
   private func registerTableViewCell() {
     
-//    tableView.register(MainImageTableCell.self, forCellReuseIdentifier: MainImageTableCell.identifier)
-//    tableView.register(PreviewTableCell.self, forCellReuseIdentifier: PreviewTableCell.identifier)
-//    tableView.register(OriginalTableCell.self, forCellReuseIdentifier: OriginalTableCell.identifier)
-//
-//    tableView.register(MainCell.self, forCellReuseIdentifier: MainCell.identifier)
+    tableView.register(MainImageTableCell.self, forCellReuseIdentifier: MainImageTableCell.identifier)
+    tableView.register(PreviewTableCell.self, forCellReuseIdentifier: PreviewTableCell.identifier)
+    tableView.register(OriginalTableCell.self, forCellReuseIdentifier: OriginalTableCell.identifier)
+    tableView.register(MainCell.self, forCellReuseIdentifier: MainCell.identifier)
     
-    streamingCell.configure(url: "http://movietrailers.apple.com/movies/lucasfilm/star-wars-the-last-jedi/the-last-jedi-worlds-of-the-last-jedi_i320.m4v")
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -49,21 +51,15 @@ final class HomeVC: UITableViewController {
     
     switch indexPath.row {
     case 0:
-      let cell = mainImageCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: MainImageTableCell.identifier, for: indexPath) as! MainImageTableCell
       cell.selectionStyle = .none
-//      cell.mainImage.kf.setImage(with: URL(string: ImagesData.shared.imagesUrl[1]), options: [.processor(CroppingImageProcessor(size: CGSize(width: 414, height: 600))), .scaleFactor(UIScreen.main.scale)])
-//
-//      cell.logoImage.kf.setImage(with: URL(string: ImagesData.shared.imagesUrl[2]), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 200, height: 200))), .cacheOriginalImage])
-      
       cell.configure(imageURLString: ImagesData.shared.imagesUrl[1], logoImageURLString: ImagesData.shared.imagesUrl[2])
-      
       return cell
       
     case 1:
-      let cell = preViewCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: PreviewTableCell.identifier, for: indexPath) as! PreviewTableCell
       cell.delegate = self
       cell.selectionStyle = .none
-      
       return cell
       
     case 5:
@@ -71,15 +67,14 @@ final class HomeVC: UITableViewController {
       return cell
       
     case 7:
-      let cell = originalCell
+      let cell = tableView.dequeueReusableCell(withIdentifier: OriginalTableCell.identifier, for: indexPath) as! OriginalTableCell
       cell.selectionStyle = .none
       cell.delegate = self
       return cell
       
     default:
-      let cell = MainCell()
+      let cell = tableView.dequeueReusableCell(withIdentifier: MainCell.identifier, for: indexPath) as! MainCell
       cell.configure(url: imageUrls, title: "\(indexPath)")
-      
       return cell
     }
     
@@ -128,7 +123,7 @@ final class HomeVC: UITableViewController {
 //  }
   
 }
-extension HomeVC: PreviewTableCellDelegate {
+extension DoNotUse2: PreviewTableCellDelegate {
   func didSelectItemAt(indexPath: IndexPath) {
     let url = URL(string: "https://firebasestorage.googleapis.com/v0/b/test-64199.appspot.com/o/%E1%84%82%E1%85%A6%E1%86%BA%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%86%A8%E1%84%89%E1%85%B3%E1%84%86%E1%85%B5%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%80%E1%85%B5%E1%84%80%E1%85%A1%E1%84%8B%E1%85%A9%E1%84%80%E1%85%A2%E1%86%AF2.mp4?alt=media&token=96a3f3ef-3ff9-4f05-9675-2f13232a72cf")!
     
@@ -142,7 +137,7 @@ extension HomeVC: PreviewTableCellDelegate {
   }
 }
 
-extension HomeVC: OriginalTableCellDelegate {
+extension DoNotUse2: OriginalTableCellDelegate {
   func originalDidSelectItemAt(indexPath: IndexPath) {
 //    let detailVC = DetailTableVC()
     let detailVC = DetailVC()

@@ -137,11 +137,16 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         pageControl.currentPage = 0
         scrollViewSetting()
-        makeConstraints()
+      
         navigationBarSetting()
     }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    setupSNP()
+  }
     
-    private func makeConstraints() {
+    private func setupSNP() {
         
         [scrollView, loginButton, navigationView, pageControl].forEach { view.addSubview($0) }
         

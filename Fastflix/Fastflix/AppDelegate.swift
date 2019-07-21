@@ -23,21 +23,21 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func checkLoginState() {
-    let path = UserDefaults.standard
-    let token = path.string(forKey: "token")
-    let navi = UINavigationController()
+    let token = UserDefaults.standard.string(forKey: "token")
     let tabBar = MainTabBarController()
-    tabBar.view.frame = UIScreen.main.bounds
-    print("UIScreen", UIScreen.main.bounds)
-    print("Tabbar", tabBar.view.frame)
+    
+    let navi = UINavigationController()
     navi.viewControllers = [BeforeLoginVC()]
+    
     let rootVC = token == nil ? navi : tabBar
-    token == nil ? print("Logout") : print("Login")
+    
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.backgroundColor = .clear
     window?.rootViewController = rootVC
     
     window?.makeKeyAndVisible()
+    
+    topPadding = rootVC.view.safeAreaInsets.top
   }
 
   func applicationWillResignActive(_ application: UIApplication) {

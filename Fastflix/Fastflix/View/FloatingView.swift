@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class HomeView: UIView {
+class FloatingView: UIView {
   
   
   let homeBtn: UIButton = {
