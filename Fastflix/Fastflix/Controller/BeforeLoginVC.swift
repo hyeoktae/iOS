@@ -47,9 +47,15 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
     }()
     
     // 스크롤되는 화면
-    let firstView: UIImageView = {
+    let firstView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        return view
+    }()
+    let backgroundView: UIView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = .clear
+        imageView.image = UIImage(named: "netfilxbackground")
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     let introView1: UIImageView = {
@@ -181,38 +187,46 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
         }
         
         //스크롤뷰 관련
-        [firstView, introView1, introView2, introView3].forEach { scrollView.addSubview($0) }
+        [backgroundView, firstView, introView1, introView2, introView3].forEach { scrollView.addSubview($0) }
         
-        firstView.snp.makeConstraints {
-            $0.top.equalTo(scrollView.snp.top)
+        backgroundView.snp.makeConstraints {
+            //            $0.top.equalTo(scrollView.snp.top)
             $0.leading.equalTo(scrollView.snp.leading)
             $0.width.equalTo(scrollView.snp.width)
             $0.height.equalTo(scrollView.snp.height)
             $0.centerY.equalTo(scrollView.snp.centerY)
         }
         
+        firstView.snp.makeConstraints {
+            //            $0.top.equalTo(scrollView.snp.top)
+            $0.leading.equalTo(scrollView.snp.leading)
+            $0.width.equalTo(scrollView.snp.width)
+            $0.height.equalTo(scrollView.snp.height)
+            $0.centerY.equalTo(scrollView.snp.centerY).offset(-40)
+        }
+        
         introView1.snp.makeConstraints {
-            $0.top.equalTo(scrollView.snp.top)
+            //            $0.top.equalTo(scrollView.snp.top)
             $0.leading.equalTo(firstView.snp.trailing)
             $0.width.equalTo(scrollView.snp.width)
             $0.height.equalTo(scrollView.snp.height)
-            $0.centerY.equalTo(scrollView.snp.centerY)
+            $0.centerY.equalTo(scrollView.snp.centerY).offset(-40)
         }
         
         introView2.snp.makeConstraints {
-            $0.top.equalTo(scrollView.snp.top)
+            //            $0.top.equalTo(scrollView.snp.top)
             $0.leading.equalTo(introView1.snp.trailing)
             $0.width.equalTo(scrollView.snp.width)
             $0.height.equalTo(scrollView.snp.height)
-            $0.centerY.equalTo(scrollView.snp.centerY)
+            $0.centerY.equalTo(scrollView.snp.centerY).offset(-40)
         }
         
         introView3.snp.makeConstraints {
-            $0.top.equalTo(scrollView.snp.top)
+            //            $0.top.equalTo(scrollView.snp.top)
             $0.leading.equalTo(introView2.snp.trailing)
             $0.width.equalTo(scrollView.snp.width)
             $0.height.equalTo(scrollView.snp.height)
-            $0.centerY.equalTo(scrollView.snp.centerY)
+            $0.centerY.equalTo(scrollView.snp.centerY).offset(-40)
             $0.trailing.equalTo(scrollView.snp.trailing)
         }
         
@@ -220,7 +234,7 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
         
         introlabel1.snp.makeConstraints {
             $0.centerX.equalTo(firstView.snp.centerX)
-            $0.centerY.equalTo(view.snp.top).offset(370)
+            $0.centerY.equalTo(scrollView.snp.centerY).offset(-40)
         }
         
         introlabel2.snp.makeConstraints {
@@ -239,7 +253,7 @@ class BeforeLoginVC: UIViewController, UIScrollViewDelegate {
         scrollView.contentSize = CGSize(width: self.scrollView.frame.size.width * 4, height: self.scrollView.frame.size.height)
         scrollView.delegate = self
         scrollView.isPagingEnabled = true
-        scrollView.bounces = false
+//        scrollView.bounces = false
     }
     
     @objc private func loginButtonDidTap(_ sender: UIButton) {
