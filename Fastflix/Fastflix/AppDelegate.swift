@@ -26,8 +26,12 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     let path = UserDefaults.standard
     let token = path.string(forKey: "token")
     let navi = UINavigationController()
+    let tabBar = MainTabBarController()
+    tabBar.view.frame = UIScreen.main.bounds
+    print("UIScreen", UIScreen.main.bounds)
+    print("Tabbar", tabBar.view.frame)
     navi.viewControllers = [BeforeLoginVC()]
-    let rootVC = token == nil ? navi : MainTabBarController()
+    let rootVC = token == nil ? navi : tabBar
     token == nil ? print("Logout") : print("Login")
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.backgroundColor = .clear

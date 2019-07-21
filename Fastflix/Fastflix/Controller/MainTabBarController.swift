@@ -8,19 +8,29 @@
 
 import UIKit
 import AVKit
+import SnapKit
 
 final class MainTabBarController: UITabBarController {
   
-  private let homeVC = HomeVC()
+//  private let homeVC = MainHomeVC()
   private let preVC = PreViewPlayerVC()
   private let launchVC = LaunchScreenVC()
   private let detailVC = DetailVC()
   private let seeMoreVC = SeeMoreVC()
+  private let navi = UINavigationController(rootViewController: MainHomeVC())
+  
+  private let homeNaviView: HomeView = {
+    let homeNaviView = HomeView(frame: CGRect(x: 0, y: -44, width: 0, height: 0))
+    return homeNaviView
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupNavi()
+    setupLayout()
     tabBar.tintColor = .white
-    homeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "tabBarhome2"), tag: 0)
+    navi.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "tabBarhome2"), tag: 0)
+    
     
     seeMoreVC.tabBarItem = UITabBarItem(title: "더 보기", image: UIImage(named: "tabBarSeeMore1"), tag: 3)
     
@@ -56,6 +66,27 @@ final class MainTabBarController: UITabBarController {
     
     playerVC.tabBarItem = UITabBarItem(title: "검색", image: UIImage(named: "tabBarSearch1"), tag: 1)
     
-    self.viewControllers = [homeVC, playerVC, launchVC, seeMoreVC]
+    self.viewControllers = [navi, playerVC, launchVC, seeMoreVC]
+    
+    print("navi VIew", navi.view.frame)
+    print("navi NavigationBar", navi.navigationBar.frame)
+    print("self", self.viewControllers?.first?.view.frame)
   }
+  
+  func setupNavi() {
+    navi.navigationBar.addSubview(homeNaviView)
+    navi.navigationBar.barTintColor = .clear
+    navi.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+    navi.navigationBar.shadowImage = UIImage()
+    navi.navigationBar.isTranslucent = true
+    self.setNeedsStatusBarAppearanceUpdate()
+  }
+  
+  func setupLayout() {
+//    homeNaviView.snp.makeConstraints {
+//      print(self.view.superview?.safeAreaInsets.top)
+//      $0.top.equalToSuperview().offset(-navi.view.safeAreaInsets.top)
+//    }
+  }
+  
 }
