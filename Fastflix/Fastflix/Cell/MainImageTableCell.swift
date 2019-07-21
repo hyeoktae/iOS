@@ -38,7 +38,7 @@ final class MainImageTableCell: UITableViewCell {
   
   private let movieDetailLabel: UILabel = {
     let label = UILabel()
-    label.text = " 슈퍼히어로 ･ 왕실 ･ SF ･ 액션 ･ 할리우드 영화 ･ 어드벤처 "
+    label.text = " 슈퍼히어로 ･ 사이보그 & 로봇 ･ SF ･ 액션 ･ 할리우드 영화 "
     label.textColor = .white
     label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
     return label
@@ -126,10 +126,12 @@ final class MainImageTableCell: UITableViewCell {
   }
   // snp
   private func snpLayout() {
+    let appDelegate = AppDelegate.instance
+    
     mainImage.snp.makeConstraints {
       $0.left.right.bottom.equalToSuperview()
-      $0.top.equalToSuperview().offset(-44)
-      $0.height.equalTo(630)
+      $0.top.equalToSuperview().offset(-88)
+      $0.height.equalTo(590)
     }
     
     logoImage.snp.makeConstraints {
