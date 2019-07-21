@@ -59,11 +59,12 @@ class HomeView: UIView {
       $0.width.height.equalTo(55)
       $0.leading.equalToSuperview().offset(10)
     }
+    
     movieBtn.snp.makeConstraints {
       $0.top.equalTo(UIScreen.main.bounds.height * 0.07)
       $0.leading.equalTo(homeBtn.snp.trailing).offset(30)
-      
     }
+    
     pokeBtn.snp.makeConstraints {
       $0.top.equalTo(UIScreen.main.bounds.height * 0.07)
       $0.leading.equalTo(movieBtn.snp.trailing).offset(40)
