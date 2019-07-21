@@ -72,9 +72,6 @@ extension MainHomeVC: UITableViewDataSource {
     case 0:
       let cell = mainImageCell
       cell.selectionStyle = .none
-      //      cell.mainImage.kf.setImage(with: URL(string: ImagesData.shared.imagesUrl[1]), options: [.processor(CroppingImageProcessor(size: CGSize(width: 414, height: 600))), .scaleFactor(UIScreen.main.scale)])
-      //
-      //      cell.logoImage.kf.setImage(with: URL(string: ImagesData.shared.imagesUrl[2]), options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 200, height: 200))), .cacheOriginalImage])
       
       cell.configure(imageURLString: ImagesData.shared.imagesUrl[2], logoImageURLString: ImagesData.shared.imagesUrl[4])
       
