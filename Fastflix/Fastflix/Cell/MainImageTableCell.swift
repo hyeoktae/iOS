@@ -130,7 +130,7 @@ final class MainImageTableCell: UITableViewCell {
     
     mainImage.snp.makeConstraints {
       $0.left.right.bottom.equalToSuperview()
-      $0.top.equalToSuperview().offset(-88)
+      $0.top.equalToSuperview().offset(-topPadding)
       $0.height.equalTo(590)
     }
     
@@ -166,7 +166,6 @@ final class MainImageTableCell: UITableViewCell {
   }
   
   @objc func pokeBtnDidTap(_ sender: UIButton) {
-    print("나온나")
     UIView.animate(withDuration: 0.3) {
       self.pokeButton.alpha = 0
     }

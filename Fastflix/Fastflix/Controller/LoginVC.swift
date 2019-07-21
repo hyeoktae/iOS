@@ -103,7 +103,12 @@ class LoginVC: UIViewController {
     super.viewDidLoad()
     
     configure()
-    makeConstraints()
+    
+  }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    setupSNP()
   }
   
   private func configure() {
@@ -112,7 +117,7 @@ class LoginVC: UIViewController {
     navigationBarSetting()
   }
   
-  private func makeConstraints() {
+  private func setupSNP() {
     [navigationView, stackView, passwordButton].forEach { view.addSubview($0)}
     
     emailTextField.snp.makeConstraints {

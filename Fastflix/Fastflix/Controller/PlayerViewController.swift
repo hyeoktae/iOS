@@ -169,13 +169,15 @@ class PlayerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        makeConstraints()
     }
+  
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    setupSNP()
+  }
     
     // 🔸addSubview 및 autoLayout
-    private func makeConstraints() {
+    private func setupSNP() {
         view.addSubview(playerView)
         
         [movieTitleLabel, closeButton, backWardButton, pausePlayButton, forwardButton, subtitleStackView, sliderStackView, backLabel, forwardLabel, backMovingLabel, forwardMovingLabel].forEach { playerView.addSubview($0) }

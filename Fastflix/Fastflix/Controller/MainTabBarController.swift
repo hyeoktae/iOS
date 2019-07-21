@@ -7,13 +7,12 @@
 //
 
 import UIKit
-import AVKit
 import SnapKit
 
 final class MainTabBarController: UITabBarController {
   
   // MARK: - Properties
-  private let homeVC = MainHomeVC()
+  private let mainHomeVC = MainHomeVC()
   private let downloadVC = DownloadVC()
   private let seeMoreVC = SeeMoreVC()
   private let searchVC = SearchVC()
@@ -29,7 +28,7 @@ final class MainTabBarController: UITabBarController {
     tabBar.tintColor = .white
     tabBar.backgroundImage = UIImage(named: "black")
     
-    self.viewControllers = [homeVC, searchVC, downloadVC, seeMoreVC]
+    self.viewControllers = [mainHomeVC, searchVC, downloadVC, seeMoreVC]
   }
   
   private func installTabBarItems() {
@@ -41,7 +40,7 @@ final class MainTabBarController: UITabBarController {
     downloadVCItem.badgeValue = "☁︎"
     downloadVCItem.badgeColor = .blue
     
-    homeVC.tabBarItem = homeVCItem
+    mainHomeVC.tabBarItem = homeVCItem
     searchVC.tabBarItem = searchVCItem
     downloadVC.tabBarItem = downloadVCItem
     seeMoreVC.tabBarItem = seeMoreVCItem
