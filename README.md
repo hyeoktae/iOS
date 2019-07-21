@@ -32,3 +32,5 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 19.07.20  feat: tass - login request done, with Alamofire
 
 19.07.20  feat: tass - request of MainMovieVC done, with Alamofire
+
+19.07.22  feat: tass - tabBarController complete
