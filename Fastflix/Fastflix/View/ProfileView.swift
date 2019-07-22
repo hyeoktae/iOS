@@ -11,10 +11,15 @@ import SnapKit
 
 class ProfileView: UIView {
   
-  let profileImageView: UIImageView = {
-    let imgView = UIImageView()
-    imgView.contentMode = .scaleAspectFit
-    return imgView
+//  let profileImageView: UIImageView = {
+//    let imgView = UIImageView()
+//    imgView.contentMode = .scaleAspectFit
+//    return imgView
+//  }()
+  
+  let profileImageBtn: UIButton = {
+    let imageButton = UIButton(type: .custom)
+    return imageButton
   }()
   
   let profileNameLabel: UILabel = {
@@ -26,8 +31,10 @@ class ProfileView: UIView {
   }()
   
   func configure(image: UIImage?, name: String?) {
-    profileImageView.image = image ?? UIImage(named: "profileAdd")
+//    profileImageView.image = image ?? UIImage(named: "profileAdd")
     profileNameLabel.text = name ?? "프로필 추가"
+    let newImg = image ?? UIImage(named: "profileAdd")
+    profileImageBtn.setImage(newImg, for: .normal)
   }
   
   override func didMoveToSuperview() {
@@ -39,18 +46,18 @@ class ProfileView: UIView {
   }
   
   private func addsubviews() {
-    [profileImageView, profileNameLabel].forEach { addSubview($0) }
+    [profileImageBtn, profileNameLabel].forEach { addSubview($0) }
   }
   
   private func setupSNP() {
-    profileImageView.snp.makeConstraints {
+    profileImageBtn.snp.makeConstraints {
       $0.leading.trailing.equalToSuperview()
-      $0.top.equalToSuperview().offset(50)
+      $0.top.equalToSuperview().offset(15)
       $0.height.width.equalTo(60)
     }
     
     profileNameLabel.snp.makeConstraints {
-      $0.top.equalTo(profileImageView.snp.bottom).offset(10)
+      $0.top.equalTo(profileImageBtn.snp.bottom).offset(10)
       $0.bottom.equalToSuperview()
       $0.centerX.equalToSuperview()
     }

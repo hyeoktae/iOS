@@ -54,8 +54,8 @@ extension CreateProfileVC: CreateProfileViewDelegate {
   }
   
   func titleImageChange(button: UIButton) {
-    let iconVC = IconVC()
-    present(iconVC, animated: true)
+//    let iconVC = IconVC()
+//    present(iconVC, animated: true)
     
   }
   

@@ -10,7 +10,9 @@ import SnapKit
 
 class SeeMoreVC: UIViewController {
   
-  let datas = [" 알림설정", "내가 찜한 콘텐츠", "앱설정", "계정", "개인정보", "고객 센터", "로그아웃"]
+  let datas = [ "앱설정", "계정", "개인정보", "고객 센터", "로그아웃"]
+  let notificationData = ["내가 찜한 콘텐츠"]
+  let pokeData = [" 알림 설정"]
   
   let topView: UIView = {
     let topView = UIView()
@@ -18,22 +20,7 @@ class SeeMoreVC: UIViewController {
     return topView
   }()
   
-  lazy var profileBtn: UIButton = {
-    let button = UIButton(type: .custom)
-    button.addTarget(self, action: #selector(profileBtnDidTap(_:)), for: .touchUpInside)
-    button.setImage(UIImage(named: "profile3"), for: .normal)
-    button.imageView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
-    return button
-  }()
-  
-  let profileName: UILabel = {
-    let label = UILabel()
-    label.text = "hea"
-    label.font = UIFont.systemFont(ofSize: 15, weight: .light)
-    label.textColor = .gray
-    return label
-  }()
-  
+
   let profileAdminBtn: UIButton = {
     let button = UIButton(type: .custom)
     button.addTarget(self, action: #selector(profileAdminBtnDidTap(_:)), for: .touchUpInside)
@@ -43,15 +30,7 @@ class SeeMoreVC: UIViewController {
     button.setTitleColor(.gray, for: .normal)
     return button
   }()
-  
-//  lazy var profileAddBtn: UIButton = {
-//    let button = UIButton(type: .custom)
-//    button.setImage(UIImage(named: "profileAdd"), for: .normal)
-//    button.addTarget(self, action: #selector(profileAddBtnDidTap(_:)), for: .touchUpInside)
-//    button.imageView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
-//    return button
-//  }()
-  
+
   let profileAddLabel: UILabel = {
     let label = UILabel()
     label.text = "프로필 추가"
@@ -67,11 +46,10 @@ class SeeMoreVC: UIViewController {
   }()
   lazy var profileAddView: ProfileView = {
     let view = ProfileView()
-    view.configure(image: UIImage(named: "profileAdd"), name: "프로필 추가")
+    view.configure(image: nil, name: nil)
     view.profileNameLabel.textColor = .gray
-    view.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileImageTapGesture(_:))))
-    view.profileImageView.isUserInteractionEnabled = true
-    
+    view.profileImageBtn.addTarget(self, action: #selector(profileAddDidTap(_:)), for: .touchUpInside)
+
     return view
   }()
   
@@ -99,14 +77,12 @@ class SeeMoreVC: UIViewController {
     
   }
   
-  @objc func profileBtnDidTap(_ sender: UIButton) {
-    print("profileBtnDidTap")
-  }
+
   @objc func profileAdminBtnDidTap(_ sender: UIButton) {
     print("@@@@profileAdminBtnDidTap")
   }
   
-  @objc func profileImageTapGesture(_ sender: UITapGestureRecognizer) {
+  @objc func profileAddDidTap(_ sender: UIButton) {
     print("#####TapTapTap")
     let createProfielVC = CreateProfileVC()
     present(createProfielVC, animated: true)
@@ -119,6 +95,7 @@ class SeeMoreVC: UIViewController {
     tableView.dataSource = self
     tableView.delegate = self
     tableView.backgroundColor = #colorLiteral(red: 0.1087603109, green: 0.1087603109, blue: 0.1087603109, alpha: 1)
+    tableView.separatorColor = .black
     
   }
   
@@ -130,7 +107,7 @@ class SeeMoreVC: UIViewController {
   private func setupSNP() {
     topView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
-      $0.height.equalToSuperview().multipliedBy(0.33)
+      $0.height.equalToSuperview().multipliedBy(0.31)
     }
     
     tableView.snp.makeConstraints {
@@ -138,7 +115,7 @@ class SeeMoreVC: UIViewController {
       $0.leading.trailing.bottom.equalToSuperview()
     }
     profileStackView.snp.makeConstraints {
-      $0.top.equalTo(topView.snp.top).offset(30)
+      $0.top.equalTo(topView.snp.top).offset(20)
       $0.centerX.equalTo(topView.snp.centerX)
     }
     
@@ -147,65 +124,96 @@ class SeeMoreVC: UIViewController {
       $0.centerX.equalToSuperview()
     }
 
-    
-//    profileBtn.snp.makeConstraints {
-//      $0.top.equalToSuperview().offset(60)
-//      $0.centerX.equalToSuperview()
-//      $0.width.height.equalTo(60)
-//
-//    }
-//    profileName.snp.makeConstraints {
-//      $0.top.equalTo(profileBtn.snp.bottom).offset(10)
-//      $0.centerX.equalToSuperview()
-//    }
-//
-//
-//    profileAddBtn.snp.makeConstraints {
-//      $0.top.equalToSuperview().offset(60)
-//      $0.leading.equalTo(profileBtn.snp.trailing).offset(40)
-//      $0.width.height.equalTo(60)
-//    }
-    
-//    profileAddLabel.snp.makeConstraints {
-//      $0.top.equalTo(profileAddBtn.snp.bottom).offset(10)
-//      $0.centerX.equalTo(profileAddBtn.snp.centerX)
-//    }
-    
   }
-  
   
 }
 extension SeeMoreVC: UITableViewDataSource {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return datas.count
+  func numberOfSections(in tableView: UITableView) -> Int {
+   return 3
   }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-    cell.selectionStyle = .none
-    
-    if indexPath.row == 0 {
-      cell.imageView?.image = UIImage(named: "notification")
-      cell.accessoryType = .disclosureIndicator
-      
-    } else if indexPath.row == 1 {
-      let cell2 = UITableViewCell()
-      cell.backgroundColor = .black
-      return cell2
-    } else if indexPath.row == 2 {
-      cell.imageView?.image = UIImage(named: "check")
-      cell.accessoryType = .disclosureIndicator
-    } else if indexPath.row == 3 {
-      let cell2 = UITableViewCell()
-      cell.backgroundColor = .black
-      return cell2
+    switch section {
+    case 0:
+      return notificationData.count
+    case 1:
+      return pokeData.count
+    case 2:
+      return datas.count
+    default:
+      return 0
     }
-    cell.backgroundColor = #colorLiteral(red: 0.1087603109, green: 0.1087603109, blue: 0.1087603109, alpha: 1)
-    tableView.separatorStyle = .none
-    cell.textLabel?.text = datas[indexPath.row]
-    cell.textLabel?.font = UIFont.systemFont(ofSize: 20, weight: .light)
+ 
+  }
+  
+  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    let footerView = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2))
+    footerView.backgroundColor = .black
+    return footerView
+  }
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    return 2
+  }
+  
+  
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    let cell = UITableViewCell(style: .default, reuseIdentifier: "cell")
+    cell.selectionStyle = .none
+    cell.backgroundColor = #colorLiteral(red: 0.08262611039, green: 0.08262611039, blue: 0.08262611039, alpha: 1)
     cell.textLabel?.textColor = .lightGray
+    cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .light)
+    tableView.separatorStyle = .none
+    
+    switch indexPath.section {
+    case 0:
+      if indexPath.row == 0 {
+        cell.imageView?.image = UIImage(named: "notification")
+        cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.text = " 알림 설정"
+//        cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        tableView.separatorStyle = .none
+      } else {
+        cell.textLabel?.text = notificationData[indexPath.row]
+      }
+    case 1:
+      if indexPath.row == 0 {
+        cell.imageView?.image = UIImage(named: "check")
+        cell.accessoryType = .disclosureIndicator
+        cell.textLabel?.text = "내가 찜한 콘텐츠"
+//        cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .light)
+      } else {
+        cell.textLabel?.text = pokeData[indexPath.row]
+      }
+    case 2:
+      cell.textLabel?.text = datas[indexPath.row]
+//      cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .light)
+      
+    default:
+      break
+    }
+   
+//    if indexPath.row == 0 {
+//      cell.imageView?.image = UIImage(named: "notification")
+//      cell.accessoryType = .disclosureIndicator
+//      cell.textLabel?.text = " 알림 설정"
+//
+//    } else if indexPath.row == 1 {
+//      let cell2 = UITableViewCell()
+//      cell.backgroundColor = .black
+//      return cell2
+//    } else if indexPath.row == 2 {
+//      cell.imageView?.image = UIImage(named: "check")
+//      cell.accessoryType = .disclosureIndicator
+//      cell.textLabel?.text = "내가 찜한 콘텐츠"
+//    } else if indexPath.row == 3 {
+//      let cell2 = UITableViewCell()
+//      cell.backgroundColor = .black
+//      return cell2
+//    }
+
     
     return cell
   }
@@ -213,13 +221,16 @@ extension SeeMoreVC: UITableViewDataSource {
 }
 
 extension SeeMoreVC: UITableViewDelegate {
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.row == 1 || indexPath.row == 3 {
-      return 2
-    } else {
-      return 50
-    }
-  }
+//  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//    if indexPath.row == 1 || indexPath.row == 3 {
+//      return 2
+//    } else {
+//      return 45
+//    }
+//  }
+  
+
+  
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard indexPath.row == datas.count - 1 else { return }
