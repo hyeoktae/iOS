@@ -20,7 +20,7 @@ class LoginVC: UIViewController {
     return view
   }()
   
-  // 로고
+  // 네비게이션 - 로고
   let logoView: UIImageView = {
     let image = UIImage(named: "fastflix")
     let view = UIImageView()
@@ -39,6 +39,7 @@ class LoginVC: UIViewController {
     return button
   }()
   
+  // 뒤로가기 버튼
   lazy var backButton: UIButton = {
     let button = UIButton(type: .system)
     let image = UIImage(named: "back")
@@ -49,6 +50,7 @@ class LoginVC: UIViewController {
     return button
   }()
   
+  // 로그인 - 이메일 입력 필드
   let emailTextField: UITextField = {
     let tf = UITextField()
     tf.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
@@ -59,6 +61,7 @@ class LoginVC: UIViewController {
     return tf
   }()
   
+  // 로그인 - 비밀번호 입력 필드
   let passwordField: UITextField = {
     let tf = UITextField()
     tf.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
@@ -69,6 +72,7 @@ class LoginVC: UIViewController {
     return tf
   }()
   
+  // 로그인버튼
   let loginButton: UIButton = {
     let button = UIButton()
     button.backgroundColor = .clear
@@ -81,6 +85,7 @@ class LoginVC: UIViewController {
     return button
   }()
   
+  // 이메일텍스트필드, 패스워드, 로그인버튼 스택뷰에 배치
   lazy var stackView: UIStackView = {
     let sview = UIStackView(arrangedSubviews: [emailTextField, passwordField, loginButton])
     sview.spacing = 18
@@ -89,6 +94,7 @@ class LoginVC: UIViewController {
     return sview
   }()
   
+  // 비밀번호 재설정 버튼
   let passwordButton: UIButton = {
     let button = UIButton()
     button.backgroundColor = .clear
@@ -99,11 +105,17 @@ class LoginVC: UIViewController {
   
   let viewHeight: CGFloat = 48
   
+  // 스태터스바 글씨 하얗게 설정
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     configure()
-    
+    navigationBarSetting()
+    addSubViews()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -113,12 +125,15 @@ class LoginVC: UIViewController {
   
   private func configure() {
     view.backgroundColor = #colorLiteral(red: 0.07450980392, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+  }
+  
+  private func addSubViews() {
     
-    navigationBarSetting()
+    [navigationView, stackView, passwordButton].forEach { view.addSubview($0)}
+    
   }
   
   private func setupSNP() {
-    [navigationView, stackView, passwordButton].forEach { view.addSubview($0)}
     
     emailTextField.snp.makeConstraints {
       $0.height.equalTo(viewHeight)
@@ -171,11 +186,13 @@ class LoginVC: UIViewController {
     }
   }
   
+  // 네비게이션바 세팅
   private func navigationBarSetting() {
     let navCon = navigationController!
     navCon.isNavigationBarHidden = true
   }
   
+  // 로그인버튼 눌렀을 때
   @objc private func didTapLoginBtn(_ sender: UIButton) {
     guard let id = emailTextField.text, let pw = passwordField.text else { return }
     APICenter.shared.login(id: id, pw: pw) {
@@ -191,10 +208,12 @@ class LoginVC: UIViewController {
     }
   }
   
+  // 고객센터버튼 눌렀을 때
   @objc private func customerCenterTapped(_ sender: UIButton) {
     
   }
   
+  // 뒤로가기 버튼을 눌렀을 때
   @objc private func backButtonTapped(_ sender: UIButton) {
     navigationController?.popViewController(animated: true)
   }
