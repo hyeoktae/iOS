@@ -15,6 +15,8 @@
 		47FF9DC522DE3C98005C7BAD /* DetailViewBelowCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FF9DC422DE3C98005C7BAD /* DetailViewBelowCell.swift */; };
 		47FF9DC722DE3CC4005C7BAD /* DetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47FF9DC622DE3CC4005C7BAD /* DetailCollectionViewCell.swift */; };
 		4D80BA9E4F9865588E244065 /* Pods_Fastflix.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E29600FEE1EEB7B6DD9E0171 /* Pods_Fastflix.framework */; };
+		52041CD922E62D9F0035F3B8 /* MainMovieVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52041CD822E62D9F0035F3B8 /* MainMovieVC.swift */; };
+		52041CDB22E62DD20035F3B8 /* MainPokeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52041CDA22E62DD20035F3B8 /* MainPokeVC.swift */; };
 		5295214E22D5D3E800174BC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295214D22D5D3E800174BC1 /* AppDelegate.swift */; };
 		5295215522D5D3E900174BC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5295215422D5D3E900174BC1 /* Assets.xcassets */; };
 		5295216522D5D57F00174BC1 /* DataOfTass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5295216422D5D57F00174BC1 /* DataOfTass.swift */; };
@@ -57,6 +59,8 @@
 		47FF9DC222DE3C51005C7BAD /* DetailViewUpperCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewUpperCell.swift; sourceTree = "<group>"; };
 		47FF9DC422DE3C98005C7BAD /* DetailViewBelowCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewBelowCell.swift; sourceTree = "<group>"; };
 		47FF9DC622DE3CC4005C7BAD /* DetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		52041CD822E62D9F0035F3B8 /* MainMovieVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainMovieVC.swift; path = ../../../../../../../../System/Volumes/Data/Users/tass/tass/ForkiOS/iOS/Fastflix/Fastflix/Controller/MainMovieVC.swift; sourceTree = "<group>"; };
+		52041CDA22E62DD20035F3B8 /* MainPokeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainPokeVC.swift; path = ../../../../../../../../System/Volumes/Data/Users/tass/tass/ForkiOS/iOS/Fastflix/Fastflix/Controller/MainPokeVC.swift; sourceTree = "<group>"; };
 		5295214A22D5D3E800174BC1 /* Fastflix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fastflix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5295214D22D5D3E800174BC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5295215422D5D3E900174BC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				C1CA09C322E0A087009B1296 /* SeeMoreVC.swift */,
 				C1FC3F0322E594E1008E1FE9 /* CreateProfileVC.swift */,
 				C1FC3F0722E596C6008E1FE9 /* IconVC.swift */,
+				52041CD822E62D9F0035F3B8 /* MainMovieVC.swift */,
+				52041CDA22E62DD20035F3B8 /* MainPokeVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -359,6 +365,7 @@
 				C1FC3F0422E594E1008E1FE9 /* CreateProfileVC.swift in Sources */,
 				C1CA09C422E0A087009B1296 /* SeeMoreVC.swift in Sources */,
 				47FF9DC122DE3C15005C7BAD /* DetailVC.swift in Sources */,
+				52041CDB22E62DD20035F3B8 /* MainPokeVC.swift in Sources */,
 				C143560422DC8E3E005189E9 /* PreViewPlayerVC.swift in Sources */,
 				C1FC3F0022E590BF008E1FE9 /* SearchVC.swift in Sources */,
 				C1FC3F0822E596C6008E1FE9 /* IconVC.swift in Sources */,
@@ -370,6 +377,7 @@
 				C1E21BE622DF1BB400930115 /* LaunchScreenVC.swift in Sources */,
 				47FF9DC722DE3CC4005C7BAD /* DetailCollectionViewCell.swift in Sources */,
 				C143560222DC8D1C005189E9 /* Player.swift in Sources */,
+				52041CD922E62D9F0035F3B8 /* MainMovieVC.swift in Sources */,
 				5295216522D5D57F00174BC1 /* DataOfTass.swift in Sources */,
 				52BA342A22DDE513005F8489 /* MainTabBarController.swift in Sources */,
 				52BA342E22DDE7D5005F8489 /* ImageCell.swift in Sources */,

@@ -9,8 +9,15 @@
 import UIKit
 import SnapKit
 
+protocol FloatingViewDelegate: class {
+  func didTapHome()
+  func didTapMovie()
+  func didTapPoke()
+}
+
 class FloatingView: UIView {
   
+  weak var delegate: FloatingViewDelegate?
   
   let homeBtn: UIButton = {
     let button = UIButton()
@@ -74,14 +81,17 @@ class FloatingView: UIView {
   
   @objc func homeBtnDidTap(_ sender: UIButton) {
     print("homeBtnDidTap")
+    delegate?.didTapHome()
   }
   
   @objc func movieBtnDidTap(_ sender: UIButton) {
     print("movieBtnDidTap")
+    delegate?.didTapMovie()
   }
   
   @objc func pokeBtnDidTap(_ sender: UIButton) {
     print("pokeBtnDidTap")
+    delegate?.didTapPoke()
   }
   
   
