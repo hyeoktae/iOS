@@ -14,6 +14,19 @@ class MainHomeVC: UIViewController {
   
   var originValue: CGFloat = 0
   
+  var compareArr: [CGFloat] = []
+  
+  var originY: CGFloat {
+    get {
+      return floatingView.frame.origin.y
+    }
+    set {
+      guard newValue >= -94 || newValue <= 0 else { return }
+//      print("newValue", floatingView.frame)
+      floatingView.frame.origin.y = newValue
+    }
+  }
+  
   private var streamingCellFocus = false {
     willSet(newValue) {
       newValue ? streamingCell.playVideo() : streamingCell.pauseVideo()
@@ -130,38 +143,84 @@ extension MainHomeVC: UITableViewDataSource {
     streamingCellFocus = (state == nil) ? false : true
     
 //    print(scrollView.contentOffset.y)
+    let offset = scrollView.contentOffset.y
     
-    let transition = scrollView.panGestureRecognizer.translation(in: scrollView).y
+    let transition = scrollView.panGestureRecognizer.translation(in: scrollView).y.rounded()
     
     let fixValue = floatingView.frame.size.height
+    
+    var compareValue: CGFloat = 0
     
     var floatValue: CGFloat {
       get {
         return originValue
       }
       set {
-        if newValue > -fixValue && newValue < fixValue {
+        if newValue > -fixValue && newValue < 0 {
           originValue = newValue
         } else if newValue < -fixValue {
           originValue = -fixValue
         } else {
-          originValue = fixValue
+          return
         }
         
       }
     }
     
-    if transition < 0 {
-      floatValue = transition
-    } else {
-      floatValue = transition
+    
+    if compareArr.count > 1 {
+      compareArr.remove(at: 0)
     }
+    compareArr.append(offset)
     
-    floatingView.frame.origin.y = floatValue
-    
-    if scrollView.contentOffset.y <= -44 {
+    if offset <= -44 {
       floatingView.frame.origin.y = 0
+      return
     }
+    
+    if compareArr.count == 2 {
+      if compareArr[0] > compareArr[1] {
+        // show
+        let addtionalValue = compareArr[1] - compareArr[0]
+        floatValue += -addtionalValue
+        originY = floatValue
+        return
+      } else if compareArr[0] < compareArr[1] {
+        // hide
+        let addtionalValue = compareArr[1] - compareArr[0]
+        floatValue += -addtionalValue
+        originY = floatValue
+        return
+      } else {
+        return
+      }
+    }
+    
+    
+    
+    
+//    print("transition: ", transition)
+//    print("originValue: ", originValue)
+    // hide
+    
+    
+//    if transition < 0, transition >= -940 {
+//      guard originY >= -94 || originY <= 0 else { return }
+//      floatValue += transition/10
+//      originY = floatValue
+//    }else if transition > 0, transition <= 94 {
+//      // show
+//
+//      guard originY >= -940 || originY <= 0 else { return }
+//      floatValue += transition/10
+//      originY = floatValue
+//    }
+//
+//
+//
+    
+    
+    
 //    if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
 //
 //      UIView.animate(withDuration: 1.5) {
