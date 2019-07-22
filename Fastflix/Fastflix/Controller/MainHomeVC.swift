@@ -36,7 +36,6 @@ class MainHomeVC: UIViewController {
   private lazy var tableView: UITableView = {
     let tbl = UITableView()
     tbl.dataSource = self
-    tbl.delegate = self
     tbl.backgroundColor = #colorLiteral(red: 0.07762928299, green: 0.07762928299, blue: 0.07762928299, alpha: 1)
     tbl.separatorStyle = .none
     tbl.allowsSelection = false
@@ -50,7 +49,11 @@ class MainHomeVC: UIViewController {
     return cell
   }()
   
-  private let floatingView = FloatingView()
+  private lazy var floatingView: FloatingView = {
+    let view = FloatingView()
+    view.delegate = self
+    return view
+  }()
   
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -278,6 +281,18 @@ extension MainHomeVC: OriginalTableCellDelegate {
 }
 
 
-extension MainHomeVC: UITableViewDelegate {
+extension MainHomeVC: FloatingViewDelegate {
+  func didTapHome() {
+    AppDelegate.instance.checkLoginState()
+  }
   
+  func didTapMovie() {
+    streamingCell.pauseVideo()
+    present(MainMovieVC(), animated: true)
+  }
+  
+  func didTapPoke() {
+    streamingCell.pauseVideo()
+    present(MainPokeVC(), animated: true)
+  }
 }
