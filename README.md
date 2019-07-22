@@ -36,3 +36,5 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 19.07.22  feat: tass - tabBarController complete
 
 19.07.22  feat: tass - floatingView, be more cleanCode
+
+19.07.23  feat: devy - SeemoreVc add section to tableView
