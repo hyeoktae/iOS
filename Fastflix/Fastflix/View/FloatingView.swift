@@ -40,7 +40,7 @@ class FloatingView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     addSubViews()
-    setupLayout()
+    setupSNP()
     
     self.backgroundColor = .clear
     
@@ -52,7 +52,7 @@ class FloatingView: UIView {
     [homeBtn, movieBtn, pokeBtn].forEach { self.addSubview($0) }
     
   }
-  private func setupLayout() {
+  private func setupSNP() {
     
     homeBtn.snp.makeConstraints {
       $0.top.equalTo(UIScreen.main.bounds.height * 0.055)

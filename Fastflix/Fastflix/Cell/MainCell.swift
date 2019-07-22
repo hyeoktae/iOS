@@ -48,10 +48,10 @@ class MainCell: UITableViewCell {
     collectionView.showsHorizontalScrollIndicator = false
     collectionView.backgroundColor = #colorLiteral(red: 0.07762928299, green: 0.07762928299, blue: 0.07762928299, alpha: 1)
     collectionView.dataSource = self
-    setupAutoLayout()
+    setupSNP()
   }
   
-  private func setupAutoLayout() {
+  private func setupSNP() {
     
     contentView.snp.makeConstraints {
       $0.height.equalTo(220)
