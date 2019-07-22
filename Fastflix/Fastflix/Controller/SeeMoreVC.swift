@@ -18,13 +18,13 @@ class SeeMoreVC: UIViewController {
     return topView
   }()
   
-  let profileBtn: UIButton = {
+  lazy var profileBtn: UIButton = {
     let button = UIButton(type: .custom)
     button.addTarget(self, action: #selector(profileBtnDidTap(_:)), for: .touchUpInside)
     button.setImage(UIImage(named: "profile3"), for: .normal)
+    button.imageView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
     return button
   }()
-  
   
   let profileName: UILabel = {
     let label = UILabel()
@@ -41,22 +41,62 @@ class SeeMoreVC: UIViewController {
     button.setTitle("  프로필 관리", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .regular)
     button.setTitleColor(.gray, for: .normal)
-    
     return button
   }()
   
+//  lazy var profileAddBtn: UIButton = {
+//    let button = UIButton(type: .custom)
+//    button.setImage(UIImage(named: "profileAdd"), for: .normal)
+//    button.addTarget(self, action: #selector(profileAddBtnDidTap(_:)), for: .touchUpInside)
+//    button.imageView?.frame = CGRect(x: 0, y: 0, width: 60, height: 60)
+//    return button
+//  }()
+  
+  let profileAddLabel: UILabel = {
+    let label = UILabel()
+    label.text = "프로필 추가"
+    label.font = UIFont.systemFont(ofSize: 15, weight: .light)
+    label.textColor = .gray
+    return label
+  }()
+  
+  lazy var profileView: ProfileView = {
+    let view = ProfileView()
+    view.configure(image: UIImage(named: "profile3"), name: "hea")
+    return view
+  }()
+  lazy var profileAddView: ProfileView = {
+    let view = ProfileView()
+    view.configure(image: UIImage(named: "profileAdd"), name: "프로필 추가")
+    view.profileNameLabel.textColor = .gray
+    view.profileImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(profileImageTapGesture(_:))))
+    view.profileImageView.isUserInteractionEnabled = true
+    
+    return view
+  }()
+  
   let tableView = UITableView()
-  var profileStackView = UIStackView()
+  
+  lazy var profileStackView: UIStackView = {
+    let view = UIStackView(arrangedSubviews: [profileView, profileAddView])
+    view.axis = .horizontal
+    view.distribution = .fillEqually
+    view.spacing = 20
+    return view
+  }()
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
     addSubViews()
     tableViewSetUp()
+
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     setupSNP()
+    
   }
   
   @objc func profileBtnDidTap(_ sender: UIButton) {
@@ -65,6 +105,14 @@ class SeeMoreVC: UIViewController {
   @objc func profileAdminBtnDidTap(_ sender: UIButton) {
     print("@@@@profileAdminBtnDidTap")
   }
+  
+  @objc func profileImageTapGesture(_ sender: UITapGestureRecognizer) {
+    print("#####TapTapTap")
+    let createProfielVC = CreateProfileVC()
+    present(createProfielVC, animated: true)
+    print("######Present")
+  }
+
   
   private func tableViewSetUp() {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -76,35 +124,52 @@ class SeeMoreVC: UIViewController {
   
   private func addSubViews() {
     [topView, tableView].forEach { view.addSubview($0)}
-    [profileBtn, profileName, profileAdminBtn].forEach {topView.addSubview($0)}
+    [profileStackView, profileAdminBtn].forEach {topView.addSubview($0)}
   }
   
   private func setupSNP() {
     topView.snp.makeConstraints {
       $0.top.leading.trailing.equalToSuperview()
-      $0.height.equalTo(UIScreen.main.bounds.height * 0.28)
+      $0.height.equalToSuperview().multipliedBy(0.33)
     }
     
     tableView.snp.makeConstraints {
       $0.top.equalTo(topView.snp.bottom)
       $0.leading.trailing.bottom.equalToSuperview()
     }
-    profileBtn.snp.makeConstraints {
-      $0.top.equalToSuperview().offset(60)
-      $0.centerX.equalToSuperview()
-      $0.width.height.equalTo(60)
-      
+    profileStackView.snp.makeConstraints {
+      $0.top.equalTo(topView.snp.top).offset(30)
+      $0.centerX.equalTo(topView.snp.centerX)
     }
-    profileName.snp.makeConstraints {
-      $0.top.equalTo(profileBtn.snp.bottom).offset(10)
-      $0.centerX.equalToSuperview()
-    }
-    
     
     profileAdminBtn.snp.makeConstraints {
-      $0.top.equalTo(profileName.snp.bottom).offset(25)
+      $0.top.equalTo(profileStackView.snp.bottom).offset(25)
       $0.centerX.equalToSuperview()
     }
+
+    
+//    profileBtn.snp.makeConstraints {
+//      $0.top.equalToSuperview().offset(60)
+//      $0.centerX.equalToSuperview()
+//      $0.width.height.equalTo(60)
+//
+//    }
+//    profileName.snp.makeConstraints {
+//      $0.top.equalTo(profileBtn.snp.bottom).offset(10)
+//      $0.centerX.equalToSuperview()
+//    }
+//
+//
+//    profileAddBtn.snp.makeConstraints {
+//      $0.top.equalToSuperview().offset(60)
+//      $0.leading.equalTo(profileBtn.snp.trailing).offset(40)
+//      $0.width.height.equalTo(60)
+//    }
+    
+//    profileAddLabel.snp.makeConstraints {
+//      $0.top.equalTo(profileAddBtn.snp.bottom).offset(10)
+//      $0.centerX.equalTo(profileAddBtn.snp.centerX)
+//    }
     
   }
   
