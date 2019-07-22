@@ -103,7 +103,7 @@ final class StreamingCell: UITableViewCell {
   
   override func didMoveToSuperview() {
     super.didMoveToSuperview()
-    setupAutoLayout()
+    setupSNP()
   }
   
   func playVideo() {
@@ -114,7 +114,7 @@ final class StreamingCell: UITableViewCell {
     playerVC.player?.pause()
   }
   
-  private func setupAutoLayout() {
+  private func setupSNP() {
     
     [playerVC.view, titleLabel, stackView].forEach { addSubview($0) }
     [muteBtn, degreeLabel].forEach { playerVC.view.addSubview($0) }

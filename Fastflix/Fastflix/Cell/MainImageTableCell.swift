@@ -94,7 +94,7 @@ final class MainImageTableCell: UITableViewCell {
     self.backgroundColor = .clear
     setupStackView()
     addSubViews()
-    snpLayout()
+    setupSNP()
   }
   
   func configure(imageURLString: String, logoImageURLString: String) {
@@ -125,7 +125,7 @@ final class MainImageTableCell: UITableViewCell {
     insertSubview(blurImage, at: 2)
   }
   // snp
-  private func snpLayout() {
+  private func setupSNP() {
     let appDelegate = AppDelegate.instance
     
     mainImage.snp.makeConstraints {
