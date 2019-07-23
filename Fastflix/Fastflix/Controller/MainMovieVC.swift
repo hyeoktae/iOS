@@ -9,6 +9,10 @@
 import UIKit
 
 class MainMovieVC: UIViewController {
+  
+  override func loadView() {
+    self.view = MainMovieView()
+  }
 
     override func viewDidLoad() {
         super.viewDidLoad()
