@@ -30,8 +30,12 @@ class CreateProfileVC: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = .clear
     addSubViews()
-    setupLayout()
     
+
+  }
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+    setupLayout()
   }
   
   private func addSubViews() {
