@@ -200,7 +200,8 @@ class LoginVC: UIViewController {
       case .success(let value):
         print("Login Success!!!")
         print("value: ", value)
-        APICenter.shared.saveSubUserID(id: value[0].id)
+        APICenter.shared.path.set(value, forKey: "Users")
+//        APICenter.shared.saveSubUserID(id: value[0].id)
         DispatchQueue.main.async {
           AppDelegate.instance.checkLoginState()
         }
