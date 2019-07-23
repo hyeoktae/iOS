@@ -42,3 +42,5 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 19.07.23  feat: tass - almost done floatingView, need some FIX
 
 19.07.23  feat: tass - add MainMovieVC, MainPokeVC / floatingView Delegate
+
+19.07.23  fix: tass - floating View FIX

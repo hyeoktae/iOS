@@ -36,6 +36,7 @@ class MainHomeVC: UIViewController {
   private lazy var tableView: UITableView = {
     let tbl = UITableView()
     tbl.dataSource = self
+    tbl.delegate = self
     tbl.backgroundColor = #colorLiteral(red: 0.07762928299, green: 0.07762928299, blue: 0.07762928299, alpha: 1)
     tbl.separatorStyle = .none
     tbl.allowsSelection = false
@@ -139,13 +140,45 @@ extension MainHomeVC: UITableViewDataSource {
     }
   }
   
+  
+  
+}
+
+
+extension MainHomeVC: PreviewTableCellDelegate {
+  func didSelectItemAt(indexPath: IndexPath) {
+    let url = URL(string: "https://firebasestorage.googleapis.com/v0/b/test-64199.appspot.com/o/%E1%84%82%E1%85%A6%E1%86%BA%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%86%A8%E1%84%89%E1%85%B3%E1%84%86%E1%85%B5%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%80%E1%85%B5%E1%84%80%E1%85%A1%E1%84%8B%E1%85%A9%E1%84%80%E1%85%A2%E1%86%AF2.mp4?alt=media&token=96a3f3ef-3ff9-4f05-9675-2f13232a72cf")!
+    
+    let playerVC = AVPlayerViewController()
+    let player = AVPlayer(url: url)
+    playerVC.player = player
+    
+    present(playerVC, animated: true) {
+      playerVC.player?.play()
+    }
+  }
+  
+}
+
+
+extension MainHomeVC: OriginalTableCellDelegate {
+  func originalDidSelectItemAt(indexPath: IndexPath) {
+    //    let detailVC = DetailTableVC()
+    let detailVC = DetailVC()
+    print("present DetailVC")
+    present(detailVC, animated: true)
+  }
+  
+}
+
+extension MainHomeVC: UITableViewDelegate {
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     
     let state = tableView.cellForRow(at: IndexPath(row: 5, section: 0))?.alpha
     
     streamingCellFocus = (state == nil) ? false : true
     
-//    print(scrollView.contentOffset.y)
+    //    print(scrollView.contentOffset.y)
     let offset = scrollView.contentOffset.y
     
     let transition = scrollView.panGestureRecognizer.translation(in: scrollView).y.rounded()
@@ -202,82 +235,54 @@ extension MainHomeVC: UITableViewDataSource {
     
     
     
-//    print("transition: ", transition)
-//    print("originValue: ", originValue)
+    //    print("transition: ", transition)
+    //    print("originValue: ", originValue)
     // hide
     
     
-//    if transition < 0, transition >= -940 {
-//      guard originY >= -94 || originY <= 0 else { return }
-//      floatValue += transition/10
-//      originY = floatValue
-//    }else if transition > 0, transition <= 94 {
-//      // show
-//
-//      guard originY >= -940 || originY <= 0 else { return }
-//      floatValue += transition/10
-//      originY = floatValue
-//    }
-//
-//
-//
+    //    if transition < 0, transition >= -940 {
+    //      guard originY >= -94 || originY <= 0 else { return }
+    //      floatValue += transition/10
+    //      originY = floatValue
+    //    }else if transition > 0, transition <= 94 {
+    //      // show
+    //
+    //      guard originY >= -940 || originY <= 0 else { return }
+    //      floatValue += transition/10
+    //      originY = floatValue
+    //    }
+    //
+    //
+    //
     
     
     
-//    if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-//
-//      UIView.animate(withDuration: 1.5) {
-//        self.navigationController?.hidesBarsOnSwipe = true
-//        UIView.animate(withDuration: 1.7, animations: {
-//          self.navigationController?.navigationBar.alpha = 0
-//        })
-//
-////        print("내려감")
-//      }
-//
-//    } else {
-//      UIView.animate(withDuration: 1.5) {
-//        self.navigationController?.hidesBarsOnSwipe = false
-//        self.navigationController?.setNavigationBarHidden(false, animated: false)
-//        UIView.animate(withDuration: 1.7, animations: {
-//          self.navigationController?.navigationBar.alpha = 1
-//
-//        })
-////        print("올라감??")
-//      }
-//
-//    }
+    //    if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
+    //
+    //      UIView.animate(withDuration: 1.5) {
+    //        self.navigationController?.hidesBarsOnSwipe = true
+    //        UIView.animate(withDuration: 1.7, animations: {
+    //          self.navigationController?.navigationBar.alpha = 0
+    //        })
+    //
+    ////        print("내려감")
+    //      }
+    //
+    //    } else {
+    //      UIView.animate(withDuration: 1.5) {
+    //        self.navigationController?.hidesBarsOnSwipe = false
+    //        self.navigationController?.setNavigationBarHidden(false, animated: false)
+    //        UIView.animate(withDuration: 1.7, animations: {
+    //          self.navigationController?.navigationBar.alpha = 1
+    //
+    //        })
+    ////        print("올라감??")
+    //      }
+    //
+    //    }
     
     
   }
-  
-}
-
-
-extension MainHomeVC: PreviewTableCellDelegate {
-  func didSelectItemAt(indexPath: IndexPath) {
-    let url = URL(string: "https://firebasestorage.googleapis.com/v0/b/test-64199.appspot.com/o/%E1%84%82%E1%85%A6%E1%86%BA%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%86%A8%E1%84%89%E1%85%B3%E1%84%86%E1%85%B5%E1%84%85%E1%85%B5%E1%84%87%E1%85%A9%E1%84%80%E1%85%B5%E1%84%80%E1%85%A1%E1%84%8B%E1%85%A9%E1%84%80%E1%85%A2%E1%86%AF2.mp4?alt=media&token=96a3f3ef-3ff9-4f05-9675-2f13232a72cf")!
-    
-    let playerVC = AVPlayerViewController()
-    let player = AVPlayer(url: url)
-    playerVC.player = player
-    
-    present(playerVC, animated: true) {
-      playerVC.player?.play()
-    }
-  }
-  
-}
-
-
-extension MainHomeVC: OriginalTableCellDelegate {
-  func originalDidSelectItemAt(indexPath: IndexPath) {
-    //    let detailVC = DetailTableVC()
-    let detailVC = DetailVC()
-    print("present DetailVC")
-    present(detailVC, animated: true)
-  }
-  
 }
 
 
