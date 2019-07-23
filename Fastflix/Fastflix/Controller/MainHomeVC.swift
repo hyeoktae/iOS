@@ -172,6 +172,7 @@ extension MainHomeVC: OriginalTableCellDelegate {
 }
 
 extension MainHomeVC: UITableViewDelegate {
+  
   func scrollViewDidScroll(_ scrollView: UIScrollView) {
     
     let state = tableView.cellForRow(at: IndexPath(row: 5, section: 0))?.alpha
