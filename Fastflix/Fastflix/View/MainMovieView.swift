@@ -63,6 +63,7 @@ extension MainMovieView: UITableViewDataSource {
     case 0:
       let cell = tableView.dequeueReusableCell(withIdentifier: MainImageTableCell.identifier, for: indexPath) as! MainImageTableCell
       cell.selectionStyle = .none
+      cell.movieDetailLabel.text = " 음악 ･ 마법을 걸어요 ･ 동화 ･ 사랑 ･ 걸파워 ･ 할리우드 영화 "
       cell.configure(imageURLString: ImagesData.shared.imagesUrl[5], logoImageURLString: ImagesData.shared.imagesUrl[6])
       return cell
     case 1:
