@@ -46,3 +46,5 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 19.07.23  fix: tass - floating View FIX
 
 19.07.23  feat: devy - MainMovieView
+
+19.07.23  feat: tass - update LoginRequest, downgrade Alamofire
