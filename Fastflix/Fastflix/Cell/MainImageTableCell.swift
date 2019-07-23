@@ -36,9 +36,8 @@ final class MainImageTableCell: UITableViewCell {
     return image
   }()
   
-  private let movieDetailLabel: UILabel = {
+   let movieDetailLabel: UILabel = {
     let label = UILabel()
-    label.text = " 슈퍼히어로 ･ 사이보그 & 로봇 ･ SF ･ 액션 ･ 할리우드 영화 "
     label.textColor = .white
     label.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
     return label

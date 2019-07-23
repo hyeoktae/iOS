@@ -52,3 +52,8 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 19.07.23  fix: tass - repo update
 
 19.07.24  feat: tass - movieVC, reqeust, exception routine
+
+19.07.24  feat: devy - add image assets, change movieDetailLabel.text 
+
+19.07.24  feat: allen - Allen adds UserView, AddProfileView, ProfileSelectVC.
+
