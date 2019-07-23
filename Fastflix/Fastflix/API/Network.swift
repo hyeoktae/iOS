@@ -9,6 +9,8 @@
 import Foundation
 import Alamofire
 
+
+
 final class APICenter {
   static let shared = APICenter()
   
@@ -22,7 +24,42 @@ final class APICenter {
     return token
   }
   
-  private let loginUrl = URL(string: "http://52.78.134.79/accounts/login/")!
+  func getMovieData(completion: @escaping (Result<RequestMovie>) -> ()) {
+//    RequestMovie.self
+    let token = getToken()
+    let subUserID = getSubUserID()
+    let headers = [
+      "Authorization": "Token \(token)",
+      "subuserid": "\(subUserID)"
+    ]
+    
+    let request = Alamofire.request(RequestString.movieURL.rawValue, method: .get, headers: headers)
+    
+    request.response(queue: .main) {
+      guard let data = $0.data else {
+        completion(.failure(ErrorType.NoData))
+        return }
+      guard let resultData = try? JSONDecoder().decode(RequestMovie.self, from: data) else {
+        completion(.failure(ErrorType.FailToParsing))
+        return }
+      completion(.success(resultData))
+    }
+    
+//    request.responseJSON(queue: .global()) {
+//      switch $0.result {
+//      case .success(_):
+//        guard let data = $0.data else { return }
+//        guard let resultData = try? JSONDecoder().decode(RequestMovie.self, from: data) else { return completion(.failure(ErrorType.FailToParsing)) }
+//        completion(.success(resultData))
+//      case .failure(let err):
+//        completion(.failure(ErrorType.networkError))
+//      }
+//    }
+    
+  
+  }
+  
+  
   
   // MARK: - Login Method
   func login(id: String, pw: String, completion: @escaping (Result<[SubUserList]>) -> ()) {
@@ -33,17 +70,18 @@ final class APICenter {
         "pw": pw
     ]
     
+    
     Alamofire.upload(multipartFormData: {
       MultipartFormData in
       for (key, value) in parameters {
         MultipartFormData.append(value.data(using: .utf8)!, withName: key)
       }
       
-    }, to: loginUrl, method: .post) {
+    }, to: RequestString.loginURL.rawValue, method: .post) {
       switch $0 {
       case .success(let upload, _, _):
         upload.responseJSON { (res) in
-          print("run", res.data as? [String: String])
+//          print("run", res.data as? [String: String])
           guard let data = res.data else {
             completion(.failure(ErrorType.NoData))
             return }
@@ -54,6 +92,7 @@ final class APICenter {
           let subUserArr = origin.subUserList
           print(token)
           self.saveToken(token: token)
+          
           completion(.success(subUserArr))
         }
       case .failure(let err):
@@ -67,6 +106,11 @@ final class APICenter {
   func saveSubUserID(id: Int) {
     path.set(id, forKey: "subUserID")
     print("'subUserID' save complete ")
+  }
+  
+  func getSubUserID() -> Int {
+    print("subUserID: ", path.integer(forKey: "subUserID"))
+    return path.integer(forKey: "subUserID")
   }
   
   // MARK: - save Token at UserDefaults with Key("token")

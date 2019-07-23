@@ -96,9 +96,9 @@ final class MainImageTableCell: UITableViewCell {
     setupSNP()
   }
   
-  func configure(imageURLString: String, logoImageURLString: String) {
-    let imageURL = URL(string: imageURLString)
-    let logoImageURL = URL(string: logoImageURLString)
+  func configure(imageURLString: String?, logoImageURLString: String?) {
+    let imageURL = URL(string: imageURLString ?? "ImagesData.shared.imagesUrl[5]")
+    let logoImageURL = URL(string: logoImageURLString ?? "ImagesData.shared.imagesUrl[6]")
     
     self.mainImage.kf.setImage(with: imageURL, options: [.processor(CroppingImageProcessor(size: CGSize(width: 414, height: 600))), .scaleFactor(UIScreen.main.scale)])
     self.logoImage.kf.setImage(with: logoImageURL, options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 200, height: 200))), .cacheOriginalImage])

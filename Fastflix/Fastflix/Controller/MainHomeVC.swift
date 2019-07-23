@@ -295,11 +295,27 @@ extension MainHomeVC: FloatingViewDelegate {
   
   func didTapMovie() {
     streamingCell.pauseVideo()
-    present(MainMovieVC(), animated: true)
+    
+    APICenter.shared.getMovieData {
+      switch $0 {
+      case .success(let value):
+        let mainMovieVC = MainMovieVC()
+        mainMovieVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "tabBarhome2"), tag: 0)
+        mainMovieVC.receiveData = value
+        self.tabBarController?.viewControllers?[0] = mainMovieVC
+      case .failure(let err):
+        print("ErrorType: ", err)
+      }
+    }
+    
+    
+    
   }
   
   func didTapPoke() {
     streamingCell.pauseVideo()
-    present(MainPokeVC(), animated: true)
+    let mainPokeVC = MainPokeVC()
+    mainPokeVC.tabBarItem = UITabBarItem(title: "홈", image: UIImage(named: "tabBarhome2"), tag: 0)
+    tabBarController?.viewControllers?[0] = mainPokeVC
   }
 }
