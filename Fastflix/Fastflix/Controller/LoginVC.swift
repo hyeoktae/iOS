@@ -197,14 +197,17 @@ class LoginVC: UIViewController {
     guard let id = emailTextField.text, let pw = passwordField.text else { return }
     APICenter.shared.login(id: id, pw: pw) {
       switch $0 {
-      case .success(_):
+      case .success(let value):
         print("Login Success!!!")
+        print("value: ", value)
+        APICenter.shared.saveSubUserID(id: value[0].id)
+        DispatchQueue.main.async {
+          AppDelegate.instance.checkLoginState()
+        }
       case .failure(let err):
         print("fail to login, reason: ", err)
       }
-      DispatchQueue.main.async {
-        AppDelegate.instance.checkLoginState()
-      }
+      
     }
   }
   

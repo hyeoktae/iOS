@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Kingfisher
+import SnapKit
+import Alamofire
 
 class MainMovieVC: UIViewController {
 

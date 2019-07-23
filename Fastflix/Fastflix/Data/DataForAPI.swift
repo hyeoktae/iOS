@@ -8,6 +8,30 @@
 
 import Foundation
 
+// MARK: - Login
+struct Login: Codable {
+  let token: String
+  let subUserList: [SubUserList]
+  
+  enum CodingKeys: String, CodingKey {
+    case token
+    case subUserList = "sub_user_list"
+  }
+}
+
+// MARK: - SubUserList
+struct SubUserList: Codable {
+  let id: Int
+  let name: String
+  let kid: Bool
+  let parentUser: Int
+  
+  enum CodingKeys: String, CodingKey {
+    case id, name, kid
+    case parentUser = "parent_user"
+  }
+}
+
 // MARK: - MovieElement
 struct MovieElement: Codable {
   let id: Int
