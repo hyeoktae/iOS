@@ -195,25 +195,6 @@ extension SeeMoreVC: UITableViewDataSource {
       break
     }
    
-//    if indexPath.row == 0 {
-//      cell.imageView?.image = UIImage(named: "notification")
-//      cell.accessoryType = .disclosureIndicator
-//      cell.textLabel?.text = " 알림 설정"
-//
-//    } else if indexPath.row == 1 {
-//      let cell2 = UITableViewCell()
-//      cell.backgroundColor = .black
-//      return cell2
-//    } else if indexPath.row == 2 {
-//      cell.imageView?.image = UIImage(named: "check")
-//      cell.accessoryType = .disclosureIndicator
-//      cell.textLabel?.text = "내가 찜한 콘텐츠"
-//    } else if indexPath.row == 3 {
-//      let cell2 = UITableViewCell()
-//      cell.backgroundColor = .black
-//      return cell2
-//    }
-
     
     return cell
   }
@@ -221,17 +202,7 @@ extension SeeMoreVC: UITableViewDataSource {
 }
 
 extension SeeMoreVC: UITableViewDelegate {
-//  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//    if indexPath.row == 1 || indexPath.row == 3 {
-//      return 2
-//    } else {
-//      return 45
-//    }
-//  }
-  
 
-  
-  
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     guard indexPath.row == datas.count - 1 else { return }
     let path = UserDefaults.standard
