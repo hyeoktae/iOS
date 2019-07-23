@@ -24,12 +24,14 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func checkLoginState() {
     let token = UserDefaults.standard.string(forKey: "token")
-    let tabBar = MainTabBarController()
+//    let tabBar = MainTabBarController()
+    let profileSelectVC = UINavigationController(rootViewController: ProfileSelectVC())
     
     let navi = UINavigationController()
     navi.viewControllers = [BeforeLoginVC()]
     
-    let rootVC = token == nil ? navi : tabBar
+    let rootVC = token == nil ? navi : profileSelectVC
+//    let rootVC = token == nil ? navi : tabBar
     
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.backgroundColor = .clear
