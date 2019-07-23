@@ -43,6 +43,7 @@ final class APICenter {
       switch $0 {
       case .success(let upload, _, _):
         upload.responseJSON { (res) in
+          print("run", res.data as? [String: String])
           guard let data = res.data else {
             completion(.failure(ErrorType.NoData))
             return }
