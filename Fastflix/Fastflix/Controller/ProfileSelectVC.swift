@@ -55,11 +55,11 @@ class ProfileSelectVC: UIViewController {
   var profileImageView5 = UserView()
   var addProfileView = AddProfileView()
   
-  var numberOfUsers: Int = 1
+  var numberOfUsers: Int?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    print("numberOfUsers:",numberOfUsers)
     configure()
     addSubViews()
     navigationBarSetting()
@@ -188,8 +188,8 @@ class ProfileSelectVC: UIViewController {
   }
   
   func setUsers() {
-    let users = APICenter.shared.path.array(forKey: "Users")
-    numberOfUsers = users?.count ?? 1
+//    let users = APICenter.shared.path.array(forKey: "Users") as? [SubUserList]
+//    numberOfUsers = users?.count ?? 1
   
 //    profileImageView1.profileUserName = users?[0].id ?? "테스트"
 //    profileImageView2.profileUserName = user2 ?? "테스트"
@@ -221,7 +221,17 @@ extension ProfileSelectVC: UserViewDelegate {
   }
   
   func didSelectUser(id: String) {
+    
+//    APICenter.shared.saveSubUserID(id: value[0].id)
+    DispatchQueue.main.async {
+      AppDelegate.instance.checkLoginState()
+    }
+    
+    
     let tabBar = MainTabBarController()
     present(tabBar, animated: false)
+    
+    
+    
   }
 }

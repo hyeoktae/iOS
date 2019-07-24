@@ -16,7 +16,7 @@ class UserView: UIView {
 
   let imageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "toystory")
+    imageView.image = UIImage(named: "profile1")
     return imageView
   }()
   
