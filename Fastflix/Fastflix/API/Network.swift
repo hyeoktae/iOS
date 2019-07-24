@@ -10,12 +10,13 @@ import Foundation
 import Alamofire
 
 
-
 final class APICenter {
   static let shared = APICenter()
   
+  // MARK: 유저디폴트 객체
   let path = UserDefaults.standard
   
+  // MARK: 유저디폴트에 저장된 토큰값 가져오기
   private func getToken() -> String {
     guard let token = path.string(forKey: "token") else {
       print("ERROR!!!, No Token")
@@ -24,6 +25,7 @@ final class APICenter {
     return token
   }
   
+  // MARK: (토큰값 및 서브유저아이디로)영화 데이터 받기
   func getMovieData(completion: @escaping (Result<RequestMovie>) -> ()) {
 //    RequestMovie.self
     let token = getToken()
@@ -56,12 +58,10 @@ final class APICenter {
 //      }
 //    }
     
-  
   }
+
   
-  
-  
-  // MARK: - Login Method
+  // MARK: 로그인 메서드 -> 토큰값 저장 및 컴플리션에 서브유저 배열 넘기기
   func login(id: String, pw: String, completion: @escaping (Result<[SubUserList]>) -> ()) {
     
     let parameters =
@@ -69,7 +69,6 @@ final class APICenter {
         "id": id,
         "pw": pw
     ]
-    
     
     Alamofire.upload(multipartFormData: {
       MultipartFormData in
@@ -91,6 +90,8 @@ final class APICenter {
           let token = origin.token
           let subUserArr = origin.subUserList
           print("subUser: ", subUserArr)
+          
+          // 토큰값 유저디폴트에 저장하기
           self.saveToken(token: token)
           
           completion(.success(subUserArr))
@@ -103,17 +104,19 @@ final class APICenter {
     }
   }
   
+  // MARK: 유저디폴트에 Int값으로 서브유저 아이디 저장하기
   func saveSubUserID(id: Int) {
     path.set(id, forKey: "subUserID")
     print("'subUserID' save complete ")
   }
   
+  // MARK: 유저디폴트에 Int값으로된 서브유저 아이디 가져오기
   func getSubUserID() -> Int {
     print("subUserID: ", path.integer(forKey: "subUserID"))
     return path.integer(forKey: "subUserID")
   }
   
-  // MARK: - save Token at UserDefaults with Key("token")
+  // MARK: 유저디폴트에 키값"token"로 토큰값 저장하기
   private func saveToken(token: String) {
     path.set(token, forKey: "token")
     print("'Token' save complete ")

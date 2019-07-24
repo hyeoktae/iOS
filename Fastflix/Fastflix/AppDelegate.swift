@@ -28,16 +28,13 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     let token = UserDefaults.standard.string(forKey: "token")
     
     
-    // 1) "token"없을때 안내화면
-    let beforeLoginNavi = UINavigationController()
-    beforeLoginNavi.viewControllers = [BeforeLoginVC()]
+    // 1) "token"없을때 안내화면 -> 로그인화면
+    let beforeLoginNavi = UINavigationController(rootViewController: BeforeLoginVC())
+//    beforeLoginNavi.viewControllers = []
     
-    // 2) "token"값 있을때 홈화면
+    // 2) "token"값 있을때 (로그인없이)홈화면
     let tabBar = MainTabBarController()
     
-    
-//    let userList = APICenter.shared.path.array(forKey: "Users") as? [SubUserList]
-//    profileSelectVC.numberOfUsers = userList?.count ?? 1
     
     // "token"값 nil일때는 1)안내화면으로 / nil이 아닐때는 2) 홈화면으로
     let rootVC = token == nil ? beforeLoginNavi : tabBar
