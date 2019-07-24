@@ -23,15 +23,24 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
   }
   
   func checkLoginState() {
+    
+    // 유저디폴트에 저장되어있는 "token"값 확인
     let token = UserDefaults.standard.string(forKey: "token")
-//    let tabBar = MainTabBarController()
-    let profileSelectVC = UINavigationController(rootViewController: ProfileSelectVC())
     
-    let navi = UINavigationController()
-    navi.viewControllers = [BeforeLoginVC()]
     
-    let rootVC = token == nil ? navi : profileSelectVC
-//    let rootVC = token == nil ? navi : tabBar
+    // 1) "token"없을때 안내화면
+    let beforeLoginNavi = UINavigationController()
+    beforeLoginNavi.viewControllers = [BeforeLoginVC()]
+    
+    // 2) "token"값 있을때 홈화면
+    let tabBar = MainTabBarController()
+    
+    
+//    let userList = APICenter.shared.path.array(forKey: "Users") as? [SubUserList]
+//    profileSelectVC.numberOfUsers = userList?.count ?? 1
+    
+    // "token"값 nil일때는 1)안내화면으로 / nil이 아닐때는 2) 홈화면으로
+    let rootVC = token == nil ? beforeLoginNavi : tabBar
     
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.backgroundColor = .clear

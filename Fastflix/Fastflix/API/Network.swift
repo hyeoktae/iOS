@@ -90,7 +90,7 @@ final class APICenter {
             return }
           let token = origin.token
           let subUserArr = origin.subUserList
-          print(token)
+          print("subUser: ", subUserArr)
           self.saveToken(token: token)
           
           completion(.success(subUserArr))
