@@ -200,7 +200,7 @@ class LoginVC: UIViewController {
       case .success(let value):
         print("Login Success!!!")
         print("value: ", value)
-//        APICenter.shared.saveSubUserID(id: value[0].id)
+
 //        DispatchQueue.main.async {
 //          AppDelegate.instance.checkLoginState()
 //        }
@@ -208,7 +208,7 @@ class LoginVC: UIViewController {
         let profileSelectVC = ProfileSelectVC()
         let navi = UINavigationController(rootViewController: profileSelectVC)
         profileSelectVC.numberOfUsers = value.count
-        
+        profileSelectVC.subUserList = value
         
         self.present(navi, animated: false)
         

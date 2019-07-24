@@ -9,7 +9,7 @@
 import UIKit
 
 protocol UserViewDelegate: class {
-  func didSelectUser(id: String)
+  func didSelectUser(tag: Int)
 }
 
 class UserView: UIView {
@@ -20,9 +20,22 @@ class UserView: UIView {
     return imageView
   }()
   
+  var isEditing: Bool = false {
+    didSet {
+      editImageView.isHidden = !isEditing
+    }
+  }
+  
   var profileImage: UIImage?
   
   var profileUserName: String?
+  
+  var editImageView: UIImageView = {
+    let imageView = UIImageView()
+    imageView.image = UIImage(named: "pencil2")
+    imageView.isHidden = true
+    return imageView
+  }()
   
   weak var delegate: UserViewDelegate?
   
@@ -40,21 +53,29 @@ class UserView: UIView {
     super.init(frame: frame)
     addSubViews()
     setupSNP()
-    setupTapGesture()
+    setupTapGestureForImageView()
+    setupTapGestureForEditImageView()
   }
   
   func setUserUI(userName: String) {
     profileUserName = userName
   }
   
-  private func setupTapGesture() {
+  private func setupTapGestureForImageView() {
     let tap = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
     imageView.addGestureRecognizer(tap)
     imageView.isUserInteractionEnabled = true
   }
   
+  private func setupTapGestureForEditImageView() {
+    let tap = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
+    editImageView.addGestureRecognizer(tap)
+    editImageView.isUserInteractionEnabled = true
+  }
+  
   @objc private func buttonTapped() {
-    delegate?.didSelectUser(id: profileUserName ?? "테스트")
+    delegate?.didSelectUser(tag: tag)
+    APICenter.shared.saveSubUserID(id: tag)
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -62,7 +83,8 @@ class UserView: UIView {
   }
   
   private func addSubViews() {
-    [imageView, profileButton].forEach { self.addSubview($0) }
+    [imageView, profileButton, editImageView].forEach { self.addSubview($0) }
+    imageView.addSubview(editImageView)
   }
   
   private func setupSNP(){
@@ -71,6 +93,10 @@ class UserView: UIView {
       $0.leading.equalTo(self.snp.leading)
       $0.trailing.equalTo(self.snp.trailing)
       $0.height.equalTo(self.imageView.snp.width)
+    }
+    
+    editImageView.snp.makeConstraints {
+      $0.top.leading.trailing.bottom.equalToSuperview()
     }
     
     profileButton.snp.makeConstraints {
