@@ -15,7 +15,7 @@ var topPadding: CGFloat = 0
 
 
 enum ErrorType: Error {
-  case networkError, NoData
+  case networkError, NoData, FailToParsing
 }
 
 struct Token: Codable {
