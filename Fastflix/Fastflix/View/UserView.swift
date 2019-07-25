@@ -10,6 +10,7 @@ import UIKit
 
 protocol UserViewDelegate: class {
   func didSelectUser(tag: Int)
+  func profileChangeTapped(tag: Int)
 }
 
 class UserView: UIView {
@@ -28,7 +29,11 @@ class UserView: UIView {
   
   var profileImage: UIImage?
   
-  var profileUserName: String?
+  var profileUserName: String? {
+    didSet {
+      profileButton.setTitle(profileUserName, for: .normal)
+    }
+  }
   
   var editImageView: UIImageView = {
     let imageView = UIImageView()
@@ -74,8 +79,14 @@ class UserView: UIView {
   }
   
   @objc private func buttonTapped() {
-    delegate?.didSelectUser(tag: tag)
-    APICenter.shared.saveSubUserID(id: tag)
+    if isEditing {
+      delegate?.profileChangeTapped(tag: tag)
+      print("프로필 변경중일때 누름")
+    } else {
+      delegate?.didSelectUser(tag: tag)
+      APICenter.shared.saveSubUserID(id: tag)
+      print("프로필눌렸당")
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {
