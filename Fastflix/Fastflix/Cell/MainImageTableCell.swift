@@ -32,8 +32,9 @@ final class MainImageTableCell: UITableViewCell {
   }()
   
   private let logoImage: UIImageView = {
-    let image = UIImageView()
-    return image
+    let imageView = UIImageView()
+    imageView.contentMode = .scaleAspectFit
+    return imageView
   }()
   
    let movieDetailLabel: UILabel = {
@@ -101,7 +102,7 @@ final class MainImageTableCell: UITableViewCell {
     let logoImageURL = URL(string: logoImageURLString ?? "ImagesData.shared.imagesUrl[6]")
     
     self.mainImage.kf.setImage(with: imageURL, options: [.processor(CroppingImageProcessor(size: CGSize(width: 414, height: 600))), .scaleFactor(UIScreen.main.scale)])
-    self.logoImage.kf.setImage(with: logoImageURL, options: [.processor(DownsamplingImageProcessor(size: CGSize(width: 200, height: 200))), .cacheOriginalImage])
+    self.logoImage.kf.setImage(with: logoImageURL, options: [.processor(CroppingImageProcessor(size: CGSize(width: 200, height: 200))), .scaleFactor(UIScreen.main.scale)])
   }
   
   private func setupStackView() {
@@ -134,8 +135,8 @@ final class MainImageTableCell: UITableViewCell {
     }
     
     logoImage.snp.makeConstraints {
-      $0.centerX.equalToSuperview()
-      $0.height.equalTo(UIScreen.main.bounds.width / 4)
+      $0.centerX.equalToSuperview().inset(50)
+      $0.height.equalTo(UIScreen.main.bounds.width / 3)
       $0.width.equalTo(UIScreen.main.bounds.width / 1.8)
       $0.bottom.equalTo(movieDetailLabel.snp.top).offset(-20)
     }

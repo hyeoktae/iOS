@@ -54,6 +54,7 @@
 		C1FC3F3422E8ACFC008E1FE9 /* MyContentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F3322E8ACFC008E1FE9 /* MyContentVC.swift */; };
 		C1FC3F3622E8AD23008E1FE9 /* MyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F3522E8AD23008E1FE9 /* MyContentView.swift */; };
 		C1FC3F3822E8B1FD008E1FE9 /* MyContentCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F3722E8B1FD008E1FE9 /* MyContentCollectionCell.swift */; };
+		C1FC3F3C22E97548008E1FE9 /* SeeMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F3B22E97548008E1FE9 /* SeeMoreView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -108,6 +109,7 @@
 		C1FC3F3322E8ACFC008E1FE9 /* MyContentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContentVC.swift; sourceTree = "<group>"; };
 		C1FC3F3522E8AD23008E1FE9 /* MyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContentView.swift; sourceTree = "<group>"; };
 		C1FC3F3722E8B1FD008E1FE9 /* MyContentCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContentCollectionCell.swift; sourceTree = "<group>"; };
+		C1FC3F3B22E97548008E1FE9 /* SeeMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreView.swift; sourceTree = "<group>"; };
 		E29600FEE1EEB7B6DD9E0171 /* Pods_Fastflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fastflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -221,6 +223,7 @@
 				C1FC3F0922E5A725008E1FE9 /* ProfileView.swift */,
 				C1FC3F3122E7025D008E1FE9 /* MainMovieView.swift */,
 				C1FC3F3522E8AD23008E1FE9 /* MyContentView.swift */,
+				C1FC3F3B22E97548008E1FE9 /* SeeMoreView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -375,6 +378,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5295214E22D5D3E800174BC1 /* AppDelegate.swift in Sources */,
+				C1FC3F3C22E97548008E1FE9 /* SeeMoreView.swift in Sources */,
 				C14355F822DB0E22005189E9 /* MainImageTableCell.swift in Sources */,
 				47AC179922E2343800D6AACD /* LoginVC.swift in Sources */,
 				C143560C22DCD16E005189E9 /* DoNotUse.swift in Sources */,

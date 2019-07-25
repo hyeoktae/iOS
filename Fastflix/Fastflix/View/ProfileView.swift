@@ -6,16 +6,12 @@
 //  Copyright © 2019 hyeoktae kwon. All rights reserved.
 //
 
+// 프로필이미지 + 프로필 이름 -> 스택뷰안에 들어갈 뷰
 import UIKit
 import SnapKit
 
 class ProfileView: UIView {
-  
-//  let profileImageView: UIImageView = {
-//    let imgView = UIImageView()
-//    imgView.contentMode = .scaleAspectFit
-//    return imgView
-//  }()
+
   
   let profileImageBtn: UIButton = {
     let imageButton = UIButton(type: .custom)
@@ -31,7 +27,6 @@ class ProfileView: UIView {
   }()
   
   func configure(image: UIImage?, name: String?) {
-//    profileImageView.image = image ?? UIImage(named: "profileAdd")
     profileNameLabel.text = name ?? "프로필 추가"
     let newImg = image ?? UIImage(named: "profileAdd")
     profileImageBtn.setImage(newImg, for: .normal)
@@ -41,8 +36,6 @@ class ProfileView: UIView {
     super.didMoveToSuperview()
     addsubviews()
     setupSNP()
-//    let image = UIImageView()
-//    image.contentMode = .scaleToFill
   }
   
   private func addsubviews() {
