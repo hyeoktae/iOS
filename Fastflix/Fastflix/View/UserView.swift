@@ -81,11 +81,9 @@ class UserView: UIView {
   @objc private func buttonTapped() {
     if isEditing {
       delegate?.profileChangeTapped(tag: tag)
-      print("프로필 변경중일때 누름")
     } else {
       delegate?.didSelectUser(tag: tag)
       APICenter.shared.saveSubUserID(id: tag)
-      print("프로필눌렸당")
     }
   }
   
