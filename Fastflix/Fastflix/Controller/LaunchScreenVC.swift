@@ -19,7 +19,6 @@ final class LaunchScreenVC: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    print("splash")
     
     // label의 알파를 천천히 바꾸는 거
 //    UIView.animate(withDuration: 0.5) { [weak imageView = self.imageView] in

@@ -76,7 +76,6 @@ class SeeMoreVC: UIViewController {
     setupSNP()
     
   }
-  
 
   @objc func profileAdminBtnDidTap(_ sender: UIButton) {
     print("@@@@profileAdminBtnDidTap")
@@ -173,7 +172,6 @@ extension SeeMoreVC: UITableViewDataSource {
         cell.imageView?.image = UIImage(named: "notification")
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = " 알림 설정"
-//        cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .light)
         tableView.separatorStyle = .none
       } else {
         cell.textLabel?.text = notificationData[indexPath.row]
@@ -183,13 +181,12 @@ extension SeeMoreVC: UITableViewDataSource {
         cell.imageView?.image = UIImage(named: "check")
         cell.accessoryType = .disclosureIndicator
         cell.textLabel?.text = "내가 찜한 콘텐츠"
-//        cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        
       } else {
         cell.textLabel?.text = pokeData[indexPath.row]
       }
     case 2:
       cell.textLabel?.text = datas[indexPath.row]
-//      cell.textLabel?.font = UIFont.systemFont(ofSize: 16, weight: .light)
       
     default:
       break
@@ -208,6 +205,13 @@ extension SeeMoreVC: UITableViewDelegate {
     let path = UserDefaults.standard
     path.removeObject(forKey: "token")
     AppDelegate.instance.checkLoginState()
+    
+    // 내가 찜한 콘텐츠
+    if indexPath.section == 1 {
+      print("나나나나나")
+      
+      print("내가 찜한 콘텐츠 고")
+    }
   }
   
 }
