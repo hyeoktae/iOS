@@ -56,7 +56,7 @@ class BeforeLoginVC: UIViewController {
   let backgroundView: UIView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "netfilxbackground")
-    imageView.contentMode = .scaleAspectFit
+    imageView.contentMode = .scaleAspectFill
     return imageView
   }()
   
