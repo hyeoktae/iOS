@@ -64,7 +64,7 @@ class ProfileSelectVC: UIViewController {
   // 안내문구
   let introlabel: UILabel = {
     let label = UILabel()
-    label.text = "Netflix를 시청할 프로필을 선택하세요."
+    label.text = "Fastflix를 시청할 프로필을 선택하세요."
     label.font = UIFont.systemFont(ofSize: 20, weight: .light)
     label.textColor = .white
     label.textAlignment = .center
@@ -87,13 +87,13 @@ class ProfileSelectVC: UIViewController {
     configure()
     addSubViews()
     navigationBarSetting()
-    setUserViews()
     setFuntions()
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     setupSNP()
+    setUserViews()
     setupProfileLayout()
   }
   
@@ -225,18 +225,25 @@ class ProfileSelectVC: UIViewController {
   
   func setUserViews() {
   
-    profileImageView1.profileUserName = subUserList?[0].name ?? "테스트"
-    profileImageView2.profileUserName = subUserList?[1].name ?? "테스트"
-    profileImageView3.profileUserName = subUserList?[2].name ?? "테스트"
-    profileImageView4.profileUserName = subUserList?[3].name ?? "테스트"
-    profileImageView5.profileUserName = subUserList?[4].name ?? "테스트"
-    
-    profileImageView1.tag = subUserList?[0].id ?? 95
-    profileImageView2.tag = subUserList?[1].id ?? 96
-    profileImageView3.tag = subUserList?[2].id ?? 97
-    profileImageView4.tag = subUserList?[3].id ?? 98
-    profileImageView5.tag = subUserList?[3].id ?? 99
-  
+    switch numberOfUsers {
+    case 1:
+      profileImageView1.profileUserName = subUserList?[0].name ?? "테스트"
+      profileImageView1.tag = subUserList?[0].id ?? 95
+    case 2:
+      profileImageView2.profileUserName = subUserList?[1].name ?? "테스트"
+      profileImageView2.tag = subUserList?[1].id ?? 96
+    case 3:
+      profileImageView3.profileUserName = subUserList?[2].name ?? "테스트"
+      profileImageView3.tag = subUserList?[2].id ?? 97
+    case 4:
+      profileImageView4.profileUserName = subUserList?[3].name ?? "테스트"
+      profileImageView4.tag = subUserList?[3].id ?? 98
+    case 5:
+      profileImageView5.profileUserName = subUserList?[4].name ?? "테스트"
+      profileImageView5.tag = subUserList?[4].id ?? 99
+    default:
+      return
+    }
   }
   
   
@@ -249,7 +256,17 @@ class ProfileSelectVC: UIViewController {
     [profileManageLabel, finishButton].forEach { $0.isHidden = false }
     [changeButton, logoView, introlabel ].forEach { $0.isHidden = true }
     [profileImageView1, profileImageView2, profileImageView3, profileImageView4, profileImageView5].forEach { $0.isEditing = true }
+    UIView.animate(withDuration: 0.3, animations: {
+      //      [self.profileImageView1, self.profileImageView2, self.profileImageView3, self.profileImageView4, self.profileImageView5].forEach { $0.isEditing = true }
+      [self.profileImageView1.editImageView, self.profileImageView2.editImageView, self.profileImageView3.editImageView, self.profileImageView4.editImageView, self.profileImageView5.editImageView].forEach { $0.transform = CGAffineTransform.identity.scaledBy(x: 1.15, y: 1.15) }
+      //      sender.transform = CGAffineTransform.identity.scaledBy(x: 0.9, y: 0.9)
+    }, completion: { (finish) in
+      UIView.animate(withDuration: 0.1, animations: {
+        [self.profileImageView1.editImageView, self.profileImageView2.editImageView, self.profileImageView3.editImageView, self.profileImageView4.editImageView, self.profileImageView5.editImageView].forEach { $0.transform = CGAffineTransform.identity }
+      })
+    })
   }
+  
   
   @objc private func finishButtonTapped(_ sender: UIButton) {
     [profileManageLabel, finishButton].forEach { $0.isHidden = true }
@@ -260,6 +277,10 @@ class ProfileSelectVC: UIViewController {
 }
 
 extension ProfileSelectVC: UserViewDelegate {
+  func profileChangeTapped(tag: Int) {
+    
+  }
+  
   private func setFuntions() {
     [profileImageView1, profileImageView2, profileImageView3, profileImageView4, profileImageView5].forEach { $0.delegate = self }
   }
