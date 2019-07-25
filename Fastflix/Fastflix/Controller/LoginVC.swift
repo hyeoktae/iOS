@@ -221,7 +221,8 @@ class LoginVC: UIViewController {
   
   // 고객센터버튼 눌렀을 때
   @objc private func customerCenterTapped(_ sender: UIButton) {
-    
+    let customerCenterVC = CustomerCenterVC()
+    present(customerCenterVC, animated: true)
   }
   
   // 뒤로가기 버튼을 눌렀을 때
