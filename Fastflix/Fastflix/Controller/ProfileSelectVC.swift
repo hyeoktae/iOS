@@ -14,8 +14,10 @@ class ProfileSelectVC: UIViewController {
   lazy var navigationView: UIView = {
     let view = UIView()
     view.backgroundColor = .clear
+    view.addSubview(profileManageLabel)
     view.addSubview(logoView)
     view.addSubview(changeButton)
+    view.addSubview(finishButton)
     return view
   }()
   
@@ -28,6 +30,16 @@ class ProfileSelectVC: UIViewController {
     return view
   }()
   
+  // 프로필관리 레이블(edit할때 나타나는 label)
+  let profileManageLabel: UILabel = {
+    let label = UILabel()
+    label.text = "프로필 관리"
+    label.textColor = .white
+    label.font = UIFont.systemFont(ofSize: 17)
+    label.isHidden = true
+    return label
+  }()
+  
   // 변경 버튼
   lazy var changeButton: UIButton = {
     let button = UIButton(type: .system)
@@ -35,6 +47,17 @@ class ProfileSelectVC: UIViewController {
     button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
     button.setTitleColor(.white, for: .normal)
     button.addTarget(self, action: #selector(changeButtonTapped(_:)), for: .touchUpInside)
+    return button
+  }()
+  
+  // 완료 버튼
+  lazy var finishButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("완료", for: .normal)
+    button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+    button.setTitleColor(.white, for: .normal)
+    button.addTarget(self, action: #selector(finishButtonTapped(_:)), for: .touchUpInside)
+    button.isHidden = true
     return button
   }()
   
@@ -56,14 +79,15 @@ class ProfileSelectVC: UIViewController {
   var addProfileView = AddProfileView()
   
   var numberOfUsers: Int?
+  var subUserList: [SubUserList]?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    print("numberOfUsers:",numberOfUsers)
+    print("numberOfUsers:", numberOfUsers)
     configure()
     addSubViews()
     navigationBarSetting()
-    setUsers()
+    setUserViews()
     setFuntions()
   }
   
@@ -97,9 +121,21 @@ class ProfileSelectVC: UIViewController {
       $0.height.equalTo(logoView.snp.width).multipliedBy(0.70)
     }
     
+    profileManageLabel.snp.makeConstraints {
+      $0.bottom.equalTo(navigationView.snp.bottom).offset(8)
+      $0.centerX.equalTo(navigationView.snp.centerX)
+      $0.width.equalToSuperview().multipliedBy(0.25)
+      $0.height.equalTo(logoView.snp.width).multipliedBy(0.70)
+    }
+    
     changeButton.snp.makeConstraints {
       $0.centerY.equalTo(logoView.snp.centerY)
       $0.trailing.equalTo(view.snp.trailing).offset(-15)
+    }
+    
+    finishButton.snp.makeConstraints {
+      $0.centerY.equalTo(logoView.snp.centerY)
+      $0.leading.equalTo(view.snp.leading).offset(15)
     }
     
     introlabel.snp.makeConstraints {
@@ -187,15 +223,19 @@ class ProfileSelectVC: UIViewController {
     }
   }
   
-  func setUsers() {
-//    let users = APICenter.shared.path.array(forKey: "Users") as? [SubUserList]
-//    numberOfUsers = users?.count ?? 1
+  func setUserViews() {
   
-//    profileImageView1.profileUserName = users?[0].id ?? "테스트"
-//    profileImageView2.profileUserName = user2 ?? "테스트"
-//    profileImageView3.profileUserName = user3 ?? "테스트"
-//    profileImageView4.profileUserName = user4 ?? "테스트"
-//    profileImageView5.profileUserName = user5 ?? "테스트"
+    profileImageView1.profileUserName = subUserList?[0].name ?? "테스트"
+    profileImageView2.profileUserName = subUserList?[1].name ?? "테스트"
+    profileImageView3.profileUserName = subUserList?[2].name ?? "테스트"
+    profileImageView4.profileUserName = subUserList?[3].name ?? "테스트"
+    profileImageView5.profileUserName = subUserList?[4].name ?? "테스트"
+    
+    profileImageView1.tag = subUserList?[0].id ?? 95
+    profileImageView2.tag = subUserList?[1].id ?? 96
+    profileImageView3.tag = subUserList?[2].id ?? 97
+    profileImageView4.tag = subUserList?[3].id ?? 98
+    profileImageView5.tag = subUserList?[3].id ?? 99
   
   }
   
@@ -206,32 +246,33 @@ class ProfileSelectVC: UIViewController {
   }
   
   @objc private func changeButtonTapped(_ sender: UIButton) {
-    
+    [profileManageLabel, finishButton].forEach { $0.isHidden = false }
+    [changeButton, logoView, introlabel ].forEach { $0.isHidden = true }
+    [profileImageView1, profileImageView2, profileImageView3, profileImageView4, profileImageView5].forEach { $0.isEditing = true }
+  }
+  
+  @objc private func finishButtonTapped(_ sender: UIButton) {
+    [profileManageLabel, finishButton].forEach { $0.isHidden = true }
+    [changeButton, logoView, introlabel ].forEach { $0.isHidden = false }
+    [profileImageView1, profileImageView2, profileImageView3, profileImageView4, profileImageView5].forEach { $0.isEditing = false }
   }
   
 }
 
 extension ProfileSelectVC: UserViewDelegate {
   private func setFuntions() {
-    profileImageView1.delegate = self
-    profileImageView2.delegate = self
-    profileImageView3.delegate = self
-    profileImageView4.delegate = self
-    profileImageView5.delegate = self
+    [profileImageView1, profileImageView2, profileImageView3, profileImageView4, profileImageView5].forEach { $0.delegate = self }
   }
   
-  func didSelectUser(id: String) {
+  func didSelectUser(tag: Int) {    
     
-//    APICenter.shared.saveSubUserID(id: value[0].id)
-    DispatchQueue.main.async {
-      AppDelegate.instance.checkLoginState()
-    }
-    
+//    APICenter.shared.saveSubUserID(id: tag)
+//    DispatchQueue.main.async {
+//      AppDelegate.instance.checkLoginState()
+//    }
     
     let tabBar = MainTabBarController()
     present(tabBar, animated: false)
-    
-    
     
   }
 }
