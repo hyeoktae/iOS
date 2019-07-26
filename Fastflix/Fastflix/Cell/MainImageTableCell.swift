@@ -102,7 +102,9 @@ final class MainImageTableCell: UITableViewCell {
     let logoImageURL = URL(string: logoImageURLString ?? "ImagesData.shared.imagesUrl[6]")
     
     self.mainImage.kf.setImage(with: imageURL, options: [.processor(CroppingImageProcessor(size: CGSize(width: 414, height: 600))), .scaleFactor(UIScreen.main.scale)])
-    self.logoImage.kf.setImage(with: logoImageURL, options: [.processor(CroppingImageProcessor(size: CGSize(width: 200, height: 200))), .scaleFactor(UIScreen.main.scale)])
+    self.logoImage.kf.setImage(with: logoImageURL, options: [.processor(CroppingImageProcessor(size: CGSize(width: 200, height: 200))), .scaleFactor(UIScreen.main.scale)]) { _ in
+      self.logoImage.image = self.logoImage.image?.cropAlpha()
+    }
   }
   
   private func setupStackView() {

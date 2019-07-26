@@ -204,18 +204,22 @@ class ProfileChangeVC: UIViewController {
   @objc private func deleteButtonTapped(_ sender: UIButton) {
     print("삭제 누름")
     
-    //삭제버튼 눌렀을때 Alert화면 구현
-    let alert = UIAlertController(title: "프로필 삭제", message: "이 프로필을 삭제하시겠어요?", preferredStyle: .alert)
-    let cencelAction = UIAlertAction(title: "아니요", style: .default, handler: nil)
-    let oKaction = UIAlertAction(title: "예", style: .default) { _ in
-      // 여기에 유저 삭제에 관한 메서드 구현해야함
-      self.dismiss(animated: true)
+    alert(title: "프로필 삭제", message: "이 프로필을 삭제하시겠어요?") {
+
     }
     
-    alert.addAction(cencelAction)
-    alert.addAction(oKaction)
-    
-    present(alert, animated: true, completion: nil)
+    //삭제버튼 눌렀을때 Alert화면 구현
+//    let alert = UIAlertController(title: "프로필 삭제", message: "이 프로필을 삭제하시겠어요?", preferredStyle: .alert)
+//    let cencelAction = UIAlertAction(title: "아니요", style: .default, handler: nil)
+//    let oKaction = UIAlertAction(title: "예", style: .default) { _ in
+//      // 여기에 유저 삭제에 관한 메서드 구현해야함
+//      self.dismiss(animated: true)
+//    }
+//
+//    alert.addAction(cencelAction)
+//    alert.addAction(oKaction)
+//
+//    present(alert, animated: true, completion: nil)
     
   }
 
