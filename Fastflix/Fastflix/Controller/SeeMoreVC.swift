@@ -37,6 +37,8 @@ class SeeMoreVC: UIViewController {
       viewArr.append(view)
     }
   }
+  
+  
 
 }
 extension SeeMoreVC: SeeMoreViewDelegate {
@@ -50,13 +52,14 @@ extension SeeMoreVC: SeeMoreViewDelegate {
       print("앱설정")
     case IndexPath(row: 4, section: 2):
       print("로그아웃")
+      self.alert(title: "로그아웃", message: "로그아웃하시겠어요?") {
+        let path = UserDefaults.standard
+        path.removeObject(forKey: "token")
+        AppDelegate.instance.checkLoginState()
+        
+        print("로그아웃됨")
+      }
       
-      let path = UserDefaults.standard
-      path.removeObject(forKey: "token")
-      AppDelegate.instance.checkLoginState()
-      
-      print("로그아웃됨")
-    
     default:
       break
     }

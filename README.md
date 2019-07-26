@@ -62,3 +62,5 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 19.07.26  feat: allen - Allen adds CustomerCenterVC.
 
 19.07.26  feat: allen - Allen fixes BeforeLonginVC's AutoLayout issues.
+
+19.07.26  feat: devy - AlertExtension
