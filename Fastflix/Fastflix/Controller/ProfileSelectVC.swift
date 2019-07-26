@@ -34,6 +34,7 @@ class ProfileSelectVC: UIViewController {
   let profileManageLabel: UILabel = {
     let label = UILabel()
     label.text = "프로필 관리"
+    label.textAlignment = .center
     label.textColor = .white
     label.font = UIFont.systemFont(ofSize: 17)
     label.isHidden = true
@@ -278,7 +279,11 @@ class ProfileSelectVC: UIViewController {
 
 extension ProfileSelectVC: UserViewDelegate {
   func profileChangeTapped(tag: Int) {
-    
+    print("프로필 변경하기 눌렀당")
+    let profileChangeVC = ProfileChangeVC()
+    profileChangeVC.userName = "테스트"
+    let navi = UINavigationController(rootViewController: profileChangeVC)
+    navigationController?.present(navi, animated: true)
   }
   
   private func setFuntions() {
@@ -286,7 +291,7 @@ extension ProfileSelectVC: UserViewDelegate {
   }
   
   func didSelectUser(tag: Int) {    
-    
+    print("유저 선택하기 눌렸당")
 //    APICenter.shared.saveSubUserID(id: tag)
 //    DispatchQueue.main.async {
 //      AppDelegate.instance.checkLoginState()

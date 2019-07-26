@@ -56,7 +56,7 @@ class BeforeLoginVC: UIViewController {
   let backgroundView: UIView = {
     let imageView = UIImageView()
     imageView.image = UIImage(named: "netfilxbackground")
-    imageView.contentMode = .scaleAspectFit
+    imageView.contentMode = .scaleAspectFill
     return imageView
   }()
   
@@ -276,7 +276,8 @@ class BeforeLoginVC: UIViewController {
   
   // 고객센터 버튼 눌렀을때의 동작
   @objc private func customerCenterTapped(_ sender: UIButton) {
-    
+    let customerCenterVC = CustomerCenterVC()
+    present(customerCenterVC, animated: true)
   }
   
 }
