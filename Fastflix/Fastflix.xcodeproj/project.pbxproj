@@ -57,6 +57,7 @@
 		C1FC3F3622E8AD23008E1FE9 /* MyContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F3522E8AD23008E1FE9 /* MyContentView.swift */; };
 		C1FC3F3822E8B1FD008E1FE9 /* MyContentCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F3722E8B1FD008E1FE9 /* MyContentCollectionCell.swift */; };
 		C1FC3F3C22E97548008E1FE9 /* SeeMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F3B22E97548008E1FE9 /* SeeMoreView.swift */; };
+		C1FC3F4122EAE5BB008E1FE9 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F4022EAE5BB008E1FE9 /* AlertExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +115,7 @@
 		C1FC3F3522E8AD23008E1FE9 /* MyContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContentView.swift; sourceTree = "<group>"; };
 		C1FC3F3722E8B1FD008E1FE9 /* MyContentCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContentCollectionCell.swift; sourceTree = "<group>"; };
 		C1FC3F3B22E97548008E1FE9 /* SeeMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreView.swift; sourceTree = "<group>"; };
+		C1FC3F4022EAE5BB008E1FE9 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
 		E29600FEE1EEB7B6DD9E0171 /* Pods_Fastflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fastflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -159,6 +161,7 @@
 		5295214C22D5D3E800174BC1 /* Fastflix */ = {
 			isa = PBXGroup;
 			children = (
+				C1FC3F3F22EAE43B008E1FE9 /* Extensions */,
 				5295214D22D5D3E800174BC1 /* AppDelegate.swift */,
 				5295215F22D5D52700174BC1 /* Controller */,
 				5295216122D5D53500174BC1 /* View */,
@@ -251,6 +254,14 @@
 				5295216E22D5D65400174BC1 /* Network.swift */,
 			);
 			path = API;
+			sourceTree = "<group>";
+		};
+		C1FC3F3F22EAE43B008E1FE9 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C1FC3F4022EAE5BB008E1FE9 /* AlertExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		D3DAF0B40D3A1BD1093E39D6 /* Pods */ = {
@@ -420,6 +431,7 @@
 				C1FC3F0622E59631008E1FE9 /* CreateProfileView.swift in Sources */,
 				C1FC3F0A22E5A725008E1FE9 /* ProfileView.swift in Sources */,
 				52BA342C22DDE7BB005F8489 /* StreamingCell.swift in Sources */,
+				C1FC3F4122EAE5BB008E1FE9 /* AlertExtension.swift in Sources */,
 				5295216D22D5D62F00174BC1 /* FloatingView.swift in Sources */,
 				477F4F6B22E7630E003268F9 /* ProfileSelectVC.swift in Sources */,
 				C1FC3F2C22E6B9A1008E1FE9 /* MainPokeVC.swift in Sources */,
