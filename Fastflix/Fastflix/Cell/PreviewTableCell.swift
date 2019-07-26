@@ -41,7 +41,7 @@ final class PreviewTableCell: UITableViewCell {
     collectionView.register(PreviewCollectionCell.self, forCellWithReuseIdentifier: PreviewCollectionCell.identifier)
     addSubViews()
     setupSNP()
-    collectionviewSetUp()
+    setupCollectionView()
   }
   
   // MARK: - addSubViews
@@ -49,7 +49,7 @@ final class PreviewTableCell: UITableViewCell {
     [collectionView, sectionHeaderlabel].forEach { self.addSubview($0)}
   }
   // MARK: - collectionViewSetUp
-  private func collectionviewSetUp() {
+  private func setupCollectionView() {
     layout.scrollDirection = .horizontal
     collectionView.dataSource = self
     collectionView.delegate = self
@@ -101,6 +101,5 @@ extension PreviewTableCell: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     print("indexPath.row: ", indexPath.row)
     delegate?.didSelectItemAt(indexPath: indexPath)
-    
   }
 }
