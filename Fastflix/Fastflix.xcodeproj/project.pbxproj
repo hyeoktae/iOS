@@ -11,6 +11,7 @@
 		477F4F6922E76297003268F9 /* AddProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477F4F6822E76297003268F9 /* AddProfileView.swift */; };
 		477F4F6B22E7630E003268F9 /* ProfileSelectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 477F4F6A22E7630E003268F9 /* ProfileSelectVC.swift */; };
 		478AA3D222E9868900A632EF /* ProfileChangeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AA3D122E9868900A632EF /* ProfileChangeVC.swift */; };
+		478AA3D822EA2D3100A632EF /* CustomerCenterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 478AA3D722EA2D3100A632EF /* CustomerCenterVC.swift */; };
 		47AC179722E2341E00D6AACD /* BeforeLoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC179622E2341E00D6AACD /* BeforeLoginVC.swift */; };
 		47AC179922E2343800D6AACD /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC179822E2343800D6AACD /* LoginVC.swift */; };
 		47AC179B22E234E700D6AACD /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47AC179A22E234E700D6AACD /* PlayerViewController.swift */; };
@@ -61,6 +62,7 @@
 		477F4F6822E76297003268F9 /* AddProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfileView.swift; sourceTree = "<group>"; };
 		477F4F6A22E7630E003268F9 /* ProfileSelectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSelectVC.swift; sourceTree = "<group>"; };
 		478AA3D122E9868900A632EF /* ProfileChangeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileChangeVC.swift; sourceTree = "<group>"; };
+		478AA3D722EA2D3100A632EF /* CustomerCenterVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerCenterVC.swift; sourceTree = "<group>"; };
 		47AC179622E2341E00D6AACD /* BeforeLoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeLoginVC.swift; sourceTree = "<group>"; tabWidth = 2; };
 		47AC179822E2343800D6AACD /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		47AC179A22E234E700D6AACD /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 				C1FC3F2D22E6B9BA008E1FE9 /* MainMovieVC.swift */,
 				477F4F6A22E7630E003268F9 /* ProfileSelectVC.swift */,
 				478AA3D122E9868900A632EF /* ProfileChangeVC.swift */,
+				478AA3D722EA2D3100A632EF /* CustomerCenterVC.swift */,
 				C1FC3F2B22E6B9A1008E1FE9 /* MainPokeVC.swift */,
 			);
 			path = Controller;
@@ -409,6 +412,7 @@
 				C1FC3F0222E590CF008E1FE9 /* DownloadVC.swift in Sources */,
 				477F4F6922E76297003268F9 /* AddProfileView.swift in Sources */,
 				47FF9DC522DE3C98005C7BAD /* DetailViewBelowCell.swift in Sources */,
+				478AA3D822EA2D3100A632EF /* CustomerCenterVC.swift in Sources */,
 				5295216F22D5D65400174BC1 /* Network.swift in Sources */,
 				5295216922D5D59A00174BC1 /* DataOfAllen.swift in Sources */,
 			);

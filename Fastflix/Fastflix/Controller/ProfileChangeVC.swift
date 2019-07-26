@@ -24,6 +24,7 @@ class ProfileChangeVC: UIViewController {
   let profileChangeLabel: UILabel = {
     let label = UILabel()
     label.text = "프로필 변경"
+    label.textAlignment = .center
     label.textColor = .white
     label.font = UIFont.systemFont(ofSize: 17)
     return label
@@ -83,6 +84,7 @@ class ProfileChangeVC: UIViewController {
     sv.spacing = 15
     sv.axis = .horizontal
     sv.distribution = .fill
+    sv.isHidden = true
     return sv
   }()
   
@@ -91,7 +93,7 @@ class ProfileChangeVC: UIViewController {
     button.setTitle("삭제", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 14)
     button.setTitleColor(.white, for: .normal)
-    button.addTarget(self, action: #selector(cancelButtonTapped(_:)), for: .touchUpInside)
+    button.addTarget(self, action: #selector(deleteButtonTapped(_:)), for: .touchUpInside)
     return button
   }()
   
@@ -113,12 +115,15 @@ class ProfileChangeVC: UIViewController {
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
     setupSNP()
+    kidsStackView.isHidden = false
     subNameChangeTextField.becomeFirstResponder()
   }
   
   private func configure() {
+//    view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
     view.backgroundColor = .black
     userView.profileUserName = "변경"
+    subNameChangeTextField.text = userName ?? ""
   }
   
   private func addSubViews() {
@@ -187,15 +192,33 @@ class ProfileChangeVC: UIViewController {
   
   @objc private func saveButtonTapped(_ sender: UIButton) {
     print("새로바뀐 유저정보 저장관련 메서드 넣어야함")
-    navigationController?.popViewController(animated: true)
+    dismiss(animated: true)
   }
   
   
   @objc private func cancelButtonTapped(_ sender: UIButton) {
     print("취소")
-    navigationController?.popViewController(animated: true)
+    dismiss(animated: true)
   }
   
+  @objc private func deleteButtonTapped(_ sender: UIButton) {
+    print("삭제 누름")
+    
+    //삭제버튼 눌렀을때 Alert화면 구현
+    let alert = UIAlertController(title: "프로필 삭제", message: "이 프로필을 삭제하시겠어요?", preferredStyle: .alert)
+    let cencelAction = UIAlertAction(title: "아니요", style: .default, handler: nil)
+    let oKaction = UIAlertAction(title: "예", style: .default) { _ in
+      // 여기에 유저 삭제에 관한 메서드 구현해야함
+      self.dismiss(animated: true)
+    }
+    
+    alert.addAction(cencelAction)
+    alert.addAction(oKaction)
+    
+    present(alert, animated: true, completion: nil)
+    
+  }
+
 }
 
 
@@ -209,7 +232,7 @@ extension ProfileChangeVC: UserViewDelegate {
   
   func didSelectUser(tag: Int) {
     
-    print("여러가지 프로필 선택 화면으로 이동")
+    print("여러가지 프로필 선택 화면으로 이동--->")
     
   }
   
