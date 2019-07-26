@@ -18,6 +18,7 @@ class SeeMoreVC: UIViewController {
     let seeMoreView = SeeMoreView()
     self.view = seeMoreView
 //    seeMoreView.profileStackView.addArrangedSubview(viewArr)
+    seeMoreView.delegate = self
   }
   
   override func viewDidLoad() {
@@ -37,6 +38,28 @@ class SeeMoreVC: UIViewController {
     }
   }
 
-
 }
+extension SeeMoreVC: SeeMoreViewDelegate {
+  func logoutCellDidTap(indexPath: IndexPath) {
+    switch indexPath {
+    case IndexPath(row: 0, section: 0): break
+      
+    case IndexPath(row: 0, section: 1): break
+      
+    case IndexPath(row: 0, section: 2):
+      print("앱설정")
+    case IndexPath(row: 4, section: 2):
+      print("로그아웃")
+      
+      let path = UserDefaults.standard
+      path.removeObject(forKey: "token")
+      AppDelegate.instance.checkLoginState()
+      
+      print("로그아웃됨")
+    
+    default:
+      break
+    }
+  }
   
+}

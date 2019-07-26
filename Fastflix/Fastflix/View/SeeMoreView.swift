@@ -5,6 +5,9 @@
 //  Created by Jeon-heaji on 25/07/2019.
 //  Copyright © 2019 hyeoktae kwon. All rights reserved.
 //
+protocol SeeMoreViewDelegate {
+  func logoutCellDidTap(indexPath: IndexPath)
+}
 
 import UIKit
 import SnapKit
@@ -15,6 +18,7 @@ class SeeMoreView: UIView {
   
   var profileCount = 0
   var viewArr: [ProfileView] = []
+  var delegate: SeeMoreViewDelegate?
   
   let datas = [ "앱설정", "계정", "개인정보", "고객 센터", "로그아웃"]
   let notificationData = ["내가 찜한 콘텐츠"]
@@ -203,17 +207,7 @@ extension SeeMoreView: UITableViewDataSource {
 extension SeeMoreView: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    guard indexPath.row == datas.count - 1 else { return }
-    let path = UserDefaults.standard
-    path.removeObject(forKey: "token")
-    AppDelegate.instance.checkLoginState()
-    
-    // 내가 찜한 콘텐츠
-    if indexPath.section == 1 {
-      print("나나나나나")
-      
-      print("내가 찜한 콘텐츠 고")
-    }
+    delegate?.logoutCellDidTap(indexPath: indexPath)
   }
   
 }
