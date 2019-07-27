@@ -210,4 +210,5 @@ extension SeeMoreView: UITableViewDelegate {
     delegate?.logoutCellDidTap(indexPath: indexPath)
   }
   
+  
 }
