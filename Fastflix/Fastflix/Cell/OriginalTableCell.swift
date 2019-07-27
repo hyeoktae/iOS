@@ -104,7 +104,7 @@ extension OriginalTableCell: UICollectionViewDataSource {
 
 extension OriginalTableCell: UICollectionViewDelegate {
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    print("indexPath.row: ", indexPath.row)
+//    print("indexPath.row: ", indexPath.row)
     delegate?.originalDidSelectItemAt(indexPath: indexPath)
     
   }

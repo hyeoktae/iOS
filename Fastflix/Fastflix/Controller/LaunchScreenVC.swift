@@ -27,7 +27,7 @@ final class LaunchScreenVC: UIViewController {
     
     // 3초 뒤에 뷰 컨트롤러를 띄우는거
     Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
-      let appDelegate =  UIApplication.shared.delegate as! AppDelegate
+//      let appDelegate =  UIApplication.shared.delegate as! AppDelegate
     
 
     }

@@ -55,6 +55,24 @@ class ImagesData {
     "https://occ-0-3446-1007.1.nflxso.net/dnm/api/v6/CFXrEYtXxhcqF3ItF4DehdUbQjk/AAAABXLhEohYBrhJ56ArSqwMPzV6KJex-lgQaJ0hnkACdVgIKZ59UU-IQI0oAwr7sKmk70s0NtcoSmOS8w_dJjFi53DQy6W7lDcdXluzqHFs5-Vbv2yI7p4Ua5K9ykIerun2DcQp9qSNLgNTBrYhXwUzURV8A2kmdMT_kXPPvNSVu_K-_lwsXJLPPY4dS-PI7ewKEb4bLNoE.jpg?r=a11"
   ]
   
+  var myContentImages = [
+  "https://user-images.githubusercontent.com/44523619/61929222-cb85dd80-afb5-11e9-8f9d-3089ee8b3e61.png",
+  "https://user-images.githubusercontent.com/48317281/61929588-5a92f580-afb6-11e9-9e73-21802d140a88.png",
+  "https://user-images.githubusercontent.com/48317281/61929595-5b2b8c00-afb6-11e9-8e82-c535aebe9b32.PNG",
+    "https://user-images.githubusercontent.com/48317281/61929600-5bc42280-afb6-11e9-9207-f08715454380.PNG",
+    "https://user-images.githubusercontent.com/47494192/61929153-9ed1c600-afb5-11e9-9636-c9049c42c617.PNG",
+    "https://user-images.githubusercontent.com/48080762/61929271-e22c3480-afb5-11e9-8261-e87646387ba4.png",
+    "https://user-images.githubusercontent.com/48317281/61929606-5cf54f80-afb6-11e9-8c75-d84c30d658c4.PNG",
+    "https://user-images.githubusercontent.com/48317281/61929610-5d8de600-afb6-11e9-9564-c41cd9c71351.PNG",
+    "https://user-images.githubusercontent.com/48628740/61927430-b017d400-afaf-11e9-8952-b38da89a21bc.png",
+    "https://user-images.githubusercontent.com/48628740/61929293-ee17f680-afb5-11e9-99c1-3118ee8bc221.png",
+    "https://user-images.githubusercontent.com/45123444/61928501-9b3d3f80-afb3-11e9-8de7-6686e83d27d0.png",
+    "https://user-images.githubusercontent.com/48080762/61929231-ccb70a80-afb5-11e9-9af0-9b0e2317c107.png",
+    "https://user-images.githubusercontent.com/45123444/61928538-b9a33b00-afb3-11e9-94b2-840cb349a6b8.png",
+  
+  
+  ]
+  
   //  init(imagesUrl: [String]) {
   //    self.imagesUrl = imagesUrl
   //  }
