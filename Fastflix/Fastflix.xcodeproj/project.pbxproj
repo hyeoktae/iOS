@@ -59,6 +59,8 @@
 		C1FC3F3822E8B1FD008E1FE9 /* MyContentCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F3722E8B1FD008E1FE9 /* MyContentCollectionCell.swift */; };
 		C1FC3F3C22E97548008E1FE9 /* SeeMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F3B22E97548008E1FE9 /* SeeMoreView.swift */; };
 		C1FC3F4122EAE5BB008E1FE9 /* AlertExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F4022EAE5BB008E1FE9 /* AlertExtension.swift */; };
+		C1FC3F6022EC9E9F008E1FE9 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F5F22EC9E9E008E1FE9 /* SearchView.swift */; };
+		C1FC3F6222ECA67A008E1FE9 /* SearchCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FC3F6122ECA67A008E1FE9 /* SearchCollectionCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -118,6 +120,8 @@
 		C1FC3F3722E8B1FD008E1FE9 /* MyContentCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyContentCollectionCell.swift; sourceTree = "<group>"; };
 		C1FC3F3B22E97548008E1FE9 /* SeeMoreView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreView.swift; sourceTree = "<group>"; };
 		C1FC3F4022EAE5BB008E1FE9 /* AlertExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertExtension.swift; sourceTree = "<group>"; };
+		C1FC3F5F22EC9E9E008E1FE9 /* SearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		C1FC3F6122ECA67A008E1FE9 /* SearchCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionCell.swift; sourceTree = "<group>"; };
 		E29600FEE1EEB7B6DD9E0171 /* Pods_Fastflix.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fastflix.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -311,6 +315,7 @@
 		C1FC3F4D22EC7D72008E1FE9 /* SearchView */ = {
 			isa = PBXGroup;
 			children = (
+				C1FC3F5F22EC9E9E008E1FE9 /* SearchView.swift */,
 			);
 			path = SearchView;
 			sourceTree = "<group>";
@@ -318,6 +323,7 @@
 		C1FC3F4E22EC7D7A008E1FE9 /* SearchCell */ = {
 			isa = PBXGroup;
 			children = (
+				C1FC3F6122ECA67A008E1FE9 /* SearchCollectionCell.swift */,
 			);
 			path = SearchCell;
 			sourceTree = "<group>";
@@ -592,6 +598,7 @@
 				478AA3D222E9868900A632EF /* ProfileChangeVC.swift in Sources */,
 				C1FC3F3222E7025D008E1FE9 /* MainMovieView.swift in Sources */,
 				C1FC3F0822E596C6008E1FE9 /* IconVC.swift in Sources */,
+				C1FC3F6222ECA67A008E1FE9 /* SearchCollectionCell.swift in Sources */,
 				C143560A22DCAAD5005189E9 /* OriginalTableCell.swift in Sources */,
 				47AC179722E2341E00D6AACD /* BeforeLoginVC.swift in Sources */,
 				C14355F422DB0B11005189E9 /* PreviewCollectionCell.swift in Sources */,
@@ -613,6 +620,7 @@
 				47B4086A22EAF30400D6A19D /* ImageCropExtension.swift in Sources */,
 				C1FC3F4122EAE5BB008E1FE9 /* AlertExtension.swift in Sources */,
 				5295216D22D5D62F00174BC1 /* FloatingView.swift in Sources */,
+				C1FC3F6022EC9E9F008E1FE9 /* SearchView.swift in Sources */,
 				477F4F6B22E7630E003268F9 /* ProfileSelectVC.swift in Sources */,
 				C1FC3F2C22E6B9A1008E1FE9 /* MainPokeVC.swift in Sources */,
 				5295216722D5D59100174BC1 /* DataOfDevy.swift in Sources */,
@@ -751,7 +759,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = KNHX5B578D;
 				INFOPLIST_FILE = Fastflix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -771,7 +779,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G4MM77V7NH;
+				DEVELOPMENT_TEAM = KNHX5B578D;
 				INFOPLIST_FILE = Fastflix/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (

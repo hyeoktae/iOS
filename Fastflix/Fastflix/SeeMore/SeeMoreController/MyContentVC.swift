@@ -23,7 +23,6 @@ class MyContentVC: UIViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-//      setupNavi()
     }
   
   override func loadView() {
@@ -31,7 +30,6 @@ class MyContentVC: UIViewController {
     self.view = myContentView
     view.backgroundColor = .clear
     myContentView.delegate = self
-    print("delegate = self")
   }
   
   private func setupNavi() {
@@ -41,8 +39,6 @@ class MyContentVC: UIViewController {
     navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.isTranslucent = true
     self.setNeedsStatusBarAppearanceUpdate()
-    
-//    navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(named: "back"), style: .done, target: nil, action: nil)
     navigationItem.backBarButtonItem = UIBarButtonItem(title: "❮", style: .done, target: nil, action: nil)
     navigationController?.navigationBar.tintColor = .white
   }

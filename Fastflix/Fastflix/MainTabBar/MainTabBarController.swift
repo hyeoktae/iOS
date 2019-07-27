@@ -22,6 +22,11 @@ final class MainTabBarController: UITabBarController {
     return navi
   }()
   
+   lazy var searchNavi: UINavigationController = {
+    let navi = UINavigationController(rootViewController: SearchVC())
+    return navi
+  }()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupTabBar()
@@ -33,7 +38,7 @@ final class MainTabBarController: UITabBarController {
     tabBar.tintColor = .white
     tabBar.backgroundImage = UIImage(named: "black")
     
-    self.viewControllers = [mainHomeVC, searchVC, downloadVC, navi]
+    self.viewControllers = [mainHomeVC, searchNavi, downloadVC, navi]
   }
   
   private func installTabBarItems() {
@@ -46,7 +51,7 @@ final class MainTabBarController: UITabBarController {
     downloadVCItem.badgeColor = .blue
     
     mainHomeVC.tabBarItem = homeVCItem
-    searchVC.tabBarItem = searchVCItem
+    searchNavi.tabBarItem = searchVCItem
     downloadVC.tabBarItem = downloadVCItem
     navi.tabBarItem = seeMoreVCItem
 
