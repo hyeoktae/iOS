@@ -8,19 +8,23 @@
 
 import UIKit
 
+protocol AddProfileViewDelegate: class {
+  func addProfileButtonTapped()
+}
+
 class AddProfileView: UIView {
 
-  lazy var addProfileButton: UIImageView = {
-    let image = UIImage(named: "profileAdd")
-    let imageView = UIImageView(image: image)
-//    button.setTitle("+", for: .normal)
-//    button.titleLabel?.font = UIFont.systemFont(ofSize: 50, weight: .medium)
-//    button.titleLabel?.textAlignment = .center
-//    button.setTitleColor(.white, for: .normal)
-//    button.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
-//    button.clipsToBounds = true
-//    button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-    return imageView
+  lazy var addProfileButton: UIButton = {
+    let button = UIButton()
+    button.setTitle("+", for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 50, weight: .medium)
+    button.titleLabel?.textAlignment = .center
+    button.contentEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 18, right: 15)
+    button.setTitleColor(.white, for: .normal)
+    button.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+    button.clipsToBounds = true
+    button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+    return button
   }()
   
   lazy var profileButton: UIButton = {
@@ -33,12 +37,18 @@ class AddProfileView: UIView {
     return button
   }()
   
+  weak var delegate: AddProfileViewDelegate?
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     addSubViews()
     setupSNP()
-//    addProfileButton.layer.cornerRadius = addProfileButton.frame.width / 2
     setupTapGesture()
+  }
+  
+  override func layoutSubviews() {
+    super.layoutSubviews()
+    addProfileButton.layer.cornerRadius = addProfileButton.frame.width / 2
   }
   
   private func setupTapGesture() {
@@ -50,6 +60,7 @@ class AddProfileView: UIView {
   
   @objc private func buttonTapped() {
     print("프로필추가 눌렀당")
+    delegate?.addProfileButtonTapped()
   }
   
   required init?(coder aDecoder: NSCoder) {

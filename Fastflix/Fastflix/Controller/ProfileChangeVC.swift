@@ -59,10 +59,11 @@ class ProfileChangeVC: UIViewController {
     return view
   }()
   
-  var subNameChangeTextField: UITextField = {
+  var subUserNameTextField: UITextField = {
     let tf = UITextField()
     tf.backgroundColor = .black
     tf.textColor = .white
+    tf.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
     return tf
   }()
   
@@ -99,6 +100,8 @@ class ProfileChangeVC: UIViewController {
   
   var userName: String?
   
+  var userImage: UIImage?
+  
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
   }
@@ -116,18 +119,20 @@ class ProfileChangeVC: UIViewController {
     super.viewDidAppear(animated)
     setupSNP()
     kidsStackView.isHidden = false
-    subNameChangeTextField.becomeFirstResponder()
+    subUserNameTextField.becomeFirstResponder()
   }
   
   private func configure() {
 //    view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
     view.backgroundColor = .black
     userView.profileUserName = "변경"
-    subNameChangeTextField.text = userName ?? ""
+    subUserNameTextField.text = userName ?? ""
+    userView.imageView.image = userImage ?? UIImage(named: "profile1")
+    subUserNameTextField.delegate = self
   }
   
   private func addSubViews() {
-    [navigationView, userView, textSurroundingView, subNameChangeTextField, kidsStackView, deleteButton].forEach { view.addSubview($0) }
+    [navigationView, userView, textSurroundingView, subUserNameTextField, kidsStackView, deleteButton].forEach { view.addSubview($0) }
   }
   
   private func setupSNP() {
@@ -168,7 +173,7 @@ class ProfileChangeVC: UIViewController {
       $0.height.equalTo(45)
     }
     
-    subNameChangeTextField.snp.makeConstraints {
+    subUserNameTextField.snp.makeConstraints {
       $0.top.bottom.equalTo(textSurroundingView).inset(5)
       $0.leading.trailing.equalTo(textSurroundingView).inset(10)
     }
@@ -192,7 +197,15 @@ class ProfileChangeVC: UIViewController {
   
   @objc private func saveButtonTapped(_ sender: UIButton) {
     print("새로바뀐 유저정보 저장관련 메서드 넣어야함")
+    saveChangedUserInfo()
     dismiss(animated: true)
+  }
+  
+  private func saveChangedUserInfo() {
+    
+    
+    
+    
   }
   
   
@@ -205,7 +218,9 @@ class ProfileChangeVC: UIViewController {
     print("삭제 누름")
     
     alert(title: "프로필 삭제", message: "이 프로필을 삭제하시겠어요?") {
-
+      //프로필 삭제시 - 클로저로 기능 구현 코드 넣어야 함
+      
+      
     }
     
     //삭제버튼 눌렀을때 Alert화면 구현
@@ -222,12 +237,30 @@ class ProfileChangeVC: UIViewController {
 //    present(alert, animated: true, completion: nil)
     
   }
-
+  
+  // 텍스트필드에 아무것도 없으면 저장 버튼 비활성화
+  @objc private func editingChanged(_ textField: UITextField) {
+    if textField.text?.count == 1 {
+      if textField.text?.first == " " {
+        textField.text = ""
+        return
+      }
+    }
+    guard
+      let username = subUserNameTextField.text, !username.isEmpty
+      else {
+        saveButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
+        saveButton.isEnabled = false
+        return
+    }
+    saveButton.setTitleColor(.white, for: .normal)
+    saveButton.isEnabled = true
+  }
 }
 
 
 extension ProfileChangeVC: UserViewDelegate {
-  func profileChangeTapped(tag: Int) {
+  func profileChangeTapped(tag: Int, userName: String, userImage: UIImage) {
   }
   
   private func setFuntions() {
@@ -239,5 +272,26 @@ extension ProfileChangeVC: UserViewDelegate {
     print("여러가지 프로필 선택 화면으로 이동--->")
     
   }
+}
+
+extension ProfileChangeVC: UITextFieldDelegate {
   
+  //프로필 추가시에는 시작부터 텍스트 없기 때문에 버튼 비활성화 시키키 위해 텍스트필드 메서드 이용
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField.text?.count == 1 {
+      if textField.text?.first == " " {
+        textField.text = ""
+        return
+      }
+    }
+    guard
+      let username = subUserNameTextField.text, !username.isEmpty
+      else {
+        saveButton.setTitleColor(#colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1), for: .normal)
+        saveButton.isEnabled = false
+        return
+    }
+    saveButton.setTitleColor(.white, for: .normal)
+    saveButton.isEnabled = true
+  }
 }

@@ -11,7 +11,7 @@ import Kingfisher
 
 protocol UserViewDelegate: class {
   func didSelectUser(tag: Int)
-  func profileChangeTapped(tag: Int)
+  func profileChangeTapped(tag: Int, userName: String, userImage: UIImage)
 }
 
 class UserView: UIView {
@@ -85,7 +85,7 @@ class UserView: UIView {
   
   @objc private func buttonTapped() {
     if isEditing {
-      delegate?.profileChangeTapped(tag: tag)
+      delegate?.profileChangeTapped(tag: tag, userName: profileUserName!, userImage: imageView.image!)
     } else {
 //      APICenter.shared.saveSubUserID(id: tag)
       delegate?.didSelectUser(tag: tag)
