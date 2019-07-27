@@ -11,6 +11,9 @@ import Foundation
 enum RequestString: String {
   case loginURL = "http://52.78.134.79/accounts/login/"
   case movieURL = "http://52.78.134.79/movies/genre_select_before/"
+  case requestSubUserListURL = "http://52.78.134.79/accounts/sub_user_list/"
+  case createSubUserURL = "http://52.78.134.79/accounts/create_sub_user/"
+  case changeProfileListURL = "http://52.78.134.79/accounts/change_profile/"
 }
 
 // MARK: - Login
@@ -27,13 +30,26 @@ struct Login: Codable {
 // MARK: - SubUserList
 struct SubUserList: Codable {
   let id: Int
+  let profileInfo: ProfileInfo
   let name: String
   let kid: Bool
   let parentUser: Int
   
   enum CodingKeys: String, CodingKey {
-    case id, name, kid
+    case id
+    case profileInfo = "profile_info"
+    case name, kid
     case parentUser = "parent_user"
+  }
+}
+
+struct ProfileInfo: Codable {
+  let imageID: Int
+  let profileImagePath: String
+  
+  enum CodingKeys: String, CodingKey {
+    case imageID = "image_id"
+    case profileImagePath = "profile_image_path"
   }
 }
 

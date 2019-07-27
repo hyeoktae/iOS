@@ -228,20 +228,20 @@ class ProfileSelectVC: UIViewController {
   
     switch numberOfUsers {
     case 1:
-      profileImageView1.profileUserName = subUserList?[0].name ?? "테스트"
-      profileImageView1.tag = subUserList?[0].id ?? 95
+      profileImageView1.profileUserName = subUserList?[0].name
+      profileImageView1.tag = (subUserList?[0].id)!
     case 2:
-      profileImageView2.profileUserName = subUserList?[1].name ?? "테스트"
-      profileImageView2.tag = subUserList?[1].id ?? 96
+      profileImageView2.profileUserName = subUserList?[1].name
+      profileImageView2.tag = (subUserList?[1].id)!
     case 3:
-      profileImageView3.profileUserName = subUserList?[2].name ?? "테스트"
-      profileImageView3.tag = subUserList?[2].id ?? 97
+      profileImageView3.profileUserName = subUserList?[2].name
+      profileImageView3.tag = (subUserList?[2].id)!
     case 4:
-      profileImageView4.profileUserName = subUserList?[3].name ?? "테스트"
-      profileImageView4.tag = subUserList?[3].id ?? 98
+      profileImageView4.profileUserName = subUserList?[3].name
+      profileImageView4.tag = (subUserList?[3].id)!
     case 5:
-      profileImageView5.profileUserName = subUserList?[4].name ?? "테스트"
-      profileImageView5.tag = subUserList?[4].id ?? 99
+      profileImageView5.profileUserName = subUserList?[4].name
+      profileImageView5.tag = (subUserList?[4].id)!
     default:
       return
     }
@@ -292,13 +292,14 @@ extension ProfileSelectVC: UserViewDelegate {
   
   func didSelectUser(tag: Int) {    
     print("유저 선택하기 눌렸당")
-//    APICenter.shared.saveSubUserID(id: tag)
-//    DispatchQueue.main.async {
-//      AppDelegate.instance.checkLoginState()
-//    }
     
-    let tabBar = MainTabBarController()
-    present(tabBar, animated: false)
+    APICenter.shared.saveSubUserID(id: tag)
+    DispatchQueue.main.async {
+      AppDelegate.instance.checkLoginState()
+    }
+    
+//    let tabBar = MainTabBarController()
+//    present(tabBar, animated: false)
     
   }
 }

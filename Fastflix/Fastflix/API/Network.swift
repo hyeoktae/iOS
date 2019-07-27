@@ -104,22 +104,30 @@ final class APICenter {
     }
   }
   
-  // MARK: 유저디폴트에 Int값으로 서브유저 아이디 저장하기
-  func saveSubUserID(id: Int) {
-    path.set(id, forKey: "subUserID")
-    print("'subUserID' save complete ")
-  }
-  
-  // MARK: 유저디폴트에 Int값으로된 서브유저 아이디 가져오기
-  func getSubUserID() -> Int {
-    print("subUserID: ", path.integer(forKey: "subUserID"))
-    return path.integer(forKey: "subUserID")
-  }
-  
   // MARK: 유저디폴트에 키값"token"로 토큰값 저장하기
   private func saveToken(token: String) {
     path.set(token, forKey: "token")
     print("'Token' save complete ")
   }
   
+  
+  // MARK: 서브 유저 관련 메서드
+  // MARK: 유저디폴트에 Int값으로된 서브유저 아이디 가져오기
+  func getSubUserID() -> Int {
+    print("subUserID: ", path.integer(forKey: "subUserID"))
+    return path.integer(forKey: "subUserID")
+  }
+  
+  // MARK: 유저디폴트에 Int값으로 서브유저 아이디 저장하기
+  func saveSubUserID(id: Int) {
+    path.set(id, forKey: "subUserID")
+    print("'subUserID' save complete ")
+  }
+
+  // MARK: 유저디폴트에 현재 저장된 서브유저 아이디 지우기
+  func deleteCurrentSubUserID() {
+    path.removeObject(forKey: "subUserID")
+    print("'subUserID' is deleted")
+  }
+
 }

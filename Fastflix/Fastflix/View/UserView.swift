@@ -82,8 +82,8 @@ class UserView: UIView {
     if isEditing {
       delegate?.profileChangeTapped(tag: tag)
     } else {
+//      APICenter.shared.saveSubUserID(id: tag)
       delegate?.didSelectUser(tag: tag)
-      APICenter.shared.saveSubUserID(id: tag)
     }
   }
   
