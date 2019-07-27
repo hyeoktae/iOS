@@ -70,3 +70,5 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 19.07.27  feat: allen - Allen adds LoginVC's textfield delegate, and checking if textfields are filled out for login button activation.
 
 19.07.27  fix: allen - SubUser data is fixed.
+
+19.07.27  feat: deve - Rename a folder, Organize folders
