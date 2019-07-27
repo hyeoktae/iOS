@@ -126,7 +126,6 @@ final class MainImageTableCell: UITableViewCell {
   }
   // snp
   private func setupSNP() {
-    let appDelegate = AppDelegate.instance
     
     mainImage.snp.makeConstraints {
       $0.left.right.bottom.equalToSuperview()

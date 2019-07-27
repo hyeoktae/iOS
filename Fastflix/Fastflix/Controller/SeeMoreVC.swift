@@ -12,7 +12,6 @@ class SeeMoreVC: UIViewController {
   
   var profileCount = 0
   var viewArr: [ProfileView] = []
-  
 
   override func loadView() {
     let seeMoreView = SeeMoreView()
@@ -23,6 +22,12 @@ class SeeMoreVC: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupNavi()
+    
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
   }
   
   // profile 생성
@@ -38,6 +43,14 @@ class SeeMoreVC: UIViewController {
     }
   }
   
+  private func setupNavi() {
+    navigationController?.setNavigationBarHidden(false, animated: true)
+    navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+    navigationController?.navigationBar.shadowImage = UIImage()
+    navigationController?.navigationBar.isTranslucent = true
+    
+  }
+  
   
 
 }
@@ -46,7 +59,14 @@ extension SeeMoreVC: SeeMoreViewDelegate {
     switch indexPath {
     case IndexPath(row: 0, section: 0): break
       
-    case IndexPath(row: 0, section: 1): break
+    case IndexPath(row: 0, section: 1):
+      print("내가 찜한 콘텐츠 ")
+  
+      let mycontentVC = MyContentVC()
+      navigationController?.show(mycontentVC, sender: nil)
+//      navigationController?.navigationBar.isHidden = true
+      navigationItem.setHidesBackButton(true, animated: true)
+
       
     case IndexPath(row: 0, section: 2):
       print("앱설정")
