@@ -46,7 +46,7 @@ class UserView: UIView {
   
   lazy var profileButton: UIButton = {
     let button = UIButton(type: .system)
-    button.setTitle(profileUserName ?? "테스트", for: .normal)
+    button.setTitle("", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
     button.titleLabel?.textAlignment = .center
     button.setTitleColor(.white, for: .normal)
