@@ -105,22 +105,82 @@ final class APICenter {
     }
   }
   
-  // MARK: 유저디폴트에 Int값으로 서브유저 아이디 저장하기
-  func saveSubUserID(id: Int) {
-    path.set(id, forKey: "subUserID")
-    print("'subUserID' save complete ")
+  // MARK: 유저디폴트에 키값"token"로 토큰값 저장하기
+  private func saveToken(token: String) {
+    path.set(token, forKey: "token")
+    print("'Token' save complete ")
   }
   
+  
+  // MARK: 서브 유저 관련 메서드
   // MARK: 유저디폴트에 Int값으로된 서브유저 아이디 가져오기
   func getSubUserID() -> Int {
     print("subUserID: ", path.integer(forKey: "subUserID"))
     return path.integer(forKey: "subUserID")
   }
   
-  // MARK: 유저디폴트에 키값"token"로 토큰값 저장하기
-  private func saveToken(token: String) {
-    path.set(token, forKey: "token")
-    print("'Token' save complete ")
+  // MARK: 유저디폴트에 Int값으로 서브유저 아이디 저장하기
+  func saveSubUserID(id: Int) {
+    path.set(id, forKey: "subUserID")
+    print("'subUserID' save complete ")
   }
+
+  // MARK: 유저디폴트에 현재 저장된 서브유저 아이디 지우기
+  func deleteCurrentSubUserID() {
+    path.removeObject(forKey: "subUserID")
+    print("'subUserID' is deleted")
+  }
+
+  
+  // MARK: 서브유저 생성
+  func createSubUser(name: String, kid: String, completion: @escaping (Result<[SubUserList]>) -> ()) {
+    
+    let token = getToken()
+    
+    let headers = [
+      "Authorization": "Token \(token)"
+    ]
+    
+    let parameters =
+      [
+        "name": name,
+        "kid": kid
+        ]
+    
+    Alamofire.upload(multipartFormData: {
+      MultipartFormData in
+      for (key, value) in parameters {
+        MultipartFormData.append(value.data(using: .utf8)!, withName: key)
+      }
+      
+    }, to: RequestString.createSubUserURL.rawValue, method: .post, headers: headers) {
+      switch $0 {
+      case .success(let upload, _, _):
+        upload.responseJSON { (res) in
+          
+          guard let data = res.data else {
+            completion(.failure(ErrorType.NoData))
+            return }
+          guard let origin = try? JSONDecoder().decode(SubUser.self, from: data) else {
+            completion(.failure(ErrorType.NoData))
+            return }
+          let subUserArr = origin.subUserList
+          print("subUser: ", subUserArr)
+          
+          //서브유저 정보들 넘기기
+          completion(.success(subUserArr))
+        }
+      case .failure(let err):
+        print(err)
+        completion(.failure(ErrorType.NoData))
+        break
+      }
+    }
+  }
+  
+  
+  
+  
+  
   
 }

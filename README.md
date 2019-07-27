@@ -66,3 +66,7 @@ teamMembers: 권혁태(tass), 홍원표(allen), 전혜지(devy)
 19.07.26  feat: devy - AlertExtension
 
 19.07.26  feat: allen - Allen adds Imagecrop feature extension.
+
+19.07.27  feat: allen - Allen adds LoginVC's textfield delegate, and checking if textfields are filled out for login button activation.
+
+19.07.27  fix: allen - SubUser data is fixed.

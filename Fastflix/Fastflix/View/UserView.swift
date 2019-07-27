@@ -7,17 +7,17 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol UserViewDelegate: class {
   func didSelectUser(tag: Int)
-  func profileChangeTapped(tag: Int)
+  func profileChangeTapped(tag: Int, userName: String, userImage: UIImage)
 }
 
 class UserView: UIView {
 
   let imageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "profile1")
     return imageView
   }()
   
@@ -46,7 +46,7 @@ class UserView: UIView {
   
   lazy var profileButton: UIButton = {
     let button = UIButton(type: .system)
-    button.setTitle(profileUserName ?? "테스트", for: .normal)
+    button.setTitle("", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
     button.titleLabel?.textAlignment = .center
     button.setTitleColor(.white, for: .normal)
@@ -78,12 +78,17 @@ class UserView: UIView {
     editImageView.isUserInteractionEnabled = true
   }
   
+  func configureImage(imageURLString: String?) {
+    let imageURL = URL(string: imageURLString ?? "ImagesData.shared.imagesUrl[5]")
+    self.imageView.kf.setImage(with: imageURL, options: [.processor(CroppingImageProcessor(size: CGSize(width: 100, height: 100))), .scaleFactor(UIScreen.main.scale)])
+  }
+  
   @objc private func buttonTapped() {
     if isEditing {
-      delegate?.profileChangeTapped(tag: tag)
+      delegate?.profileChangeTapped(tag: tag, userName: profileUserName!, userImage: imageView.image!)
     } else {
+//      APICenter.shared.saveSubUserID(id: tag)
       delegate?.didSelectUser(tag: tag)
-      APICenter.shared.saveSubUserID(id: tag)
     }
   }
   

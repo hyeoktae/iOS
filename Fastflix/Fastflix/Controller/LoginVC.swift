@@ -51,13 +51,18 @@ class LoginVC: UIViewController {
   }()
   
   // 로그인 - 이메일 입력 필드
-  let emailTextField: UITextField = {
-    let tf = UITextField()
+  lazy var emailTextField: UITextField = {
+    var tf = UITextField()
     tf.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
     tf.layer.cornerRadius = 5
     tf.attributedPlaceholder
       = NSAttributedString(string: "  이메일 주소 또는 전화번호",attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)])
     tf.textColor = .white
+    tf.autocapitalizationType = .none
+    tf.autocorrectionType = .no
+    tf.spellCheckingType = .no
+    tf.keyboardType = .emailAddress
+    tf.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
     return tf
   }()
   
@@ -69,6 +74,12 @@ class LoginVC: UIViewController {
       = NSAttributedString(string: "  비밀번호",attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)])
     tf.layer.cornerRadius = 5
     tf.textColor = .white
+    tf.autocapitalizationType = .none
+    tf.autocorrectionType = .no
+    tf.spellCheckingType = .no
+    tf.isSecureTextEntry = true
+    tf.clearsOnBeginEditing = false
+    tf.addTarget(self, action: #selector(editingChanged(_:)), for: .editingChanged)
     return tf
   }()
   
@@ -82,6 +93,7 @@ class LoginVC: UIViewController {
     button.setTitle("로그인", for: .normal)
     button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
     button.addTarget(self, action: #selector(didTapLoginBtn(_:)), for: .touchUpInside)
+    button.isEnabled = false
     return button
   }()
   
@@ -125,6 +137,8 @@ class LoginVC: UIViewController {
   
   private func configure() {
     view.backgroundColor = #colorLiteral(red: 0.07450980392, green: 0.07450980392, blue: 0.07450980392, alpha: 1)
+    emailTextField.delegate = self
+    passwordField.delegate = self
   }
   
   private func addSubViews() {
@@ -230,5 +244,42 @@ class LoginVC: UIViewController {
     navigationController?.popViewController(animated: true)
   }
   
+  // 이메일텍스트필드, 비밀번호 텍스트필드 두가지 다 채워져 있을때, 로그인 버튼 빨간색으로 변경
+  @objc private func editingChanged(_ textField: UITextField) {
+    if textField.text?.count == 1 {
+      if textField.text?.first == " " {
+        textField.text = ""
+        return
+      }
+    }
+    guard
+      let email = emailTextField.text, !email.isEmpty,
+      let password = passwordField.text, !password.isEmpty
+      else {
+        loginButton.backgroundColor = .clear
+        loginButton.isEnabled = false
+        return
+    }
+    loginButton.backgroundColor = .red
+    loginButton.isEnabled = true
+  }
+}
+
+// 텍스트필드 델리게이트 구현
+extension LoginVC: UITextFieldDelegate {
+  // 텍스트필드 편집 시작하면 백그라운드 색 변경
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    textField.backgroundColor = #colorLiteral(red: 0.2972877622, green: 0.2973434925, blue: 0.297280401, alpha: 1)
+  }
   
+  // 텍스트필드 편집 종료되면 백그라운드 색 변경
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    textField.backgroundColor = #colorLiteral(red: 0.2, green: 0.2, blue: 0.2, alpha: 1)
+  }
+  
+  // 엔터 누르면 일단 키보드 내림
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
 }

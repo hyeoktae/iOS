@@ -110,8 +110,10 @@ extension MainMovieView: UITableViewDataSource {
       print("key: ", key)
       
       if let data = mainData {
-        for idx in data.listOfMovie[key]! {
-          mainImgUrl.append(idx?.verticalImage ?? "")
+        for idx in data.moviesByGenre[key]! {
+          mainImgUrl.append(idx.verticalImage)
+          print("string: ", idx.verticalImage)
+          print("list: ", data.moviesByGenre[key]?.count)
         }
       }
       print("count: ", mainImgUrl)
