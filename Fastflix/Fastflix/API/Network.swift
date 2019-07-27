@@ -130,4 +130,56 @@ final class APICenter {
     print("'subUserID' is deleted")
   }
 
+  
+  // MARK: 서브유저 생성
+  func createSubUser(name: String, kid: String, completion: @escaping (Result<[SubUserList]>) -> ()) {
+    
+    let token = getToken()
+    
+    let headers = [
+      "Authorization": "Token \(token)"
+    ]
+    
+    let parameters =
+      [
+        "name": name,
+        "kid": kid
+        ]
+    
+    Alamofire.upload(multipartFormData: {
+      MultipartFormData in
+      for (key, value) in parameters {
+        MultipartFormData.append(value.data(using: .utf8)!, withName: key)
+      }
+      
+    }, to: RequestString.createSubUserURL.rawValue, method: .post, headers: headers) {
+      switch $0 {
+      case .success(let upload, _, _):
+        upload.responseJSON { (res) in
+          
+          guard let data = res.data else {
+            completion(.failure(ErrorType.NoData))
+            return }
+          guard let origin = try? JSONDecoder().decode(SubUser.self, from: data) else {
+            completion(.failure(ErrorType.NoData))
+            return }
+          let subUserArr = origin.subUserList
+          print("subUser: ", subUserArr)
+          
+          //서브유저 정보들 넘기기
+          completion(.success(subUserArr))
+        }
+      case .failure(let err):
+        print(err)
+        completion(.failure(ErrorType.NoData))
+        break
+      }
+    }
+  }
+  
+  
+  
+  
+  
+  
 }

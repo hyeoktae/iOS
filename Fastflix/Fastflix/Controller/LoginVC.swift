@@ -93,6 +93,7 @@ class LoginVC: UIViewController {
     button.setTitle("로그인", for: .normal)
     button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
     button.addTarget(self, action: #selector(didTapLoginBtn(_:)), for: .touchUpInside)
+    button.isEnabled = false
     return button
   }()
   
@@ -256,9 +257,11 @@ class LoginVC: UIViewController {
       let password = passwordField.text, !password.isEmpty
       else {
         loginButton.backgroundColor = .clear
+        loginButton.isEnabled = false
         return
     }
     loginButton.backgroundColor = .red
+    loginButton.isEnabled = true
   }
 }
 

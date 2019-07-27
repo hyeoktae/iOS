@@ -267,12 +267,12 @@ class ProfileSelectVC: UIViewController {
     [profileManageLabel, finishButton].forEach { $0.isHidden = false }
     [changeButton, logoView, introlabel ].forEach { $0.isHidden = true }
     [profileImageView1, profileImageView2, profileImageView3, profileImageView4, profileImageView5].forEach { $0.isEditing = true }
-    UIView.animate(withDuration: 0.3, animations: {
+    UIView.animate(withDuration: 0.01, animations: {
       //      [self.profileImageView1, self.profileImageView2, self.profileImageView3, self.profileImageView4, self.profileImageView5].forEach { $0.isEditing = true }
-      [self.profileImageView1.editImageView, self.profileImageView2.editImageView, self.profileImageView3.editImageView, self.profileImageView4.editImageView, self.profileImageView5.editImageView].forEach { $0.transform = CGAffineTransform.identity.scaledBy(x: 1.15, y: 1.15) }
+      [self.profileImageView1.editImageView, self.profileImageView2.editImageView, self.profileImageView3.editImageView, self.profileImageView4.editImageView, self.profileImageView5.editImageView].forEach { $0.transform = CGAffineTransform.identity.scaledBy(x: 1.2, y: 1.2) }
       //      sender.transform = CGAffineTransform.identity.scaledBy(x: 0.9, y: 0.9)
     }, completion: { (finish) in
-      UIView.animate(withDuration: 0.1, animations: {
+      UIView.animate(withDuration: 0.4, animations: {
         [self.profileImageView1.editImageView, self.profileImageView2.editImageView, self.profileImageView3.editImageView, self.profileImageView4.editImageView, self.profileImageView5.editImageView].forEach { $0.transform = CGAffineTransform.identity }
       })
     })
@@ -285,19 +285,22 @@ class ProfileSelectVC: UIViewController {
     [profileImageView1, profileImageView2, profileImageView3, profileImageView4, profileImageView5].forEach { $0.isEditing = false }
   }
   
+  private func setFuntions() {
+    [profileImageView1, profileImageView2, profileImageView3, profileImageView4, profileImageView5].forEach { $0.delegate = self }
+    addProfileView.delegate = self
+  }
+  
 }
 
 extension ProfileSelectVC: UserViewDelegate {
-  func profileChangeTapped(tag: Int) {
+  func profileChangeTapped(tag: Int, userName: String, userImage: UIImage) {
     print("프로필 변경하기 눌렀당")
     let profileChangeVC = ProfileChangeVC()
-    profileChangeVC.userName = "테스트"
+    profileChangeVC.userName = userName
+    profileChangeVC.userImage = userImage
+    
     let navi = UINavigationController(rootViewController: profileChangeVC)
     navigationController?.present(navi, animated: true)
-  }
-  
-  private func setFuntions() {
-    [profileImageView1, profileImageView2, profileImageView3, profileImageView4, profileImageView5].forEach { $0.delegate = self }
   }
   
   func didSelectUser(tag: Int) {    
@@ -312,4 +315,15 @@ extension ProfileSelectVC: UserViewDelegate {
 //    present(tabBar, animated: false)
     
   }
+}
+
+extension ProfileSelectVC: AddProfileViewDelegate {
+  func addProfileButtonTapped() {
+    let profileChangeVC = ProfileChangeVC()
+    profileChangeVC.userName = ""
+    let navi = UINavigationController(rootViewController: profileChangeVC)
+    navigationController?.present(navi, animated: true)
+  
+  }
+  
 }
