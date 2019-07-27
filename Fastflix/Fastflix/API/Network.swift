@@ -43,6 +43,7 @@ final class APICenter {
         return }
       guard let resultData = try? JSONDecoder().decode(RequestMovie.self, from: data) else {
         completion(.failure(ErrorType.FailToParsing))
+        print("data: ", data as? [String])
         return }
       completion(.success(resultData))
     }

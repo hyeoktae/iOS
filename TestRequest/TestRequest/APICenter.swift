@@ -12,8 +12,8 @@ import Alamofire
 class APICenter {
   static let shared = APICenter()
   
-  private let movieURL = "http://54.180.191.152/movies/genre_select_before/"
-  private let loginURL = "http://54.180.191.152/accounts/login/"
+  private let movieURL = "http://52.78.134.79/movies/genre_select_before/"
+  private let loginURL = "http://52.78.134.79/accounts/login/"
   
   
   private func getToken() -> String {

@@ -233,7 +233,7 @@ class ProfileSelectVC: UIViewController {
       profileImageView5.tag = (subUserList?[4].id)!
       profileImageView5.configureImage(imageURLString: subUserList?[4].profileInfo.profileImagePath)
       fallthrough
-    case 2:
+    case 4:
       profileImageView4.profileUserName = subUserList?[3].name
       profileImageView4.tag = (subUserList?[3].id)!
       profileImageView4.configureImage(imageURLString: subUserList?[3].profileInfo.profileImagePath)
@@ -243,12 +243,12 @@ class ProfileSelectVC: UIViewController {
       profileImageView3.tag = (subUserList?[2].id)!
       profileImageView3.configureImage(imageURLString: subUserList?[2].profileInfo.profileImagePath)
       fallthrough
-    case 4:
+    case 2:
       profileImageView2.profileUserName = subUserList?[1].name
       profileImageView2.tag = (subUserList?[1].id)!
       profileImageView2.configureImage(imageURLString: subUserList?[1].profileInfo.profileImagePath)
       fallthrough
-    case 5:
+    case 1:
       profileImageView1.profileUserName = subUserList?[0].name
       profileImageView1.tag = (subUserList?[0].id)!
       profileImageView1.configureImage(imageURLString: subUserList?[0].profileInfo.profileImagePath)

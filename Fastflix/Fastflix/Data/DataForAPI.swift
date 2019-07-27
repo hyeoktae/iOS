@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - URLString
 enum RequestString: String {
   case loginURL = "http://52.78.134.79/accounts/login/"
   case movieURL = "http://52.78.134.79/movies/genre_select_before/"
@@ -146,10 +147,22 @@ struct MainMovie: Codable {
   }
 }
 
+// MARK: - Actor
+struct Actor: Codable {
+  let id: Int
+  let name: String
+}
+
 // MARK: - Degree
 struct Degree: Codable {
   let id: Int
   let name: String
+  let degreeImagePath: String
+  
+  enum CodingKeys: String, CodingKey {
+    case id, name
+    case degreeImagePath = "degree_image_path"
+  }
 }
 
 // MARK: - 장르별영화리스트
@@ -164,11 +177,6 @@ struct MoviesByGenre: Codable {
     case horizontalImagePath = "horizontal_image_path"
     case verticalImage = "vertical_image"
   }
-}
-
-struct Actor: Codable {
-  let id: Int
-  let name: String
 }
 
 typealias RequestMovie = [RequestMovieElement]

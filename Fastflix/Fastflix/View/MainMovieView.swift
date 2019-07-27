@@ -105,7 +105,8 @@ extension MainMovieView: UITableViewDataSource {
       return cell
     default:
       
-      let key = receiveKeys?[indexPath.row - 2] ?? ""
+      let keys = mainData!.listOfGenre
+      let key = keys[indexPath.row - 2]
       print("key: ", key)
       
       if let data = mainData {
