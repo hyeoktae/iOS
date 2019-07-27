@@ -15,7 +15,7 @@ class MainMovieVC: UIViewController {
   
   var receiveData: RequestMovie? = nil {
     willSet(new) {
-      receiveKeys = new?[0].listOfGenre.keys.sorted()
+      receiveKeys = new?[0].listOfGenre
 //      loadView()
     }
   }
