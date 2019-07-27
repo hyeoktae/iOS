@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 protocol UserViewDelegate: class {
   func didSelectUser(tag: Int)
@@ -17,7 +18,6 @@ class UserView: UIView {
 
   let imageView: UIImageView = {
     let imageView = UIImageView()
-    imageView.image = UIImage(named: "profile1")
     return imageView
   }()
   
@@ -76,6 +76,11 @@ class UserView: UIView {
     let tap = UITapGestureRecognizer(target: self, action: #selector(buttonTapped))
     editImageView.addGestureRecognizer(tap)
     editImageView.isUserInteractionEnabled = true
+  }
+  
+  func configureImage(imageURLString: String?) {
+    let imageURL = URL(string: imageURLString ?? "ImagesData.shared.imagesUrl[5]")
+    self.imageView.kf.setImage(with: imageURL, options: [.processor(CroppingImageProcessor(size: CGSize(width: 100, height: 100))), .scaleFactor(UIScreen.main.scale)])
   }
   
   @objc private func buttonTapped() {
