@@ -17,6 +17,22 @@ enum RequestString: String {
   case changeProfileListURL = "http://52.78.134.79/accounts/change_profile/"
 }
 
+// MARK: - ProfileImageElement
+struct ProfileImageElement: Codable {
+  let name: String
+  let imagePath: String
+  
+  enum CodingKeys: String, CodingKey {
+    case name
+    case imagePath = "image_path"
+  }
+}
+
+typealias ProfileImage = [String: [ProfileImageElement]]
+
+
+
+
 // MARK: - Login
 struct Login: Codable {
   let token: String
@@ -75,40 +91,17 @@ struct RequestMovieElement: Codable {
   }
 }
 
-// MARK: - 메인영화
-//struct MainMovie: Codable {
-//  let id: Int
-//  let name: String
-//  let videoFile, sampleVideoFile, verticalSampleVideoFile: JSONNull?
-//  let productionDate, uploadedDate, synopsis, runningTime: String
-//  let viewCount: Int
-//  let logoImagePath: String
-//  let horizontalImagePath: String
-//  let verticalImage: String
-//  let circleImage: JSONNull?
-//  let bigImagePath: String
-//  let degree: Degree
-//  let directors, actors, feature, author: [Degree]
-//  let genre: [Degree]
-//
-//  enum CodingKeys: String, CodingKey {
-//    case id, name
-//    case videoFile = "video_file"
-//    case sampleVideoFile = "sample_video_file"
-//    case verticalSampleVideoFile = "vertical_sample_video_file"
-//    case productionDate = "production_date"
-//    case uploadedDate = "uploaded_date"
-//    case synopsis
-//    case runningTime = "running_time"
-//    case viewCount = "view_count"
-//    case logoImagePath = "logo_image_path"
-//    case horizontalImagePath = "horizontal_image_path"
-//    case verticalImage = "vertical_image"
-//    case circleImage = "circle_image"
-//    case bigImagePath = "big_image_path"
-//    case degree, directors, actors, feature, author, genre
-//  }
-//}
+typealias MainCellData = [MainCellElement]
+
+// MARK: - MainCellElement
+struct MainCellElement: Codable {
+  let mainMovie: MainMovie
+  
+  enum CodingKeys: String, CodingKey {
+    case mainMovie = "메인 영화"
+  }
+}
+
 
 struct MainMovie: Codable {
   let id: Int
