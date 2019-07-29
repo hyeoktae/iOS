@@ -7,88 +7,244 @@
 //
 
 import Foundation
+import Alamofire
 
 
 final class APICenter {
   static let shared = APICenter()
   
-  private let loginUrl = URL(string: "http://54.180.191.152/accounts/login/")!
+  // MARK: 유저디폴트 객체
+  private let path = UserDefaults.standard
   
+  private var token: String {
+    return getToken()
+  }
   
-  // MARK: - Login Method
-  func login(id: String, pw: String, completion: @escaping (Result<Token, ErrorType>) -> ()) {
-    let headers = [
-      "content-type": "multipart/form-data; boundary=I don't want use it"
-    ]
-    
-    let parameters = [
-      [
-        "name": "username",
-        "value": id
-      ],
-      [
-        "name": "password",
-        "value": pw
-      ]
-    ]
-    
-    let boundary = "I don't want use it"
-    
-    var body = ""
-    let error: Error? = nil
-    for param in parameters {
-      let paramName = param["name"]!
-      body += "--\(boundary)\r\n"
-      body += "Content-Disposition:form-data; name=\"\(paramName)\""
-      if let filename = param["fileName"] {
-        let contentType = param["content-type"]!
-        let fileContent = try? String(contentsOfFile: filename, encoding: String.Encoding.utf8)
-        if (error != nil) {
-          print(error!.localizedDescription)
-        }
-        body += "; filename=\"\(filename)\"\r\n"
-        body += "Content-Type: \(contentType)\r\n\r\n"
-        body += fileContent!
-      } else if let paramValue = param["value"] {
-        body += "\r\n\r\n\(paramValue)"
-      }
-    }
-    
-    var request = URLRequest(url: loginUrl, cachePolicy: .useProtocolCachePolicy, timeoutInterval: 10.0)
-    
-    request.httpMethod = "POST"
-    request.allHTTPHeaderFields = headers
-    request.httpBody = body.data(using: .utf8)
-    
-    let session = URLSession.shared
-    session.dataTask(with: request) { (data, res, err) in
-      guard err == nil else {
-        completion(.failure(.networkError))
-        return }
-      
-      guard let data = data else {
-        completion(.failure(.NoData))
-        return
-      }
-      
-      guard let resultData = try? JSONDecoder().decode(Token.self, from: data) else {
-        completion(.failure(.NoData))
-        return
-      }
-      
-      self.saveToken(token: resultData.token)
-      completion(.success(resultData))
-      
-    }.resume()
+  private var subUserID: Int {
+    return getSubUserID()
   }
   
   
-  // MARK: - save Token at UserDefaults with Key("token")
-  private func saveToken(token: String) {
-    let path = UserDefaults.standard
+  
+  
+  
+  
+  // MARK: - 필요한 헤더를 가져옴
+  private func getHeader(needSubuser: Bool) -> ([String: String]) {
     
+    let withSubuser = [
+      "Authorization": "Token \(token)",
+      "subuserid": "\(subUserID)"
+    ]
+    
+    let withOutSubuser = [
+      "Authorization": "Token \(token)"
+    ]
+    
+    switch needSubuser {
+    case true:
+      return withSubuser
+    case false:
+      return withOutSubuser
+    }
+  }
+  
+  
+  
+  
+  
+  // MARK: - 프로필사진들 가져오기
+  func changeProfileImage(completion: @escaping (Result<ProfileImage>) -> ()) {
+    let header = getHeader(needSubuser: false)
+    
+    let req = Alamofire.request(RequestString.changeProfileListURL.rawValue, method: .get, headers: header)
+    
+    req.response(queue: .global()) { (res) in
+      guard res.error == nil else {
+        completion(.failure(ErrorType.networkError))
+        return }
+      
+      guard let data = res.data else {
+        completion(.failure(ErrorType.NoData))
+        return
+      }
+      
+      guard let result = try? JSONDecoder().decode(ProfileImage.self, from: data) else {
+        completion(.failure(ErrorType.FailToParsing))
+        return
+      }
+      
+      completion(.success(result))
+    }
+  }
+  
+  // MARK: 유저디폴트에 저장된 토큰값 가져오기
+  private func getToken() -> String {
+    guard let token = path.string(forKey: "token") else {
+      print("ERROR!!!, No Token")
+      AppDelegate.instance.checkLoginState()
+      return ""}
+    return token
+  }
+  
+  func getMainImgCellData(completion: @escaping (Result<MainImgCellData>) -> ()) {
+    let header = getHeader(needSubuser: true)
+    
+    let req = Alamofire.request(RequestString.getMainImgURL.rawValue, method: .get, headers: header)
+    
+    req.response(queue: .global()) { (res) in
+      guard res.error == nil else {
+        completion(.failure(ErrorType.networkError))
+        return
+      }
+      
+      guard let data = res.data else {
+        completion(.failure(ErrorType.NoData))
+        return
+      }
+      
+      guard let result = try? JSONDecoder().decode(MainImgCellData.self, from: data) else {
+        completion(.failure(ErrorType.FailToParsing))
+        return
+      }
+      
+      completion(.success(result))
+    }
+  }
+  
+  // MARK: (토큰값 및 서브유저아이디로)영화 데이터 받기
+  func getMovieData(completion: @escaping (Result<RequestMovie>) -> ()) {
+    //    RequestMovie.self
+    let headers = getHeader(needSubuser: true)
+    
+    let request = Alamofire.request(RequestString.movieURL.rawValue, method: .get, headers: headers)
+    
+    request.response(queue: .main) {
+      guard let data = $0.data else {
+        completion(.failure(ErrorType.NoData))
+        return }
+      guard let resultData = try? JSONDecoder().decode(RequestMovie.self, from: data) else {
+        completion(.failure(ErrorType.FailToParsing))
+//        print("data: ", data as? [String])
+        return }
+      completion(.success(resultData))
+    }
+  }
+  
+  
+  // MARK: 로그인 메서드 -> 토큰값 저장 및 컴플리션에 서브유저 배열 넘기기
+  func login(id: String, pw: String, completion: @escaping (Result<[SubUserList]>) -> ()) {
+    
+    let parameters =
+      [
+        "id": id,
+        "pw": pw
+    ]
+    
+    Alamofire.upload(multipartFormData: {
+      MultipartFormData in
+      for (key, value) in parameters {
+        MultipartFormData.append(value.data(using: .utf8)!, withName: key)
+      }
+      
+    }, to: RequestString.loginURL.rawValue, method: .post) {
+      switch $0 {
+      case .success(let upload, _, _):
+        upload.responseJSON { (res) in
+          //          print("run", res.data as? [String: String])
+          guard let data = res.data else {
+            completion(.failure(ErrorType.NoData))
+            return }
+          guard let origin = try? JSONDecoder().decode(Login.self, from: data) else {
+            completion(.failure(ErrorType.NoData))
+            return }
+          let token = origin.token
+          let subUserArr = origin.subUserList
+          print("subUser: ", subUserArr)
+          
+          // 토큰값 유저디폴트에 저장하기
+          self.saveToken(token: token)
+          
+          completion(.success(subUserArr))
+        }
+      case .failure(let err):
+        print(err)
+        completion(.failure(ErrorType.NoData))
+        break
+      }
+    }
+  }
+  
+  // MARK: 유저디폴트에 키값"token"로 토큰값 저장하기
+  private func saveToken(token: String) {
     path.set(token, forKey: "token")
     print("'Token' save complete ")
   }
+  
+  
+  // MARK: 서브 유저 관련 메서드
+  // MARK: 유저디폴트에 Int값으로된 서브유저 아이디 가져오기
+  func getSubUserID() -> Int {
+    print("subUserID: ", path.integer(forKey: "subUserID"))
+    return path.integer(forKey: "subUserID")
+  }
+  
+  // MARK: 유저디폴트에 Int값으로 서브유저 아이디 저장하기
+  func saveSubUserID(id: Int) {
+    path.set(id, forKey: "subUserID")
+    print("'subUserID' save complete ")
+  }
+  
+  // MARK: 유저디폴트에 현재 저장된 서브유저 아이디 지우기
+  func deleteCurrentSubUserID() {
+    path.removeObject(forKey: "subUserID")
+    print("'subUserID' is deleted")
+  }
+  
+  
+  // MARK: 서브유저 생성
+  func createSubUser(name: String, kid: String, completion: @escaping (Result<[SubUserList]>) -> ()) {
+    
+    let headers = getHeader(needSubuser: false)
+    
+    let parameters =
+      [
+        "name": name,
+        "kid": kid
+    ]
+    
+    Alamofire.upload(multipartFormData: {
+      MultipartFormData in
+      for (key, value) in parameters {
+        MultipartFormData.append(value.data(using: .utf8)!, withName: key)
+      }
+      
+    }, to: RequestString.createSubUserURL.rawValue, method: .post, headers: headers) {
+      switch $0 {
+      case .success(let upload, _, _):
+        upload.responseJSON { (res) in
+          
+          guard let data = res.data else {
+            completion(.failure(ErrorType.NoData))
+            return }
+          guard let origin = try? JSONDecoder().decode(SubUser.self, from: data) else {
+            completion(.failure(ErrorType.NoData))
+            return }
+          let subUserArr = origin.subUserList
+          print("subUser: ", subUserArr)
+          
+          //서브유저 정보들 넘기기
+          completion(.success(subUserArr))
+        }
+      case .failure(let err):
+        print(err)
+        completion(.failure(ErrorType.NoData))
+        break
+      }
+    }
+  }
+  
+  
+  
   
 }
